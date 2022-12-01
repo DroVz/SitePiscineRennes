@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-    <form method="POST" action="index.php?action=infocode">
+    <form method="POST" action="index.php?action=verifInfo">
         <p>
             <label for="code">Saisissez votre code :</label>
             <input type="text" name="code" id="code" maxlength=6 placeholder="Votre code"/>

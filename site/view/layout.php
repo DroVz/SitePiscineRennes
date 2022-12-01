@@ -14,7 +14,7 @@
                 <ul>
                     <li><a href="/index.php?action=accueil">Accueil</a></li>
                     <li><a href="/index.php?action=achat">Achat de code</a></li>
-                    <li><a href="/index.php?action=verification">Vérification de code</a></li>
+                    <li><a href="/index.php?action=verif">Vérification de code</a></li>
                 </ul>
             </nav>    
         </header>

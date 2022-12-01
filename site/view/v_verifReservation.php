@@ -43,7 +43,7 @@
 
                 echo '<li>Le ' . $jour . ' à ' . $heuredeb . ' à ' . $nom_piscine . ' (coach : ' . $prof . '). 
                 Occupation : ' . $seance['occupation'] . '/' . $seance['capacite'] .
-                ($alreadyPicked ? ' - Séance déjà réservée !': '') . '</li>';
+                ($alreadyPicked ? ' - Vous avez déjà réservé pour cette séance': '') . '</li>';
             }
             ?>
 

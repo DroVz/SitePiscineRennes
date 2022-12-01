@@ -1,11 +1,9 @@
 <?php
-    require_once('model/model.php');
+    require_once('model/m_accueil.php');
 
     function accueil() {
-        $conn = getConnection();
-
         // Appel au modèle pour interroger la base de données
-        $piscines = getPiscines($conn);
+        $piscines = getInfoPiscines();
     
         require('view/v_accueil.php');
     } 

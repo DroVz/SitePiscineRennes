@@ -35,7 +35,7 @@
         </div>';
         // Si le code correspond à une formule nécessitant une réservation
         if($lesInfos['reservation']) {
-            echo '<form method="POST" action="index.php?action=reservation">
+            echo '<form method="POST" action="index.php?action=verifReservation">
             <input type="hidden" id="id_code" name="id_code" value=' . $lesInfos['id_code'] . ' /input>
             <input type="hidden" id="id_activite" name="id_activite" value=' . $lesInfos['id_activite'] . ' /input>
             <input type="hidden" id="nb_entrees" name="nb_entrees" value=' . $lesInfos['nb_entrees'] . ' /input>

@@ -1,5 +1,4 @@
 <?php
-    require_once('model/model.php');
     require_once('model/m_achatFormule.php');
 
     function achatFormule() {

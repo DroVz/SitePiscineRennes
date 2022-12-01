@@ -1,12 +1,7 @@
 <?php
-    require_once('model/model.php');
     require_once('model/m_achatResult.php');
 
     function achatResult() {
-
-
-        $conn = getConnection();
-
         $formule = $_POST["formule"];
     
         // appel à fonction pour

@@ -1,11 +1,8 @@
-<html>
-<head>
+<?php $title = "Choix de la formule"; ?>
 
-</head>
+<?php ob_start(); ?>
 
-<body>
-
-    <form method="POST" action="paiement.php">
+    <form method="POST" action="index.php">
         <div id = "choixFormule">
             <fieldset>
                 <legend>Choisissez votre formule :</legend>
@@ -22,11 +19,12 @@
                     ?>
                 </p>
             </fieldset>
+            <input type="hidden" id="action" name="action" value="paiement">
             <input type="submit" value="Obtenir mon code">
         </div>
 
     </form>
 
-</body>
+    <?php $content = ob_get_clean(); ?>
 
-</html>
+<?php require('templates/layout.php') ?>

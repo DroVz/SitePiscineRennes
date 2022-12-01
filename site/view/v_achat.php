@@ -4,7 +4,7 @@
 
 <h1>Choisissez votre activité et votre situation</h1>
 
-<form method="post" action="index.php">
+<form method="post" action="index.php?action=achatFormule">
     <div id="choixActivite">
         <fieldset>
             <legend>Choisir une activité :</legend>
@@ -31,11 +31,10 @@
             ?>
         </fieldset>
     </div>
-    <input type="hidden" id="action" name="action" value="nouveaucode">
     <input type="submit" value="Choisir la formule">
     
 </form>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('templates/layout.php') ?>
+<?php require('view/layout.php') ?>

@@ -7,4 +7,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('templates/layout.php') ?>
+<?php require('view/layout.php') ?>

@@ -19,5 +19,5 @@
         // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
         $seancesDispo = getSeancesDispo($conn, $id_activite);
 
-        require('templates/v_reservation.php');
+        require('view/v_reservation.php');
 }

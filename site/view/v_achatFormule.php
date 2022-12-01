@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-    <form method="POST" action="index.php">
+    <form method="POST" action="index.php?action=achatResult">
         <div id = "choixFormule">
             <fieldset>
                 <legend>Choisissez votre formule :</legend>
@@ -19,7 +19,6 @@
                     ?>
                 </p>
             </fieldset>
-            <input type="hidden" id="action" name="action" value="paiement">
             <input type="submit" value="Obtenir mon code">
         </div>
 
@@ -27,4 +26,4 @@
 
     <?php $content = ob_get_clean(); ?>
 
-<?php require('templates/layout.php') ?>
+<?php require('view/layout.php') ?>

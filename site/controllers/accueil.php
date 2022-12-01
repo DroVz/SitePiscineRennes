@@ -7,6 +7,6 @@
         // Appel au modèle pour interroger la base de données
         $piscines = getPiscines($conn);
     
-        require('templates/v_accueil.php');
+        require('view/v_accueil.php');
     } 
     

@@ -8,5 +8,5 @@
     
         $infosCode = getInfosCode($conn, $code);
     
-        require('templates/v_infocode.php');
+        require('view/v_infocode.php');
     }   

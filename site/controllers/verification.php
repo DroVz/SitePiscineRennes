@@ -1,4 +1,4 @@
 <?php
     function verification() {
-        require('templates/v_verification.php');
+        require('view/v_verification.php');
     }

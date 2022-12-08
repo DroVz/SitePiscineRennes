@@ -3,7 +3,7 @@
 // Return all reservations associated with a given code
 function getReservations(int $id_code) : array
 {
-    $conn = verifResaConnect();
+    $conn = verifConnect();
     $MySQLQuery = 'SELECT cs.id_code, cs.date_reservation, s.id_seance, s.dateheure,
     s.professeur, p.nom FROM code_seance cs
     LEFT JOIN seance s ON (cs.id_seance = s.id_seance)
@@ -18,7 +18,7 @@ function getReservations(int $id_code) : array
 // Return all available sessions for a given activity, with occupation number
 function getSeancesDispo(int $id_activite) : array
 {
-    $conn = verifResaConnect();
+    $conn = verifConnect();
     $MySQLQuery = 'SELECT s.id_seance, s.id_piscine, p.nom, s.id_activite, a.libelle,
     s.dateheure, s.professeur, s.capacite, COUNT(cs.id_seance) as occupation
     FROM seance s
@@ -37,7 +37,7 @@ function getSeancesDispo(int $id_activite) : array
 // Return information from pools
 function getPiscines() : array
 {
-    $conn = verifResaConnect();
+    $conn = verifConnect();
     $MySQLQuery = 'SELECT * FROM piscine';
     $stmt = $conn->prepare($MySQLQuery);
     $stmt->execute();
@@ -58,8 +58,27 @@ function isPickedSeance(int $id_seance, array $reservations) : bool
     return false;
 }
 
+// Return data concerning a given code
+function getInfosCode(string $code) : array
+{
+    $conn = verifConnect();
+    $MySQLQuery = 'SELECT c.id_code, c.date_generation, c.code, c.entrees_restantes,
+                    f.id_activite, f.nb_entrees, f.nb_personnes, f.duree_validite,
+                    a.libelle AS libelle_activite, a.description as description_activite,
+                    a.reservation, s.libelle AS libelle_situation
+                    FROM code c
+                        JOIN formule f ON (c.id_formule = f.id_formule)
+                        JOIN activite a ON (f.id_activite = a.id_activite)
+                        JOIN situation s ON (f.id_situation = s.id_situation)
+                    WHERE c.code = ?;';
+    $stmt = $conn->prepare($MySQLQuery);
+    $stmt->execute([$code]);
+    $infosCode = $stmt->fetchAll();
+    return $infosCode;
+}
+
 // Connection to database
-function verifResaConnect() : PDO
+function verifConnect() : PDO
 {
     try
     {

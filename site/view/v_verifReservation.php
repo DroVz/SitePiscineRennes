@@ -2,15 +2,13 @@
 
 <?php ob_start(); ?>
 
-
+<main>
     <h1>Gérer ses réservations</h1>
     <p>
         <?php echo 'Votre code est valable pour ' . $nb_entrees . ' entrées.'?>
     </p>
-
     <div>
         <h2>Vos réservations actuelles</h2>
-
         <ol>
             <?php
             foreach($reservations as $reservation) {            
@@ -28,8 +26,7 @@
                 echo 'Il vous reste ' . $reservationsRestantes . ' séances à réserver'
             ?>
         </p>
-    </div>
-    
+    </div>    
     <div>
         <h2>Séances disponibles</h2>
         <ul>
@@ -46,6 +43,9 @@
                 ($alreadyPicked ? ' - Vous avez déjà réservé pour cette séance': '') . '</li>';
             }
             ?>
+        </ul>
+    </div>
+</main>
 
 <?php $content = ob_get_clean(); ?>
 

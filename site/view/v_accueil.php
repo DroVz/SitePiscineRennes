@@ -2,8 +2,18 @@
 
 <?php ob_start(); ?>
 
-<h1>Liste des piscines</h1>
-<?= 'A venir' ?>
+<main>
+    <h1>Liste des piscines</h1>
+    <div>
+        <ul>
+            <?php
+                foreach($piscines as $piscine) {
+                    echo '<li>' . $piscine['nom'] . ' (' . $piscine['adresse'] . ')</li>';
+                }
+            ?>
+        </ul>
+    </div>
+</main>
 
 <?php $content = ob_get_clean(); ?>
 

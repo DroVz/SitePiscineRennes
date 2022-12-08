@@ -3,13 +3,12 @@
    <head>
       <meta charset="utf-8" />
       <title><?= $title ?></title>
-      <link href="style.css" rel="stylesheet" /> 
+      <link href="view/style.css" rel="stylesheet" />
    </head>
 
    <body>
         <!-- Je remets le header ici pour l'instant mais à revoir -->
-        <header>
-    
+        <header>    
             <nav>
                 <ul>
                     <li><a href="/index.php?action=accueil">Accueil</a></li>
@@ -20,5 +19,6 @@
         </header>
 
         <?= $content ?>
+        
    </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-// Return information from pools
+// Return information from piscine table
 function getInfoPiscines() : array
 {
     $conn = accueilConnect();

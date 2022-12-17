@@ -3,15 +3,11 @@
 <?php ob_start(); ?>
 
 <main>
-    <h1>Liste des piscines</h1>
-    <div>
-        <ul>
-            <?php
-                foreach($piscines as $piscine) {
-                    echo '<li>' . $piscine['nom'] . ' (' . $piscine['adresse'] . ')</li>';
-                }
-            ?>
-        </ul>
+    <div id="choix__list">
+        <img id="img__item1" src="img\piscine\piscineSaintGeorge.webp" alt="">
+        <img id="img__item2" src="img\piscine\piscineBrequigny.webp" alt="">
+        <img id="img__item3" src="img\piscine\piscineGayeulles.webp" alt="">
+        <img id="img__item4" src="img\piscine\piscineVilleJean.webp" alt="">
     </div>
 </main>
 

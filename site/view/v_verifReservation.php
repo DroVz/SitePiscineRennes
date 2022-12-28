@@ -32,14 +32,17 @@
         <ul>
             <?php
             foreach($seancesDispo as $seance) {
-                $nom_piscine = $seance['nom'];
-                $prof = $seance['professeur'];
-                $jour = date('d/m/Y', strtotime($seance['dateheure']));
-                $heuredeb = date('h:i', strtotime($seance['dateheure']));
-                $alreadyPicked = isPickedSeance($seance['id_seance'], $reservations);
+                $nom_piscine = $seance->getPiscine()->getNom();
+                $prof = $seance->getProfesseur();
+                $jour = date('d/m/Y', strtotime($seance->getDateheure()));
+                $heuredeb = date('h:i', strtotime($seance->getDateheure()));
+                // TODO voir comment trouver une séance déjà réservée
+                // TODO voir comment calculer l'occupation d'une séance
+                // $alreadyPicked = isPickedSeance($seance->id_seance, $reservations);
+                $alreadyPicked = false;
 
                 echo '<li>Le ' . $jour . ' à ' . $heuredeb . ' à ' . $nom_piscine . ' (coach : ' . $prof . '). 
-                Occupation : ' . $seance['occupation'] . '/' . $seance['capacite'] .
+                Capacité : ' . $seance->capacite .
                 ($alreadyPicked ? ' - Vous avez déjà réservé pour cette séance': '') . '</li>';
             }
             ?>

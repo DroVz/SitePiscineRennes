@@ -11,11 +11,11 @@
                     <?php
                         foreach($formules as $formule)
                         {
-                            echo '<input type="radio" name="formule" value="' . $formule['id_formule'] . '" id="' .
-                            $formule['id_formule'] . '" required/> <label for="' . $formule['id_formule'] .
-                            '">' . $formule['nb_entrees'] . ' entrées, ' . $formule['nb_personnes'] .
-                            ' personne(s), code valable ' . $formule['duree_validite'] . ' mois à partir de l\'achat - ' .
-                            $formule['prix'] . ' €</label><br />';
+                            echo '<input type="radio" name="formule" value="' . $formule->getId_formule() . '" id="' .
+                            $formule->getId_formule() . '" required/> <label for="' . $formule->getId_formule() .
+                            '">' . $formule->getNb_entrees() . ' entrées, ' . $formule->getNb_personnes() .
+                            ' personne(s), code valable ' . $formule->getDuree_validite() . ' mois à partir de l\'achat - ' .
+                            $formule->getPrix() . ' €</label><br />';
                         }
                     ?>
                 </p>

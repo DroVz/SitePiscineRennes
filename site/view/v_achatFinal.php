@@ -5,7 +5,7 @@
 <main>
     <p>
         <?php
-            echo 'Votre code : ' . $generatedCode;
+            echo 'Votre code : ' . $str_code;
         ?>
     </p>
 </main>

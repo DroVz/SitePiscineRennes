@@ -1,7 +1,15 @@
 <?php
 
 function achat() {
-    require_once('model/m_achat.php');
+    require_once('pdo/database.php');
+    require_once('model/activite.php');
+    require_once('pdo/activitePDO.php');
+    require_once('model/situation.php');
+    require_once('pdo/situationPDO.php');
+    require_once('model/formule.php');
+    require_once('pdo/formulePDO.php');
+    require_once('model/code.php');
+    require_once('pdo/codePDO.php');
 
     $step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
     if (empty($step)) {
@@ -9,30 +17,39 @@ function achat() {
     }
 
     switch($step) {
-        case 'initial' :
-            $activites = getActivites();
-            $situations = getSituations();
+        case 'initial':
+            $activitePDO = new ActivitePDO();
+            $activitePDO->connection = new DBConnection();
+            $activites = $activitePDO->getActivites();
+            $situationPDO = new SituationPDO();
+            $situationPDO->connection = new DBConnection();
+            $situations = $situationPDO->getSituations();
             require('view/v_achatInitial.php');
             break;
-        case 'formule' :
-            $id_activite = $_POST["activite"];
-            $id_situation = $_POST["situation"];        
+        case 'formule':
+            $activitePDO = new ActivitePDO();
+            $activitePDO->connection = new DBConnection();
+            $activite = $activitePDO->getActivite($_POST["activite"]);
+            $situationPDO = new SituationPDO();
+            $situationPDO->connection = new DBConnection();
+            $situation = $situationPDO->getSituation($_POST["situation"]);  
             // Recherche en base des formules existantes pour ce couple "activite + situation"
-            $formules = getFormules($id_activite, $id_situation);
+            $formulePDO = new FormulePDO();
+            $formulePDO->connection = new DBConnection();
+            $formules = $formulePDO->getFormules($activite, $situation);
             require('view/v_achatFormule.php');
             break;
         case 'final' :
-            $formule = $_POST["formule"];    
-            // appel à fonction pour
-            // 1. générer un code
-            // 2. boucler tant que le code n'est pas nouveau (fonction doit rechercher les codes existants)
-            $generatedCode = "";
-            while ($generatedCode == null || alreadyExists($generatedCode)) {
-                $generatedCode = generateCode();
-            };        
-            // 3. une fois qu'on a un code qui n'existe pas déjà, faire un update de la base
-            addCode($formule, $generatedCode);        
-            // 4. donner le code à l'utilisateur (c'est la vue qui s'en occupe)
+            $formulePDO = new FormulePDO();
+            $formulePDO->connection = new DBConnection();
+            $formule = $formulePDO->getFormule($_POST["formule"]);
+            // génération d'un nouveau code
+            $codePDO = new CodePDO();
+            $codePDO->connection = new DBConnection();
+            $str_code = $codePDO->newCode($formule);
+            // entrée du code dans la base
+            $codePDO->addCode($formule, $str_code);
+            // récupération du nouveau code
             require('view/v_achatFinal.php');
             break;
     }

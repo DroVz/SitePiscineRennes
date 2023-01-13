@@ -11,9 +11,9 @@
                 <?php
                 foreach($activites as $activite)
                 {
-                    echo '<input type="radio" name="activite" value="' . $activite['id_activite'] . '" id="' .
-                    $activite['id_activite'] . '" required/> <label for="' . $activite['id_activite'] .
-                    '">' . $activite['libelle'] . ' (' . $activite['description'] . ')' . '</label><br />';
+                    echo '<input type="radio" name="activite" value="' . $activite->getId_activite() . '" id="' .
+                    $activite->getId_activite() . '" required/> <label for="' . $activite->getId_activite() .
+                    '">' . $activite->getLibelle() . ' (' . $activite->getDescription() . ')' . '</label><br />';
                 }
                 ?>
             </fieldset>      
@@ -24,9 +24,9 @@
                 <?php
                 foreach($situations as $situation)
                 {
-                    echo '<input type="radio" name="situation" value="' . $situation['id_situation'] . '" id="' .
-                    $situation['id_situation'] . '" required/> <label for="' . $situation['id_situation'] .
-                    '">' . $situation['libelle'] . '</label><br />';
+                    echo '<input type="radio" name="situation" value="' . $situation->getId_situation() . '" id="' .
+                    $situation->getId_situation() . '" required/> <label for="' . $situation->getId_situation() .
+                    '">' . $situation->getLibelle() . '</label><br />';
                 }    
                 ?>
             </fieldset>

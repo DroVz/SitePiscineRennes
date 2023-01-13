@@ -1,8 +1,10 @@
 <?php
-    require_once('model/m_accueil.php');
+    require_once('model/piscine.php');
+    require_once('pdo/piscinePDO.php');
 
     function accueil() {
-        $piscines = getInfoPiscines();
-    
+        $piscinePDO = new PiscinePDO();
+        $piscinePDO->connection = new DBConnection();
+        $piscines = $piscinePDO->getPiscines();    
         require('view/v_accueil.php');
     }

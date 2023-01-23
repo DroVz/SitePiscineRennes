@@ -3,21 +3,23 @@
    <head>
       <meta charset="utf-8" />
       <title><?= $title ?></title>
-      <link href="view/style/style.css" rel="stylesheet" />
+      <link href="view/style.css" rel="stylesheet" />
+      <script src="view/script.js"></script>
    </head>
 
    <body>
         <!-- Je remets le header ici pour l'instant mais à revoir -->
         <header>    
             <nav>
-                <img src="img/logo.png" alt="">
-                <a href="/index.php?action=accueil">Accueil</a>
-                <a href="/index.php?action=achat">Formules</a>
-                <a href="/index.php?action=verif">Mon code</a>
+                <img src="view/img/logo.jpeg" alt="">
+                <ul>
+                    <li><a href="/index.php?action=accueil">Accueil</a></li>
+                    <li><a href="/index.php?action=achat">Formules</a></li>
+                    <li><a class="StyleButton" href="/index.php?action=verif">Mon Code</a></li>
+                </ul>
             </nav>    
         </header>
 
         <?= $content ?>
-        
    </body>
 </html>

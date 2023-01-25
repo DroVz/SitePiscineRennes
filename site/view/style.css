@@ -3,6 +3,7 @@ body {
     padding: 0%;
     background-color: #EDEDED;
 }
+
 /* Taille Police */
 h1 {
     font-size: 28pt;
@@ -13,6 +14,7 @@ h2 {
 p {
     font-size: 14pt;
 }
+
 /* Navigation */
 nav {
     display: flex;
@@ -60,8 +62,9 @@ nav .StyleButton:hover {
     background-color: #FFFFFF;
     transition: 500ms;
 }
-/* Corp */
-#Corp {
+
+/* SelectSwimmingPool */
+.SelectSwimmingPool {
     margin: 0%;
     padding: 0%;
 
@@ -69,18 +72,19 @@ nav .StyleButton:hover {
     justify-content: center;
     flex-wrap: wrap;
 }
-#Corp img {
+.SelectSwimmingPool img {
     width: 30%;
     margin: 40px;
     opacity: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-#Corp img:hover{
+.SelectSwimmingPool img:hover{
     opacity: 100%;
     transition: 500ms;
 }
+
 /* Bot */
-#Bot {
+.FocusSwimmingPool {
     background-color: #FFFFFF;
     display: flex; 
     flex-direction: column;
@@ -95,21 +99,21 @@ nav .StyleButton:hover {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 /* Title */
-#Bot h1{
+.FocusSwimmingPool h1{
     border-bottom: solid 1px #000000;
     text-align: center;
 }
 /* Information Card */
-#Bot div {
+.FocusSwimmingPool div {
     display: flex;
     width: 100%;
     height: 100%;
 }
-#Bot .info {
+.FocusSwimmingPool .info {
     width: 60%;
     margin: 0px 10px 0px 20px;
 }
-#Bot img {
+.FocusSwimmingPool img {
     padding: 10px 20px 10px 20px;
 
     width: 40%;

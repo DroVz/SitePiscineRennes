@@ -1,25 +1,26 @@
 <?php $title = "Piscines municipales de Rennes - Accueil"; ?>
 <?php ob_start();?>
 <main>
-    <div id="Corp">
+    <div class="SelectSwimmingPool">
         <?php 
             foreach($piscines as $piscine){
-                echo ' <img src="'. $piscine->getImage() .'" alt="" onclick="updatePiscineImage('. $piscine->getNom() .')">';
+                echo ' <img src="'. $piscine->getImage() .'" value="'. $piscine->getNom() .'*'. $piscine->getAdresse() .'*'. $piscine->getDescriptif() .'*'. $piscine->getMap() .'" alt="" onclick="PiscineClickEvent(this)">';
             }
         ?>    
     </div>
-    <div id="Bot">
-    <?php echo  '<h1>'. $selectPiscine->getNom() .'</h1>'; ?>
+
+    <div class="FocusSwimmingPool">
+      <?php echo  '<h1 id="FocusSwimmingPool--Title">'. $selectPiscine->getNom() .'</h1>'; ?>
         <div>
             <div  class="info">
                 <article>
                     <h2> Adresse : </h2>
-                   <?php echo '<p>'. $selectPiscine->getAdresse() .'<p>' ?>
+                   <?php echo '<p id="FocusSwimmingPool--Address">'. $selectPiscine->getAdresse() .'<p>' ?>
                     <h2> Descriptif : </h2>
-                    <?php echo '<p>'. $selectPiscine->getDescriptif() .'<p></br>' ?>
+                    <?php echo '<p id="FocusSwimmingPool--Descriptif">'. $selectPiscine->getDescriptif() .'<p></br>' ?>
                 </article>
             </div>
-           <?php echo ' <img src="'. $selectPiscine->getMap() .'" alt="">'; ?>
+           <?php echo ' <img id="FocusSwimmingPool--Map" src="'. $selectPiscine->getMap() .'" alt="">'; ?>
         </div>
     </div>
 </main>
@@ -44,4 +45,5 @@
     default:
       img.src = "path/to/default-image.jpg";
   }
+  /'. $piscine->getAdresse() .'/'. $piscine->getDescriptif .'/'. $piscine->getMap() .'
 } -->

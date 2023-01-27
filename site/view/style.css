@@ -1,0 +1,170 @@
+body {
+    margin: 0%;
+    padding: 0%;
+    background-color: #EDEDED;
+}
+
+/* Taille Police */
+h1 {
+    font-size: 28pt;
+
+}
+h2 {
+    font-family:'Istok Web';
+    font-size: 24pt;
+
+}
+p {
+    font-size: 14pt;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #FFFFFF;
+    height: 10vh;
+}
+nav img {
+    margin-left: 20px;
+    width: 20%;
+}
+nav ul {
+    margin:0%;
+    padding: 0%;
+    display: flex;
+
+    list-style-type: none;
+}
+nav a{
+    display: block;
+    text-align: center;
+    padding: 16px;
+    margin-right: 20px;
+
+    font-family:'Istok Web';
+    font-size: 16pt;
+    text-decoration: none;
+    color: #000000;
+}
+nav .StyleButton{
+    color: #FFFFFF;
+    background-color: #479CFF;
+    border: solid 1px #479CFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+nav a:hover{
+    color: #FFFFFF;
+    background-color: #479CFF;
+    transition: 500ms;
+}
+nav .StyleButton:hover {
+    color: #479CFF;
+    background-color: #FFFFFF;
+    transition: 500ms;
+}
+
+/* SelectSwimmingPool */
+.SelectSwimmingPool {
+    margin: 0%;
+    padding: 0%;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.SelectSwimmingPool .SwimmingPool--Img {
+    width: 30%;
+    margin: 40px;
+    opacity: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.SelectSwimmingPool .SwimmingPool--Img:hover{
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+    transition: 500ms;
+}
+
+/* FocusSwimmingPool */
+.FocusSwimmingPool {
+    background-color: #ffffff;
+    display: flex; 
+    flex-direction: column;
+
+    width: 80%;
+
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    padding-bottom: 20px;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.FocusSwimmingPool h1{
+    border-bottom: solid 1px #000000;
+    text-align: center;
+}
+
+.FocusSwimmingPool div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.FocusSwimmingPool .info {
+    width: 60%;
+    margin: 0px 10px 0px 20px;
+}
+.FocusSwimmingPool img {
+    padding: 10px 20px 10px 20px;
+
+    width: 40%;
+    border-left: solid 1px #000000;
+}
+
+/*CheckCodeSwimmingPool */
+.CheckCodeSwimmingPool {
+
+    background-color: #ffffff;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    padding-bottom: 20px;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.CheckCodeSwimmingPool h2 {
+    text-align: center;
+}
+
+.CheckCodeSwimmingPool input {
+    width: 600px;
+    height: 50px;
+
+    text-align: center;
+    font-size: 16pt;
+}
+
+.CheckCodeSwimmingPool button {
+    margin-top: 20px;
+    width: 20%;
+    height: 60px;
+
+    color: #ffffff;
+    background-color: #479CFF;
+    border: solid 1px #479CFF;
+
+    font-family:'Istok Web';
+    font-size: 16pt;
+}
+.CheckCodeSwimmingPool button:hover {
+    color: #479CFF;
+    background-color: #FFFFFF;
+}

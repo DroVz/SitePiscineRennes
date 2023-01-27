@@ -17,7 +17,10 @@ class PiscinePDO {
             $nom = $row['nom'];
             $adresse = $row['adresse'];
             $actif = $row['actif'];
-            $piscine = new Piscine($id_piscine, $nom, $adresse, $actif);
+            $image = $row['image'];
+            $map = $row['map'];
+            $descriptif = $row['descriptif'];
+            $piscine = new Piscine($id_piscine, $nom, $adresse, $actif, $image, $map, $descriptif);
         }
         return $piscine;
     }
@@ -35,7 +38,10 @@ class PiscinePDO {
             $nom = $row['nom'];
             $adresse = $row['adresse'];
             $actif = $row['actif'];
-            $piscine = new Piscine($id_piscine, $nom, $adresse, $actif);
+            $image = $row['image'];
+            $map = $row['map'];
+            $descriptif = $row['descriptif'];
+            $piscine = new Piscine($id_piscine, $nom, $adresse, $actif, $image, $map, $descriptif);
             $piscines[] = $piscine;
         }
         return $piscines;

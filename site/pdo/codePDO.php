@@ -1,7 +1,7 @@
 <?php
 
 require_once('pdo/database.php');
-require_once('pdo/formulePDO.php');
+require_once('pdo/offerPDO.php');
 require_once('model/code.php');
 
 class CodePDO
@@ -12,7 +12,7 @@ class CodePDO
     // Return 1 code from database
     function read(int $id_code): Code
     {
-        $MySQLQuery = 'SELECT id_code, id_formule, date_generation, code, entrees_restantes
+        $MySQLQuery = 'SELECT id_code, id_offer, generation_date, code_string, remaining_entries
                         FROM code WHERE id_code = ?;';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
         $stmt->execute([$id_code]);
@@ -36,33 +36,33 @@ class CodePDO
     // Add new code to database
     public function create(Code $code): void
     {
-        $MySQLQuery = 'INSERT INTO code (id_formule, date_generation, code, entrees_restantes)
+        $MySQLQuery = 'INSERT INTO code (id_offer, generation_date, code_string, remaining_entries)
         VALUES (?, ?, ?, ?)';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
         $stmt->execute([
-            $code->getFormule()->getId_formule(), $code->getDate_generation(),
-            $code->getCodeString(), $code->getEntrees_restantes()
+            $code->getOffer()->getIdOffer(), $code->getGenerationDate(),
+            $code->getCodeString(), $code->getRemainingEntries()
         ]);
     }
 
     // Initiate creation of a string as new code 
-    public function newCode(Formule $formule): Code
+    public function newCode(Offer $offer): Code
     {
         // génération d'une chaîne correspondant au nouveau code
         $codeString = "";
         do {
             $codeString = $this->generateCode();
         } while ($this->getId($codeString) != 0);
-        $date_generation = date('Y-m-d H:i:s');
-        $entrees_restantes = $formule->getNb_entrees();
-        $code = new Code($formule, $date_generation, $codeString, $entrees_restantes);
+        $generationDate = date('Y-m-d H:i:s');
+        $remainingEntries = $offer->getNbEntries();
+        $code = new Code($offer, $generationDate, $codeString, $remainingEntries);
         return $code;
     }
 
     // Return code ID if given code string already exists in database
     public function getId(string $strCode): int
     {
-        $stmt = $this->connection->getConnection()->prepare('SELECT * FROM code WHERE code = ?');
+        $stmt = $this->connection->getConnection()->prepare('SELECT * FROM code WHERE code_string = ?');
         $stmt->execute([$strCode]);
         $code = $stmt->fetch();
         // if code exists, return its id_code, else return 0
@@ -75,13 +75,13 @@ class CodePDO
         $codes = [];
         foreach ($rows as $row) {
             $id_code = $row['id_code'];
-            $formulePDO = new FormulePDO();
-            $formulePDO->connection = new DBConnection();
-            $formule = $formulePDO->read($row["id_formule"]);
-            $date_generation = $row['date_generation'];
-            $codeString = $row['code'];
-            $entrees_restantes = $row['entrees_restantes'];
-            $code = new Code($formule, $date_generation, $codeString, $entrees_restantes, $id_code);
+            $optionPDO = new OfferPDO();
+            $optionPDO->connection = new DBConnection();
+            $offer = $optionPDO->read($row["id_offer"]);
+            $generation_date = $row['generation_date'];
+            $codeString = $row['code_string'];
+            $remaining_entries = $row['remaining_entries'];
+            $code = new Code($offer, $generation_date, $codeString, $remaining_entries, $id_code);
             $codes[] = $code;
             $this->data[$id_code] = $code;
         }

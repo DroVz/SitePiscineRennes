@@ -1,22 +1,22 @@
 <?php
 
 require_once('pdo/database.php');
-require_once('model/activite.php');
+require_once('model/activity.php');
 
-class ActivitePDO
+class ActivityPDO
 {
     public DBConnection $connection;
     private array $data = array();
 
     // Return 1 activity from database
-    public function read(int $id_activite): Activite
+    public function read(int $id_activity): Activity
     {
-        $MySQLQuery = 'SELECT * FROM activite WHERE id_activite = ?;';
+        $MySQLQuery = 'SELECT * FROM activity WHERE id_activity = ?;';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
-        $stmt->execute([$id_activite]);
+        $stmt->execute([$id_activity]);
         $activite = null;
-        if (array_key_exists($id_activite, $this->data)) {
-            $activite = $this->data[$id_activite];
+        if (array_key_exists($id_activity, $this->data)) {
+            $activite = $this->data[$id_activity];
         } else {
             $activite = $this->returnActivities($stmt->fetchAll())[0];
         }
@@ -26,7 +26,7 @@ class ActivitePDO
     // Return all activities from database
     public function readAll(): array
     {
-        $MySQLQuery = 'SELECT * FROM activite WHERE actif = 1';
+        $MySQLQuery = 'SELECT * FROM activity WHERE active = 1';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
         $stmt->execute();
         return $this->returnActivities($stmt->fetchAll());
@@ -50,17 +50,17 @@ class ActivitePDO
     // Return all activities in $rows and update $data
     private function returnActivities(array $rows): array
     {
-        $activites = [];
+        $activities = [];
         foreach ($rows as $row) {
-            $id_activite = $row['id_activite'];
-            $libelle = $row['libelle'];
+            $id_activity = $row['id_activity'];
+            $name = $row['name'];
             $description = $row['description'];
-            $reservation = $row['reservation'];
-            $actif = $row['actif'];
-            $activite = new Activite($libelle, $description, $reservation, $actif, $id_activite);
-            $activites[] = $activite;
-            $this->data[$id_activite] = $activite;
+            $booking = $row['booking'];
+            $active = $row['active'];
+            $activity = new Activity($name, $description, $booking, $active, $id_activity);
+            $activities[] = $activity;
+            $this->data[$id_activity] = $activity;
         }
-        return $activites;
+        return $activities;
     }
 }

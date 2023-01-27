@@ -30,6 +30,21 @@ class SituationPDO
         return $this->returnSituations($stmt->fetchAll());
     }
 
+    // TODO Add new situation to database
+    public function create(): void
+    {
+    }
+
+    // TODO Update existing situation
+    public function update(): void
+    {
+    }
+
+    // TODO Delete situation from database
+    public function delete(): void
+    {
+    }
+
     // Return all situations in $rows and update $data
     private function returnSituations(array $rows): array
     {

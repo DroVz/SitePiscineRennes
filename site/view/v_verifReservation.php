@@ -5,17 +5,17 @@
 <main>
     <h1>Gérer ses réservations</h1>
     <p>
-        <?php echo 'Votre code est valable pour ' . $nb_entrees . ' entrées.'?>
+        <?php echo 'Votre code est valable pour ' . $nb_entrees . ' entrées.' ?>
     </p>
     <div>
         <h2>Vos réservations actuelles</h2>
         <ol>
             <?php
-            foreach($reservations as $reservation) {            
-                $nom_piscine = $reservation['nom'];
-                $prof = $reservation['professeur'];
-                $jour = date('d/m/Y', strtotime($reservation['dateheure']));
-                $heuredeb = date('h:i', strtotime($reservation['dateheure']));
+            foreach ($reservations as $reservation) {
+                $nom_piscine = $reservation->getSeance()->read()->getNom();
+                $prof = $reservation->getSeance()->getProfesseur();
+                $jour = date('d/m/Y', strtotime($reservation->getSeance()->getDateheure()));
+                $heuredeb = date('h:i', strtotime($reservation->getSeance()->getDateheure()));
 
                 echo '<li>Le ' . $jour . ' à ' . $heuredeb . ' à ' . $nom_piscine . ' (coach : ' . $prof . ')</li>';
             }
@@ -23,27 +23,26 @@
         </ol>
         <p>
             <?php
-                echo 'Il vous reste ' . $reservationsRestantes . ' séances à réserver'
+            echo 'Il vous reste ' . $reservationsRestantes . ' séances à réserver'
             ?>
         </p>
-    </div>    
+    </div>
     <div>
         <h2>Séances disponibles</h2>
         <ul>
             <?php
-            foreach($seancesDispo as $seance) {
+            foreach ($seancesDispo as $seance) {
                 $nom_piscine = $seance->getPiscine()->getNom();
                 $prof = $seance->getProfesseur();
                 $jour = date('d/m/Y', strtotime($seance->getDateheure()));
                 $heuredeb = date('h:i', strtotime($seance->getDateheure()));
-                // TODO voir comment trouver une séance déjà réservée
-                // TODO voir comment calculer l'occupation d'une séance
-                // $alreadyPicked = isPickedSeance($seance->id_seance, $reservations);
-                $alreadyPicked = false;
+                $occupation = $seance->getOccupation();
+                $capacite = $seance->getCapacite();
+                $alreadyReserved = $seance->alreadyReserved($code);
 
                 echo '<li>Le ' . $jour . ' à ' . $heuredeb . ' à ' . $nom_piscine . ' (coach : ' . $prof . '). 
-                Capacité : ' . $seance->capacite .
-                ($alreadyPicked ? ' - Vous avez déjà réservé pour cette séance': '') . '</li>';
+                 - Occupation : ' . $occupation . '/' . $capacite .
+                    ($alreadyReserved ? ' - Vous avez déjà réservé pour cette séance' : '') . '</li>';
             }
             ?>
         </ul>

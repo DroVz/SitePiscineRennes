@@ -1,6 +1,7 @@
 <?php
 
-function achat() {
+function achat()
+{
     require_once('pdo/database.php');
     require_once('model/activite.php');
     require_once('pdo/activitePDO.php');
@@ -16,11 +17,11 @@ function achat() {
         $step = 'initial';
     }
 
-    switch($step) {
+    switch ($step) {
         case 'initial':
             $activitePDO = new ActivitePDO();
             $activitePDO->connection = new DBConnection();
-            $activites = $activitePDO->getActivites();
+            $activites = $activitePDO->readAll();
             $situationPDO = new SituationPDO();
             $situationPDO->connection = new DBConnection();
             $situations = $situationPDO->getSituations();
@@ -29,26 +30,25 @@ function achat() {
         case 'formule':
             $activitePDO = new ActivitePDO();
             $activitePDO->connection = new DBConnection();
-            $activite = $activitePDO->getActivite($_POST["activite"]);
+            $activite = $activitePDO->read($_POST["activite"]);
             $situationPDO = new SituationPDO();
             $situationPDO->connection = new DBConnection();
-            $situation = $situationPDO->getSituation($_POST["situation"]);  
+            $situation = $situationPDO->getSituation($_POST["situation"]);
             // Recherche en base des formules existantes pour ce couple "activite + situation"
             $formulePDO = new FormulePDO();
             $formulePDO->connection = new DBConnection();
-            $formules = $formulePDO->getFormules($activite, $situation);
+            $formules = $formulePDO->readAll($activite, $situation);
             require('view/v_achatFormule.php');
             break;
-        case 'final' :
+        case 'final':
             $formulePDO = new FormulePDO();
             $formulePDO->connection = new DBConnection();
-            $formule = $formulePDO->getFormule($_POST["formule"]);
+            $formule = $formulePDO->read($_POST["formule"]);
             // génération d'un nouveau code
             $codePDO = new CodePDO();
             $codePDO->connection = new DBConnection();
-            $str_code = $codePDO->newCode($formule);
-            // entrée du code dans la base
-            $codePDO->addCode($formule, $str_code);
+            $newCode = $codePDO->newCode($formule);
+            $codePDO->create($newCode);
             // récupération du nouveau code
             require('view/v_achatFinal.php');
             break;

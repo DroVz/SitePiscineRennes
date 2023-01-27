@@ -10,7 +10,7 @@ function verif()
     require_once('model/activite.php');
     require_once('pdo/activitePDO.php');
 
-    $step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
+    $step = filter_input(INPUT_GET, 'step',FILTER_SANITIZE_STRING);
     if (empty($step)) {
         $step = 'initial';
     }

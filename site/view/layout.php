@@ -5,6 +5,7 @@
       <title><?= $title ?></title>
       <link href="view/style.css" rel="stylesheet" />
       <script src="view/script.js"></script>
+      <script src="view/script.js"></script>
    </head>
 
    <body>
@@ -15,6 +16,7 @@
                 <ul>
                     <li><a href="/index.php?action=accueil">Accueil</a></li>
                     <li><a href="/index.php?action=achat">Formules</a></li>
+                    <li><a href="/index.php?action=admin">Gestion</a></li>
                     <li><a class="StyleButton" href="/index.php?action=verif">Mon Code</a></li>
                 </ul>
             </nav>    

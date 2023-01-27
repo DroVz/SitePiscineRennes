@@ -1,6 +1,7 @@
 <?php
 
-class Piscine {
+class Piscine
+{
     private int $id_piscine;
     private string $nom;
     private string $adresse;
@@ -8,8 +9,16 @@ class Piscine {
     private string $image;
     private string $map;
     private string $descriptif;
-    
-    public function __construct(int $id_piscine, string $nom, string $adresse, int $actif, string $image, string $map, string $descriptif) {
+
+    public function __construct(
+        string $nom,
+        string $adresse,
+        int $actif,
+        string $image,
+        string $map,
+        string $descriptif,
+        int $id_piscine = -1
+    ) {
         $this->id_piscine = $id_piscine;
         $this->nom = $nom;
         $this->adresse = $adresse;
@@ -18,31 +27,38 @@ class Piscine {
         $this->map = $map;
         $this->descriptif = $descriptif;
     }
-    
-    public function getId_piscine() : int {
+
+    public function getId_piscine(): int
+    {
         return $this->id_piscine;
     }
 
-    public function getNom() : string {
+    public function getNom(): string
+    {
         return $this->nom;
     }
 
-    public function getAdresse() : string {
+    public function getAdresse(): string
+    {
         return $this->adresse;
     }
 
-    public function getActif() : int {
+    public function getActif(): int
+    {
         return $this->actif;
     }
 
-    public function getImage() : string {
+    public function getImage(): string
+    {
         return $this->image;
     }
-    
-    public function getMap() : string {
+
+    public function getMap(): string
+    {
         return $this->map;
     }
-    public function getDescriptif() : string {
+    public function getDescriptif(): string
+    {
         return $this->descriptif;
     }
 }

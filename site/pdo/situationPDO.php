@@ -3,35 +3,59 @@
 require_once('pdo/database.php');
 require_once('model/situation.php');
 
-class SituationPDO {
+class SituationPDO
+{
     public DBConnection $connection;
+    private array $data = array();
 
     // Return 1 situation from database
-    public function getSituation(int $id_situation) : Situation
+    public function getSituation(int $id_situation): Situation
     {
         $stmt = $this->connection->getConnection()->prepare('SELECT * FROM situation WHERE id_situation = ?');
         $stmt->execute([$id_situation]);
-        while (($row = $stmt->fetch())) {
-            $id_situation = $row['id_situation'];
-            $libelle = $row['libelle'];
-            $actif = $row['actif'];
-            $situation = new Situation($id_situation, $libelle, $actif);
+        $situation = null;
+        if (array_key_exists($id_situation, $this->data)) {
+            $situation = $this->data[$id_situation];
+        } else {
+            $situation = $this->returnSituations($stmt->fetchAll())[0];
         }
         return $situation;
     }
 
     // Return all situations from database
-    public function getSituations()  : array
+    public function getSituations(): array
     {
         $stmt = $this->connection->getConnection()->prepare('SELECT * FROM situation WHERE actif = 1;');
         $stmt->execute();
+        return $this->returnSituations($stmt->fetchAll());
+    }
+
+    // TODO Add new situation to database
+    public function create(): void
+    {
+    }
+
+    // TODO Update existing situation
+    public function update(): void
+    {
+    }
+
+    // TODO Delete situation from database
+    public function delete(): void
+    {
+    }
+
+    // Return all situations in $rows and update $data
+    private function returnSituations(array $rows): array
+    {
         $situations = [];
-        while (($row = $stmt->fetch())) {
+        foreach ($rows as $row) {
             $id_situation = $row['id_situation'];
             $libelle = $row['libelle'];
             $actif = $row['actif'];
-            $situation = new Situation($id_situation, $libelle, $actif);
+            $situation = new Situation($libelle, $actif, $id_situation);
             $situations[] = $situation;
+            $this->data[$id_situation] = $situation;
         }
         return $situations;
     }

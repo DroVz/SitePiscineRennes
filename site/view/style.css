@@ -7,9 +7,12 @@ body {
 /* Taille Police */
 h1 {
     font-size: 28pt;
+
 }
 h2 {
+    font-family:'Istok Web';
     font-size: 24pt;
+
 }
 p {
     font-size: 14pt;
@@ -72,20 +75,20 @@ nav .StyleButton:hover {
     justify-content: center;
     flex-wrap: wrap;
 }
-.SelectSwimmingPool img {
+.SelectSwimmingPool .SwimmingPool--Img {
     width: 30%;
     margin: 40px;
-    opacity: 50%;
+    opacity: 100%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.SelectSwimmingPool img:hover{
-    opacity: 100%;
+.SelectSwimmingPool .SwimmingPool--Img:hover{
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
     transition: 500ms;
 }
 
-/* Bot */
+/* FocusSwimmingPool */
 .FocusSwimmingPool {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     display: flex; 
     flex-direction: column;
 
@@ -98,12 +101,12 @@ nav .StyleButton:hover {
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-/* Title */
+
 .FocusSwimmingPool h1{
     border-bottom: solid 1px #000000;
     text-align: center;
 }
-/* Information Card */
+
 .FocusSwimmingPool div {
     display: flex;
     width: 100%;
@@ -118,4 +121,50 @@ nav .StyleButton:hover {
 
     width: 40%;
     border-left: solid 1px #000000;
+}
+
+/*CheckCodeSwimmingPool */
+.CheckCodeSwimmingPool {
+
+    background-color: #ffffff;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    padding-bottom: 20px;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.CheckCodeSwimmingPool h2 {
+    text-align: center;
+}
+
+.CheckCodeSwimmingPool input {
+    width: 600px;
+    height: 50px;
+
+    text-align: center;
+    font-size: 16pt;
+}
+
+.CheckCodeSwimmingPool button {
+    margin-top: 20px;
+    width: 20%;
+    height: 60px;
+
+    color: #ffffff;
+    background-color: #479CFF;
+    border: solid 1px #479CFF;
+
+    font-family:'Istok Web';
+    font-size: 16pt;
+}
+.CheckCodeSwimmingPool button:hover {
+    color: #479CFF;
+    background-color: #FFFFFF;
 }

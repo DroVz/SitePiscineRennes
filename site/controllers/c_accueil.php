@@ -1,5 +1,4 @@
 <?php
-    require_once('controllers/PiscineController.php');
     require_once('model/piscine.php');
     require_once('pdo/piscinePDO.php');
      function accueil() {
@@ -9,10 +8,3 @@
         $selectPiscine =  $piscines[0];
         require('view/v_accueil.php');
      }
-    class AccueilController {
-        public function updatePiscineImage(string $name) {
-            $controller = new PiscineController;
-            $selectPiscine = $controller->getPiscineByName($name);
-        }
-
-    }

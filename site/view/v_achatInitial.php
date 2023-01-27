@@ -4,34 +4,32 @@
 
 <main>
     <h1>Choisissez votre activité et votre situation</h1>
-    <form method="post" action="index.php?action=achat&step=formule">
+    <form method="post" action="index.php?action=achat&step=option">
         <div id="choixActivite">
             <fieldset>
                 <legend>Choisir une activité :</legend>
                 <?php
-                foreach($activites as $activite)
-                {
-                    echo '<input type="radio" name="activite" value="' . $activite->getId_activite() . '" id="' .
-                    $activite->getId_activite() . '" required/> <label for="' . $activite->getId_activite() .
-                    '">' . $activite->getLibelle() . ' (' . $activite->getDescription() . ')' . '</label><br />';
+                foreach ($activities as $activity) {
+                    echo '<input type="radio" name="activity" value="' . $activity->getIdActivity() . '" id="' .
+                        $activity->getIdActivity() . '" required/> <label for="' . $activity->getIdActivity() .
+                        '">' . $activity->getName() . ' (' . $activity->getDescription() . ')' . '</label><br />';
                 }
                 ?>
-            </fieldset>      
+            </fieldset>
         </div>
         <div id="choixSituation">
             <fieldset>
                 <legend>Quelle est votre situation ?</legend>
                 <?php
-                foreach($situations as $situation)
-                {
-                    echo '<input type="radio" name="situation" value="' . $situation->getId_situation() . '" id="' .
-                    $situation->getId_situation() . '" required/> <label for="' . $situation->getId_situation() .
-                    '">' . $situation->getLibelle() . '</label><br />';
-                }    
+                foreach ($situations as $situation) {
+                    echo '<input type="radio" name="situation" value="' . $situation->getIdSituation() . '" id="' .
+                        $situation->getIdSituation() . '" required/> <label for="' . $situation->getIdSituation() .
+                        '">' . $situation->getName() . '</label><br />';
+                }
                 ?>
             </fieldset>
         </div>
-        <input type="submit" value="Choisir la formule">        
+        <input type="submit" value="Choisir la formule">
     </form>
 </main>
 

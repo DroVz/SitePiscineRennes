@@ -1,12 +1,12 @@
 <?php
-require_once('model/piscine.php');
-require_once('pdo/piscinePDO.php');
+require_once('model/pool.php');
+require_once('pdo/poolPDO.php');
 
 function accueil()
 {
-    $piscinePDO = new PiscinePDO();
-    $piscinePDO->connection = new DBConnection();
-    $piscines = $piscinePDO->readAll();
-    $selectPiscine =  $piscines[0];
+    $poolPDO = new PoolPDO();
+    $poolPDO->connection = new DBConnection();
+    $pools = $poolPDO->readAll();
+    $selectPool =  $pools[0];
     require('view/v_accueil.php');
 }

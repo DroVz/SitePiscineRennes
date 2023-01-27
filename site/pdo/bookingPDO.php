@@ -1,20 +1,20 @@
 <?php
 
 require_once('pdo/database.php');
-require_once('model/reservation.php');
+require_once('model/booking.php');
 
-class ReservationPDO
+class BookingPDO
 {
     public DBConnection $connection;
 
     // Return all reservations associated with a given code
     function readAll(Code $code): array
     {
-        $MySQLQuery = 'SELECT id_seance, id_code, date_reservation
-        FROM code_seance WHERE id_code = ?';
+        $MySQLQuery = 'SELECT id_session, id_code, booking_date
+        FROM session_code WHERE id_code = ?';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code()]);
-        return $this->returnReservations($stmt->fetchAll());
+        return $this->returnBookings($stmt->fetchAll());
     }
 
     // TODO Add new reservation to database
@@ -33,20 +33,20 @@ class ReservationPDO
     }
 
     // Return all reservations in $rows
-    private function returnReservations(array $rows): array
+    private function returnBookings(array $rows): array
     {
-        $reservations = [];
+        $bookings = [];
         foreach ($rows as $row) {
-            $seancePDO = new SeancePDO();
-            $seancePDO->connection = new DBConnection();
-            $seance = $seancePDO->read($row['id_seance']);
+            $sessionPDO = new SessionPDO();
+            $sessionPDO->connection = new DBConnection();
+            $session = $sessionPDO->read($row['id_session']);
             $codePDO = new CodePDO();
             $codePDO->connection = new DBConnection();
             $code = $codePDO->read($row['id_code']);
-            $date_reservation = $row['date_reservation'];
-            $reservation = new Reservation($seance, $code, $date_reservation);
-            $reservations[] = $reservation;
+            $booking_date = $row['booking_date'];
+            $booking = new Booking($session, $code, $booking_date);
+            $bookings[] = $booking;
         }
-        return $reservations;
+        return $bookings;
     }
 }

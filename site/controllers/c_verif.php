@@ -1,16 +1,16 @@
 <?php
 function verif()
 {
-    require_once('model/seance.php');
-    require_once('pdo/seancePDO.php');
-    require_once('model/reservation.php');
-    require_once('pdo/reservationPDO.php');
+    require_once('model/session.php');
+    require_once('pdo/sessionPDO.php');
+    require_once('model/booking.php');
+    require_once('pdo/bookingPDO.php');
     require_once('model/code.php');
     require_once('pdo/codePDO.php');
-    require_once('model/activite.php');
-    require_once('pdo/activitePDO.php');
+    require_once('model/activity.php');
+    require_once('pdo/activityPDO.php');
 
-    $step = filter_input(INPUT_GET, 'step',FILTER_SANITIZE_STRING);
+    $step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
     if (empty($step)) {
         $step = 'initial';
     }
@@ -22,6 +22,7 @@ function verif()
         case 'info':
             // TODO ajouter une sécurité à la ligne ci-dessous
             $str_code = $_POST["code"];
+
             $codePDO = new CodePDO();
             $codePDO->connection = new DBConnection();
             $id_code = $codePDO->getId($str_code);
@@ -32,12 +33,13 @@ function verif()
             }
             require('view/v_verifInfo.php');
             break;
-        case 'reservation':
+        case 'booking':
             // Récupération du numéro du code dans la base depuis le formulaire précédent
             // Récupération du code de l'activité
             $id_code = $_POST['id_code'];
-            $id_activite = $_POST['id_activite'];
-            $nb_entrees = $_POST['nb_entrees'];
+
+            $id_activity = $_POST['id_activity'];
+            $nbEntries = $_POST['nb_entries'];
 
             // On récupère les infos du code
             $codePDO = new CodePDO();
@@ -45,25 +47,25 @@ function verif()
             $code = $codePDO->read($id_code);
 
             // On récupère les infos de l'activité
-            $activitePDO = new ActivitePDO();
-            $activitePDO->connection = new DBConnection();
-            $activite = $activitePDO->read($id_activite);
+            $activityPDO = new ActivityPDO();
+            $activityPDO->connection = new DBConnection();
+            $activity = $activityPDO->read($id_activity);
 
             // On récupère les réservations existantes pour le code
-            $reservationPDO = new ReservationPDO();
-            $reservationPDO->connection = new DBConnection();
-            $reservations = $reservationPDO->readAll($code);
-            $reservationsRestantes = $nb_entrees - count($reservations);
+            $bookingPDO = new BookingPDO();
+            $bookingPDO->connection = new DBConnection();
+            $bookings = $bookingPDO->readAll($code);
+            $remainingBookings = $nbEntries - count($bookings);
 
             // On a besoin des infos des piscines
-            $piscinePDO = new PiscinePDO();
-            $piscinePDO->connection = new DBConnection();
-            $piscines = $piscinePDO->readAll();
+            $poolPDO = new PoolPDO();
+            $poolPDO->connection = new DBConnection();
+            $pools = $poolPDO->readAll();
 
             // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
-            $seancePDO = new SeancePDO();
-            $seancePDO->connection = new DBConnection();
-            $seancesDispo = $seancePDO->readAll($activite);
+            $sessionPDO = new SessionPDO();
+            $sessionPDO->connection = new DBConnection();
+            $availableSessions = $sessionPDO->readAll($activity);
 
             require('view/v_verifReservation.php');
             break;

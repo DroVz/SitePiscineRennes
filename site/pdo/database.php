@@ -6,14 +6,13 @@ class DBConnection
 
 	public function getConnection(): PDO
 	{
-    	if ($this->database === null) {
+		if ($this->database === null) {
 			try {
-				$this->database = new PDO('mysql:host=localhost;dbname=piscines;charset=utf8', "root", "");
+				$this->database = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
+			} catch (Exception $e) {
+				die('Erreur : ' . $e->getMessage());
 			}
-        	catch (Exception $e) {
-				die('Erreur : '.$e->getMessage());
-			}
-    	}
-    	return $this->database;
+		}
+		return $this->database;
 	}
 }

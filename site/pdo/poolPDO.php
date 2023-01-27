@@ -1,22 +1,22 @@
 <?php
 
 require_once('pdo/database.php');
-require_once('model/piscine.php');
+require_once('model/pool.php');
 
-class PiscinePDO
+class PoolPDO
 {
     public DBConnection $connection;
     private array $data = array();
 
     // Return 1 pool from database
-    public function read(int $id_piscine): Piscine
+    public function read(int $id_pool): Pool
     {
-        $MySQLQuery = 'SELECT * FROM piscine WHERE id_piscine = ?;';
+        $MySQLQuery = 'SELECT * FROM pool WHERE id_pool = ?;';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
-        $stmt->execute([$id_piscine]);
+        $stmt->execute([$id_pool]);
         $pool = null;
-        if (array_key_exists($id_piscine, $this->data)) {
-            $pool = $this->data[$id_piscine];
+        if (array_key_exists($id_pool, $this->data)) {
+            $pool = $this->data[$id_pool];
         } else {
             $pool = $this->returnPools($stmt->fetchAll())[0];
         }
@@ -26,7 +26,7 @@ class PiscinePDO
     // Return all pools from database
     public function readAll(): array
     {
-        $MySQLQuery = 'SELECT * FROM piscine';
+        $MySQLQuery = 'SELECT * FROM pool';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
         $stmt->execute();
         return $this->returnPools($stmt->fetchAll());
@@ -52,16 +52,16 @@ class PiscinePDO
     {
         $pools = [];
         foreach ($rows as $row) {
-            $id_piscine = $row['id_piscine'];
-            $nom = $row['nom'];
-            $adresse = $row['adresse'];
-            $actif = $row['actif'];
-            $image = $row['image'];
+            $id_pool = $row['id_pool'];
+            $name = $row['name'];
+            $address = $row['address'];
+            $active = $row['active'];
+            $picture = $row['picture'];
             $map = $row['map'];
-            $descriptif = $row['descriptif'];
-            $pool = new Piscine($nom, $adresse, $actif, $image, $map, $descriptif, $id_piscine);
+            $description = $row['description'];
+            $pool = new Pool($name, $address, $active, $picture, $map, $description, $id_pool);
             $pools[] = $pool;
-            $this->data[$id_piscine] = $pool;
+            $this->data[$id_pool] = $pool;
         }
         return $pools;
     }

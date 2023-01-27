@@ -4,19 +4,18 @@
 
 <main>
     <form method="POST" action="index.php?action=achat&step=final">
-        <div id = "choixFormule">
+        <div id="choixFormule">
             <fieldset>
                 <legend>Choisissez votre formule :</legend>
                 <p>
                     <?php
-                        foreach($formules as $formule)
-                        {
-                            echo '<input type="radio" name="formule" value="' . $formule->getId_formule() . '" id="' .
-                            $formule->getId_formule() . '" required/> <label for="' . $formule->getId_formule() .
-                            '">' . $formule->getNb_entrees() . ' entrées, ' . $formule->getNb_personnes() .
-                            ' personne(s), code valable ' . $formule->getDuree_validite() . ' mois à partir de l\'achat - ' .
-                            $formule->getPrix() . ' €</label><br />';
-                        }
+                    foreach ($options as $option) {
+                        echo '<input type="radio" name="formule" value="' . $option->getIdOffer() . '" id="' .
+                            $option->getIdOffer() . '" required/> <label for="' . $option->getIdOffer() .
+                            '">' . $option->getNbEntries() . ' entrées, ' . $option->getNbPeople() .
+                            ' personne(s), code valable ' . $option->getValidity() . ' mois à partir de l\'achat - ' .
+                            $option->getPrice() . ' €</label><br />';
+                    }
                     ?>
                 </p>
             </fieldset>
@@ -25,6 +24,6 @@
     </form>
 </main>
 
-    <?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean(); ?>
 
 <?php require('view/layout.php') ?>

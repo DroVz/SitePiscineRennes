@@ -7,5 +7,6 @@ function accueil()
     $piscinePDO = new PiscinePDO();
     $piscinePDO->connection = new DBConnection();
     $piscines = $piscinePDO->readAll();
+    $selectPiscine =  $piscines[0];
     require('view/v_accueil.php');
 }

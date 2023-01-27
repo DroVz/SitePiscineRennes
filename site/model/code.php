@@ -1,38 +1,49 @@
 <?php
 
-class Code {
+class Code
+{
     private int $id_code;
-    private Formule $formule;
-    private string $date_generation;
-    private string $code;
-    private int $entrees_restantes;    
-    
-    public function __construct(int $id_code, Formule $formule, string $date_generation,
-    string $code, int $entrees_restantes) {
-        $this->id_code = $id_code; 
-        $this->formule = $formule;
-        $this->date_generation = $date_generation;
-        $this->code = $code;    
-        $this->entrees_restantes = $entrees_restantes;
+    private Offer $offer;
+    private string $generation_date;
+    private string $codeString;
+    private int $remaining_entries;
+
+    public function __construct(
+        Offer $offer,
+        string $generation_date,
+        string $code_string,
+        int $remaining_entries,
+        int $id_code = -1
+    ) {
+        $this->id_code = $id_code;
+        $this->offer = $offer;
+        $this->generation_date = $generation_date;
+        $this->codeString = $code_string;
+        $this->remaining_entries = $remaining_entries;
     }
 
-    public function getId_code() : int {
+    public function getId_code(): int
+    {
         return $this->id_code;
     }
 
-    public function getFormule() : Formule {
-        return $this->formule;
+    public function getOffer(): Offer
+    {
+        return $this->offer;
     }
 
-    public function getDate_generation() : string {
-        return $this->date_generation;
+    public function getGenerationDate(): string
+    {
+        return $this->generation_date;
     }
 
-    public function getCode() : string {
-        return $this->code;
+    public function getCodeString(): string
+    {
+        return $this->codeString;
     }
 
-    public function getEntrees_restantes() : int {
-        return $this->entrees_restantes;
+    public function getRemainingEntries(): int
+    {
+        return $this->remaining_entries;
     }
 }

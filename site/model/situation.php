@@ -1,25 +1,30 @@
 <?php
 
-class Situation {
+class Situation
+{
     private int $id_situation;
-    private string $libelle;
-    private int $actif;
-    
-    public function __construct(int $id_situation, string $libelle, int $actif) {
+    private string $name;
+    private int $active;
+
+    public function __construct(string $name, int $active, int $id_situation = -1)
+    {
         $this->id_situation = $id_situation;
-        $this->libelle = $libelle;
-        $this->actif = $actif;
+        $this->name = $name;
+        $this->active = $active;
     }
 
-    public function getId_situation() : int {
+    public function getIdSituation(): int
+    {
         return $this->id_situation;
     }
 
-    public function getLibelle() : string {
-        return $this->libelle;
+    public function getName(): string
+    {
+        return $this->name;
     }
 
-    public function getActif() : int {
-        return $this->actif;
+    public function getActive(): int
+    {
+        return $this->active;
     }
 }

@@ -13,12 +13,11 @@
         <header>    
             <nav>
                 <img src="view/img/logo.jpeg" alt="">
-                <img src="view/img/logo.jpeg" alt="">
                 <ul>
                     <li><a href="/index.php?action=accueil">Accueil</a></li>
-                    <li><a href="/index.php?action=achat">Achat de code</a></li>
-                    <li><a href="/index.php?action=verif">Vérification de code</a></li>
+                    <li><a href="/index.php?action=achat">Formules</a></li>
                     <li><a href="/index.php?action=admin">Gestion</a></li>
+                    <li><a class="StyleButton" href="/index.php?action=verif">Mon Code</a></li>
                 </ul>
             </nav>    
         </header>

@@ -7,9 +7,9 @@
     <div>
         <ul>
             <?php
-                foreach($piscines as $piscine) {
-                    echo '<li>' . $piscine->getNom() . ' (' . $piscine->getAdresse() . ')</li>';
-                }
+            foreach ($piscines as $piscine) {
+                echo '<li>' . $piscine->getNom() . ' (' . $piscine->getAdresse() . ')</li>';
+            }
             ?>
         </ul>
     </div>

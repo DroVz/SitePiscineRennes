@@ -5,11 +5,11 @@
 <main>
     <p>
         <?php
-            echo 'Votre code : ' . $str_code;
+        echo 'Votre code : ' . $newCode->getCodeString();
         ?>
     </p>
 </main>
 
-    <?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean(); ?>
 
 <?php require('view/layout.php') ?>

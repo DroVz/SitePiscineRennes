@@ -14,6 +14,7 @@
                     <li><a href="/index.php?action=accueil">Accueil</a></li>
                     <li><a href="/index.php?action=achat">Achat de code</a></li>
                     <li><a href="/index.php?action=verif">Vérification de code</a></li>
+                    <li><a href="/index.php?action=admin">Gestion</a></li>
                 </ul>
             </nav>    
         </header>

@@ -3,6 +3,7 @@
 require_once('controllers/c_accueil.php');
 require_once('controllers/c_achat.php');
 require_once('controllers/c_verif.php');
+require_once('controllers/c_admin.php');
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 if(empty($action)) {
@@ -19,6 +20,9 @@ switch($action) {
 	case 'verif' :
 		verif() ;
 		break;
-	default:
+	case 'admin' ;
+		gestion() ;
+		break;
+		default:
 		accueil();
 }

@@ -6,7 +6,7 @@ require_once('model/situation.php');
 class SituationPDO
 {
     public DBConnection $connection;
-    private array $donnees = array();
+    private array $data = array();
 
     // Return 1 situation from database
     public function getSituation(int $id_situation): Situation
@@ -14,16 +14,10 @@ class SituationPDO
         $stmt = $this->connection->getConnection()->prepare('SELECT * FROM situation WHERE id_situation = ?');
         $stmt->execute([$id_situation]);
         $situation = null;
-        if (array_key_exists($id_situation, $this->donnees)) {
-            $situation = $this->donnees[$id_situation];
+        if (array_key_exists($id_situation, $this->data)) {
+            $situation = $this->data[$id_situation];
         } else {
-            while (($row = $stmt->fetch())) {
-                $id_situation = $row['id_situation'];
-                $libelle = $row['libelle'];
-                $actif = $row['actif'];
-                $situation = new Situation($libelle, $actif, $id_situation);
-                $this->donnees[$id_situation] = $situation;
-            }
+            $situation = $this->returnSituations($stmt->fetchAll())[0];
         }
         return $situation;
     }
@@ -33,13 +27,20 @@ class SituationPDO
     {
         $stmt = $this->connection->getConnection()->prepare('SELECT * FROM situation WHERE actif = 1;');
         $stmt->execute();
+        return $this->returnSituations($stmt->fetchAll());
+    }
+
+    // Return all situations in $rows and update $data
+    private function returnSituations(array $rows): array
+    {
         $situations = [];
-        while (($row = $stmt->fetch())) {
+        foreach ($rows as $row) {
             $id_situation = $row['id_situation'];
             $libelle = $row['libelle'];
             $actif = $row['actif'];
             $situation = new Situation($libelle, $actif, $id_situation);
             $situations[] = $situation;
+            $this->data[$id_situation] = $situation;
         }
         return $situations;
     }

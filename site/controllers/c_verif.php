@@ -63,7 +63,7 @@ function verif()
             // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
             $seancePDO = new SeancePDO();
             $seancePDO->connection = new DBConnection();
-            $seancesDispo = $seancePDO->getSeancesDispo($activite);
+            $seancesDispo = $seancePDO->readAll($activite);
 
             require('view/v_verifReservation.php');
             break;

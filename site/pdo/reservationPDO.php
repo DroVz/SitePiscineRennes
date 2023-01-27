@@ -32,14 +32,14 @@ class ReservationPDO
     {
     }
 
-    // Return all reservations in $rows and update $data
+    // Return all reservations in $rows
     private function returnReservations(array $rows): array
     {
         $reservations = [];
         foreach ($rows as $row) {
             $seancePDO = new SeancePDO();
             $seancePDO->connection = new DBConnection();
-            $seance = $seancePDO->getSeance($row['id_seance']);
+            $seance = $seancePDO->read($row['id_seance']);
             $codePDO = new CodePDO();
             $codePDO->connection = new DBConnection();
             $code = $codePDO->read($row['id_code']);

@@ -9,6 +9,7 @@ if(empty($action)) {
 	$action = 'accueil';
 }
 // controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
+// controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
 switch($action) {
 	case 'accueil' :
 		accueil();

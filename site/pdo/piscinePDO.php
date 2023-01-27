@@ -59,7 +59,7 @@ class PiscinePDO
             $image = $row['image'];
             $map = $row['map'];
             $descriptif = $row['descriptif'];
-            $pool = new Piscine($nom, $adresse, $actif, $id_piscine, $image, $map, $descriptif, $id_piscine);
+            $pool = new Piscine($nom, $adresse, $actif, $image, $map, $descriptif, $id_piscine);
             $pools[] = $pool;
             $this->data[$id_piscine] = $pool;
         }

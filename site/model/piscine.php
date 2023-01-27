@@ -10,8 +10,15 @@ class Piscine
     private string $map;
     private string $descriptif;
 
-    public function __construct(int $id_piscine, string $nom, string $adresse, int $actif, string $image, string $map, string $descriptif)
-    {
+    public function __construct(
+        string $nom,
+        string $adresse,
+        int $actif,
+        string $image,
+        string $map,
+        string $descriptif,
+        int $id_piscine = -1
+    ) {
         $this->id_piscine = $id_piscine;
         $this->nom = $nom;
         $this->adresse = $adresse;

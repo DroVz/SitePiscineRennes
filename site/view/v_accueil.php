@@ -1,6 +1,7 @@
 <?php $title = "Piscines municipales de Rennes - Accueil"; ?>
 <?php ob_start(); ?>
 <?php  $ControllerHomePage = new HomePage?>
+
 <main>
     <div class="SelectSwimmingPool">
         <img class="banner" src="view\img\bannerRennes.webp" alt="">

@@ -1,5 +1,5 @@
 <?php
-require_once('controllers/c_accueil.php');
+require_once('controllers/c_HomePage.php');
 require_once('controllers/c_achat.php');
 require_once('controllers/c_verif.php');
 require_once('controllers/c_admin.php');

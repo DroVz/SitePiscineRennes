@@ -5,7 +5,6 @@
       <title><?= $title ?></title>
       <link href="view/style.css" rel="stylesheet" />
       <script src="view/script.js"></script>
-      <script src="view/script.js"></script>
    </head>
 
    <body>

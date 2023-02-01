@@ -17,14 +17,23 @@ h2 {
 p {
     font-size: 14pt;
 }
-
+.line {
+    margin: 50px 0px 50px 0px;
+    width: 80%;
+    border-bottom: solid 1px #BBBBBB;
+    
+}
 /* Navigation */
 nav {
+    position: fixed;
+    z-index: 1;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     background-color: #FFFFFF;
+    width: 100%;
     height: 10vh;
 }
 nav img {
@@ -38,7 +47,7 @@ nav ul {
 
     list-style-type: none;
 }
-nav a{
+a{
     display: block;
     text-align: center;
     padding: 16px;
@@ -49,23 +58,28 @@ nav a{
     text-decoration: none;
     color: #000000;
 }
-nav .StyleButton{
+.StyleButton{
     color: #FFFFFF;
     background-color: #479CFF;
     border: solid 1px #479CFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-nav a:hover{
+a:hover{
     color: #FFFFFF;
     background-color: #479CFF;
     transition: 500ms;
 }
-nav .StyleButton:hover {
+.StyleButton:hover {
     color: #479CFF;
     background-color: #FFFFFF;
     transition: 500ms;
 }
-
+/* Banner */
+.banner {
+    width: 100%;
+    height: 90vh;
+    opacity: 80%;
+}
 /* SelectSwimmingPool */
 .SelectSwimmingPool {
     margin: 0%;
@@ -75,22 +89,37 @@ nav .StyleButton:hover {
     justify-content: center;
     flex-wrap: wrap;
 }
-.SelectSwimmingPool .SwimmingPool--Img {
+.SelectSwimmingPool .card {
     width: 30%;
     margin: 40px;
+}
+.SelectSwimmingPool .SwimmingPool--Img {
+    width: 100%;
+    height: 80%;
     opacity: 100%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.SelectSwimmingPool .SwimmingPool--Img:hover{
+.SelectSwimmingPool .poolName {
+    font-family:'Istok Web';
+    font-size: 24pt;
+
+    visibility: hidden;
+    text-align: center;
+}
+.SwimmingPool--Img:hover + .poolName{
+    visibility: visible;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
     transition: 500ms;
 }
-
+.SwimmingPool--Img:hover {
+    box-shadow: none;
+}
 /* FocusSwimmingPool */
 .FocusSwimmingPool {
     background-color: #ffffff;
     display: flex; 
     flex-direction: column;
+    align-items: center;
 
     width: 80%;
 
@@ -103,7 +132,8 @@ nav .StyleButton:hover {
 }
 
 .FocusSwimmingPool h1{
-    border-bottom: solid 1px #000000;
+    width: 100%;
+    border-bottom: solid 1px #BBBBBB;
     text-align: center;
 }
 
@@ -120,9 +150,11 @@ nav .StyleButton:hover {
     padding: 10px 20px 10px 20px;
 
     width: 40%;
-    border-left: solid 1px #000000;
+    border-left: solid 1px #BBBBBB;
 }
-
+.FocusSwimmingPool a{
+    margin: 40px 0px 20px 0px;
+}
 /*CheckCodeSwimmingPool */
 .CheckCodeSwimmingPool {
 

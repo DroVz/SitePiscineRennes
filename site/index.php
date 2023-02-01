@@ -11,7 +11,7 @@ if(empty($action)) {
 // controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
 switch($action) {
 	case 'accueil' :
-		accueil();
+		require('view/v_accueil.php');
 		break;
 	case 'achat' :
 		achat();
@@ -24,6 +24,6 @@ switch($action) {
 		break;
 
 	default:
-	accueil();
+	require('view/v_accueil.php');
 
 }

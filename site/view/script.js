@@ -20,5 +20,5 @@ function PiscineClickEvent (picture) {
 
     picture.style.opacity = 1.0;
 
-    SwimmingPoolMap.scrollIntoView({behavior:'smooth'})
+    SwimmingPoolMap.scrollIntoView({behavior:'smooth',block:'center'})
 }

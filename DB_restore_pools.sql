@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 27 jan. 2023 à 12:26
+-- Généré le : ven. 27 jan. 2023 à 16:14
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -18,31 +18,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `piscines`
+-- Base de données : `pools`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `activite`
+-- Structure de la table `activity`
 --
 
-DROP TABLE IF EXISTS `activite`;
-CREATE TABLE IF NOT EXISTS `activite` (
-  `id_activite` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `activity`;
+CREATE TABLE IF NOT EXISTS `activity` (
+  `id_activity` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `reservation` tinyint(1) NOT NULL,
-  `actif` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_activite`),
-  UNIQUE KEY `id_activite` (`id_activite`)
+  `booking` tinyint(1) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_activity`),
+  UNIQUE KEY `id_activite` (`id_activity`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `activite`
+-- Déchargement des données de la table `activity`
 --
 
-INSERT INTO `activite` (`id_activite`, `libelle`, `description`, `reservation`, `actif`) VALUES
+INSERT INTO `activity` (`id_activity`, `name`, `description`, `booking`, `active`) VALUES
 (1, 'Nage libre', 'Accès aux bassins en toute autonomie, sans contrainte de temps', 0, 1),
 (2, 'Cours de natation débutant', 'Apprentissage de la natation sous la supervision d\'un professeur', 1, 1),
 (3, 'Cours de natation avancé', 'Approfondissement des techniques de natation sous la supervision d\'un professeur', 1, 1),
@@ -59,94 +59,49 @@ INSERT INTO `activite` (`id_activite`, `libelle`, `description`, `reservation`, 
 DROP TABLE IF EXISTS `code`;
 CREATE TABLE IF NOT EXISTS `code` (
   `id_code` int(11) NOT NULL AUTO_INCREMENT,
-  `id_formule` int(11) NOT NULL,
-  `date_generation` datetime NOT NULL,
-  `code` char(10) COLLATE utf8_unicode_ci NOT NULL,
-  `entrees_restantes` int(11) NOT NULL,
+  `id_offer` int(11) NOT NULL,
+  `generation_date` datetime NOT NULL,
+  `code_string` char(10) COLLATE utf8_unicode_ci NOT NULL,
+  `remaining_entries` int(11) NOT NULL,
   PRIMARY KEY (`id_code`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `code`
 --
 
-INSERT INTO `code` (`id_code`, `id_formule`, `date_generation`, `code`, `entrees_restantes`) VALUES
+INSERT INTO `code` (`id_code`, `id_offer`, `generation_date`, `code_string`, `remaining_entries`) VALUES
 (15, 6, '2022-12-27 15:22:55', 'AKJH-E6MR', 10),
 (14, 6, '2022-12-27 15:22:38', 'KLV4-W6N3', 10),
 (13, 6, '2022-12-27 15:21:16', 'QZ4U-U2DJ', 10),
 (12, 8, '2022-12-27 15:09:10', '7RUT-6CNR', 10),
-(11, 1, '2022-12-27 15:06:23', 'S4UG-G8J2', 10),
-(6, 10, '2022-12-16 07:56:49', 'YCZP-YFZ5', 20),
-(7, 1, '2022-12-16 08:18:16', 'DEYM-G81H', 10),
-(8, 1, '2022-12-16 08:56:50', 'DZKB-7152', 10),
-(9, 17, '2022-12-16 08:59:32', 'KMA8-F7X2', 20),
-(10, 9, '2022-12-16 09:29:52', '4T71-1JRH', 10),
-(16, 4, '2022-12-27 15:28:06', 'TP3L-N4KN', 10),
-(17, 7, '2022-12-27 15:33:05', 'SNEQ-H8KH', 10),
-(18, 5, '2022-12-28 09:12:35', 'DJLJ-66HG', 10),
-(19, 15, '2022-12-28 09:12:58', '8UHS-NKK4', 10),
-(20, 30, '2022-12-28 10:39:32', '372H-NSG9', 10),
-(21, 13, '2023-01-13 15:23:16', 'BZ75-E77K', 10),
-(22, 10, '2023-01-18 09:30:11', 'FTLF-9LXG', 20),
-(23, 20, '2023-01-18 11:06:17', 'UD4Y-AYW8', 10),
-(24, 17, '2023-01-27 08:37:02', 'ML7T-JEF1', 20),
-(25, 14, '2023-01-27 08:48:22', 'QNLA-4XWG', 10),
-(26, 24, '2023-01-27 09:07:08', 'MXS3-9EAE', 5),
-(27, 24, '2023-01-27 09:07:34', '9RSN-EMVN', 5),
-(28, 11, '2023-01-27 09:27:07', 'Q3Q4-DKT2', 20),
-(29, 17, '2023-01-27 10:13:07', '5RNU-8AZZ', 20),
-(30, 4, '2023-01-27 10:43:43', 'D1W5-MWKS', 10),
-(31, 18, '2023-01-27 10:43:56', '22RR-WF9K', 20),
-(32, 30, '2023-01-27 10:52:40', 'T9RD-MW5D', 10),
-(33, 24, '2023-01-27 12:04:42', 'QCDQ-MMAL', 5);
+(11, 1, '2022-12-27 15:06:23', 'S4UG-G8J2', 10);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `code_seance`
+-- Structure de la table `offer`
 --
 
-DROP TABLE IF EXISTS `code_seance`;
-CREATE TABLE IF NOT EXISTS `code_seance` (
-  `id_seance` int(11) NOT NULL,
-  `id_code` int(11) NOT NULL,
-  `date_reservation` datetime NOT NULL,
-  PRIMARY KEY (`id_seance`,`id_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `code_seance`
---
-
-INSERT INTO `code_seance` (`id_seance`, `id_code`, `date_reservation`) VALUES
-(1, 1, '2022-12-01 08:38:02'),
-(4, 21, '2022-12-01 08:38:02');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `formule`
---
-
-DROP TABLE IF EXISTS `formule`;
-CREATE TABLE IF NOT EXISTS `formule` (
-  `id_formule` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_activite` int(11) NOT NULL,
+DROP TABLE IF EXISTS `offer`;
+CREATE TABLE IF NOT EXISTS `offer` (
+  `id_offer` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_activity` int(11) NOT NULL,
   `id_situation` int(11) NOT NULL,
-  `nb_entrees` int(11) NOT NULL,
-  `nb_personnes` int(11) NOT NULL,
-  `duree_validite` int(11) NOT NULL,
-  `prix` float NOT NULL,
-  `actif` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_formule`),
-  UNIQUE KEY `id_formule` (`id_formule`)
+  `nb_entries` int(11) NOT NULL,
+  `nb_people` int(11) NOT NULL,
+  `validity` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_offer`),
+  UNIQUE KEY `id_formule` (`id_offer`)
 ) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `formule`
+-- Déchargement des données de la table `offer`
 --
 
-INSERT INTO `formule` (`id_formule`, `id_activite`, `id_situation`, `nb_entrees`, `nb_personnes`, `duree_validite`, `prix`, `actif`) VALUES
+INSERT INTO `offer` (`id_offer`, `id_activity`, `id_situation`, `nb_entries`, `nb_people`, `validity`, `price`, `active`) VALUES
 (1, 1, 1, 10, 1, 12, 49.95, 1),
 (2, 1, 2, 10, 1, 12, 19.95, 1),
 (3, 1, 3, 10, 1, 12, 15.95, 1),
@@ -181,27 +136,27 @@ INSERT INTO `formule` (`id_formule`, `id_activite`, `id_situation`, `nb_entrees`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `piscine`
+-- Structure de la table `pool`
 --
 
-DROP TABLE IF EXISTS `piscine`;
-CREATE TABLE IF NOT EXISTS `piscine` (
-  `id_piscine` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `adresse` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `actif` tinyint(1) NOT NULL,
-  `image` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `pool`;
+CREATE TABLE IF NOT EXISTS `pool` (
+  `id_pool` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `picture` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `map` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `descriptif` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_piscine`),
-  UNIQUE KEY `id_piscine` (`id_piscine`)
+  `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_pool`),
+  UNIQUE KEY `id_piscine` (`id_pool`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `piscine`
+-- Déchargement des données de la table `pool`
 --
 
-INSERT INTO `piscine` (`id_piscine`, `nom`, `adresse`, `actif`, `image`, `map`, `descriptif`) VALUES
+INSERT INTO `pool` (`id_pool`, `name`, `address`, `active`, `picture`, `map`, `description`) VALUES
 (1, 'Piscine Crébigny', '47 bis, rue des Maillots', 1, 'view/img/Brequigny.webp', 'view/img/MapBrequigny.png', '  La piscine de Bréquigny vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
 (2, 'Piscine des Glaïeuls', '3, avenue Matthew Webb', 1, 'view/img/Gayeulles.webp', 'view/img/MapGayeulles.png', '  La piscine des Gayeulles vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
 (3, 'Piscine Saint-Doux', '36, rue du Papillon', 1, 'view/img/SaintGeorge.jpg', 'view/img/MapSaintGeorge.png', '  La piscine de Saint George vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
@@ -210,26 +165,26 @@ INSERT INTO `piscine` (`id_piscine`, `nom`, `adresse`, `actif`, `image`, `map`, 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `seance`
+-- Structure de la table `session`
 --
 
-DROP TABLE IF EXISTS `seance`;
-CREATE TABLE IF NOT EXISTS `seance` (
-  `id_seance` int(11) NOT NULL AUTO_INCREMENT,
-  `id_piscine` int(11) NOT NULL,
-  `id_activite` int(11) NOT NULL,
-  `dateheure` datetime NOT NULL,
-  `professeur` text COLLATE utf8_unicode_ci NOT NULL,
-  `capacite` int(11) NOT NULL,
-  `actif` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_seance`)
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE IF NOT EXISTS `session` (
+  `id_session` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pool` int(11) NOT NULL,
+  `id_activity` int(11) NOT NULL,
+  `date_time` datetime NOT NULL,
+  `coach` text COLLATE utf8_unicode_ci NOT NULL,
+  `capacity` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_session`)
 ) ENGINE=MyISAM AUTO_INCREMENT=911 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `seance`
+-- Déchargement des données de la table `session`
 --
 
-INSERT INTO `seance` (`id_seance`, `id_piscine`, `id_activite`, `dateheure`, `professeur`, `capacite`, `actif`) VALUES
+INSERT INTO `session` (`id_session`, `id_pool`, `id_activity`, `date_time`, `coach`, `capacity`, `active`) VALUES
 (1, 1, 2, '2023-03-13 08:30:00', 'Bernard PAPILLON', 10, 1),
 (2, 1, 2, '2023-03-15 16:00:00', 'Bernard PAPILLON', 10, 1),
 (3, 1, 2, '2023-03-18 09:30:00', 'Bernard PAPILLON', 10, 1),
@@ -1123,7 +1078,7 @@ INSERT INTO `seance` (`id_seance`, `id_piscine`, `id_activite`, `dateheure`, `pr
 (891, 4, 3, '2023-06-29 13:30:00', 'Stacy REINE', 10, 1),
 (892, 4, 3, '2023-06-29 17:30:00', 'Stacy REINE', 10, 1),
 (893, 4, 6, '2023-06-26 09:30:00', 'Iris DOE', 1, 1);
-INSERT INTO `seance` (`id_seance`, `id_piscine`, `id_activite`, `dateheure`, `professeur`, `capacite`, `actif`) VALUES
+INSERT INTO `session` (`id_session`, `id_pool`, `id_activity`, `date_time`, `coach`, `capacity`, `active`) VALUES
 (894, 4, 6, '2023-06-26 10:30:00', 'Iris DOE', 1, 1),
 (895, 4, 6, '2023-06-26 11:30:00', 'Iris DOE', 1, 1),
 (896, 4, 6, '2023-06-27 09:30:00', 'Iris DOE', 1, 1),
@@ -1145,14 +1100,36 @@ INSERT INTO `seance` (`id_seance`, `id_piscine`, `id_activite`, `dateheure`, `pr
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `session_code`
+--
+
+DROP TABLE IF EXISTS `session_code`;
+CREATE TABLE IF NOT EXISTS `session_code` (
+  `id_session` int(11) NOT NULL,
+  `id_code` int(11) NOT NULL,
+  `booking_date` datetime NOT NULL,
+  PRIMARY KEY (`id_session`,`id_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `session_code`
+--
+
+INSERT INTO `session_code` (`id_session`, `id_code`, `booking_date`) VALUES
+(1, 1, '2022-12-01 08:38:02'),
+(4, 21, '2022-12-01 08:38:02');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `situation`
 --
 
 DROP TABLE IF EXISTS `situation`;
 CREATE TABLE IF NOT EXISTS `situation` (
   `id_situation` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `actif` tinyint(1) NOT NULL,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_situation`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1160,7 +1137,7 @@ CREATE TABLE IF NOT EXISTS `situation` (
 -- Déchargement des données de la table `situation`
 --
 
-INSERT INTO `situation` (`id_situation`, `libelle`, `actif`) VALUES
+INSERT INTO `situation` (`id_situation`, `name`, `active`) VALUES
 (1, 'Adulte', 1),
 (2, 'Moins de 18 ans', 1),
 (3, 'Demandeur d\'emploi', 1);
@@ -1168,15 +1145,15 @@ INSERT INTO `situation` (`id_situation`, `libelle`, `actif`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `mot_de_passe` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `nom` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

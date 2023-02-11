@@ -27,7 +27,6 @@ class OfferPDO
     // Return all offers from database
     public function readAll(Activity $activity, Situation $situation): array
     {
-
         $MySQLQuery = 'SELECT * FROM offer 
         WHERE id_activity = ? AND id_situation = ? AND active = 1;';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);

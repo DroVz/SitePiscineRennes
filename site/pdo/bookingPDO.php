@@ -10,8 +10,8 @@ class BookingPDO
     // Return all reservations associated with a given code
     function readAll(Code $code): array
     {
-        $MySQLQuery = 'SELECT id_session, id_code, booking_date
-        FROM session_code WHERE id_code = ?';
+        $MySQLQuery = 'SELECT id_lesson, id_code, booking_date
+        FROM lesson_code WHERE id_code = ?';
         $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code()]);
         return $this->returnBookings($stmt->fetchAll());
@@ -37,14 +37,14 @@ class BookingPDO
     {
         $bookings = [];
         foreach ($rows as $row) {
-            $sessionPDO = new SessionPDO();
-            $sessionPDO->connection = new DBConnection();
-            $session = $sessionPDO->read($row['id_session']);
+            $lessonPDO = new LessonPDO();
+            $lessonPDO->connection = new DBConnection();
+            $lesson = $lessonPDO->read($row['id_lesson']);
             $codePDO = new CodePDO();
             $codePDO->connection = new DBConnection();
             $code = $codePDO->read($row['id_code']);
             $booking_date = $row['booking_date'];
-            $booking = new Booking($session, $code, $booking_date);
+            $booking = new Booking($lesson, $code, $booking_date);
             $bookings[] = $booking;
         }
         return $bookings;

@@ -1,8 +1,8 @@
 <?php
 function verif()
 {
-    require_once('model/session.php');
-    require_once('pdo/sessionPDO.php');
+    require_once('model/lesson.php');
+    require_once('pdo/lessonPDO.php');
     require_once('model/booking.php');
     require_once('pdo/bookingPDO.php');
     require_once('model/code.php');
@@ -10,8 +10,9 @@ function verif()
     require_once('model/activity.php');
     require_once('pdo/activityPDO.php');
 
-    $step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
-    if (empty($step)) {
+    if (isset($_GET['step'])) {
+        $step = htmlspecialchars($_GET['step']);
+    } else {
         $step = 'initial';
     }
 
@@ -20,9 +21,7 @@ function verif()
             require('view/v_verif.php');
             break;
         case 'info':
-            // TODO ajouter une sécurité à la ligne ci-dessous
-            $str_code = $_POST["code"];
-
+            $str_code = htmlspecialchars($_POST["code"]);
             $codePDO = new CodePDO();
             $codePDO->connection = new DBConnection();
             $id_code = $codePDO->getId($str_code);
@@ -63,9 +62,9 @@ function verif()
             $pools = $poolPDO->readAll();
 
             // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
-            $sessionPDO = new SessionPDO();
-            $sessionPDO->connection = new DBConnection();
-            $availableSessions = $sessionPDO->readAll($activity);
+            $lessonPDO = new LessonPDO();
+            $lessonPDO->connection = new DBConnection();
+            $availableLessons = $lessonPDO->readAll($activity);
 
             require('view/v_verifReservation.php');
             break;

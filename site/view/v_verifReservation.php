@@ -31,14 +31,14 @@
         <h2>Séances disponibles</h2>
         <ul>
             <?php
-            foreach ($availableSessions as $session) {
-                $pool_name = $session->getPool()->getName();
-                $coach = $session->getCoach();
-                $day = date('d/m/Y', strtotime($session->getDateTime()));
-                $beginTime = date('h:i', strtotime($session->getDateTime()));
-                $bookingNb = $session->getBookingNb();
-                $capacity = $session->getCapacity();
-                $alreadyBooked = $session->alreadyBooked($code);
+            foreach ($availableLessons as $lesson) {
+                $pool_name = $lesson->getPool()->getName();
+                $coach = $lesson->getCoach();
+                $day = date('d/m/Y', strtotime($lesson->getDateTime()));
+                $beginTime = date('h:i', strtotime($lesson->getDateTime()));
+                $bookingNb = $lesson->getBookingNb();
+                $capacity = $lesson->getCapacity();
+                $alreadyBooked = $lesson->alreadyBooked($code);
 
                 echo '<li>Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). 
                  - Occupation : ' . $bookingNb . '/' . $capacity .

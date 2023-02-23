@@ -1,5 +1,5 @@
 <?php $title = "Choix de la formule"; ?>
-
+<?php $controllerRedirection = Redirection::getInstance(); ?>
 <?php ob_start(); ?>
 
 <main>

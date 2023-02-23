@@ -1,3 +1,4 @@
+<?php require_once("controllers/c_CodeInformation.php") ?>
 <?php $title = "Informations sur votre code"; ?>
 <?php ob_start(); ?>
 <?php $ControllerCodeInformation = new CodeInformation()?>
@@ -24,4 +25,4 @@
 </main>
 
 <?php $content = ob_get_clean(); ?>
-<?php require('view/layout.php') ?>
+<?php require('layout.php') ?>

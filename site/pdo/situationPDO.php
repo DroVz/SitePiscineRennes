@@ -1,8 +1,6 @@
 <?php
-
 require_once('pdo/database.php');
 require_once('model/situation.php');
-
 class SituationPDO
 {
     private array $data = array();

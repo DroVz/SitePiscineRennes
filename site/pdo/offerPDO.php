@@ -1,8 +1,8 @@
 <?php
+require_once('database.php');
+require_once('activityPDO.php');
+require_once('situationPDO.php');
 
-require_once('pdo/database.php');
-require_once('pdo/activityPDO.php');
-require_once('pdo/situationPDO.php');
 require_once('model/offer.php');
 
 class OfferPDO

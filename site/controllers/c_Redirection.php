@@ -1,33 +1,10 @@
 <?php
-   require_once('pdo/database.php');
-   require_once('model/session.php');
-   require_once('pdo/sessionPDO.php');
-   require_once('model/booking.php');
-   require_once('pdo/bookingPDO.php');
-   require_once('model/code.php');
-   require_once('pdo/codePDO.php');
-   require_once('model/activity.php');
-   require_once('pdo/activityPDO.php');
-   require_once('model/pool.php');
-   require_once('pdo/poolPDO.php');
-   require_once('model/situation.php');
-   require_once('pdo/situationPDO.php');
-   require_once('model/offer.php');
-   require_once('pdo/offerPDO.php');
+require_once('c_achat.php');
+require_once('c_admin.php');
+require_once('c_CodeInformation.php');
+require_once('controllers/c_CodeController.php');
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-$ControllerRedirection = new Redirection();
-
-if(empty($action)) {
-	$action = 'accueil';
-}
-
-// Navigation Barre Actions 
-switch($action) {
-    case 'codeRedirection';
-
-
-}
+require_once('./pdo/codePDO.php');
 
 class Redirection {
 
@@ -50,9 +27,12 @@ class Redirection {
 	}
 
     public function codeRedirection(){
-
+        // Récupère le step du form
         $step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
 
+        // Création des controllers model 
+        $codeController = new CodeController;
+        
         if (empty($step)) {
             $step = 'initial';
         }
@@ -61,20 +41,16 @@ class Redirection {
             case 'initial':
                 require('view/v_verif.php');
                 break;
+
             case 'info':
-                // TODO ajouter une sécurité à la ligne ci-dessous
-                $userInput = $_POST["code"];
-
-                $codePDO = new CodePDO();
-                $idCode = $codePDO->getId($userInput);
-
-                if ($idCode != null) {
-                    require('view/v_CodeInformation.php');
-                } else{
-                    require('view/v_CodeVerification.php');
-                }
-
+                // Regarde si le code existe et oriente la redirection en fonction 
+                if ($codeController->tryToGetCode() != null) {
+                     require('view/v_CodeInformation.php');
+                 } else{
+                     require('view/v_CodeVerification.php');
+                 }
                 break;
+
             case 'booking':
                 // TODO : Faire un singleton de la connexion à la bd 
                 // Récupération du numéro du code dans la base depuis le formulaire précédent

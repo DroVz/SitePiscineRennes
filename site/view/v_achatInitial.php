@@ -4,7 +4,7 @@
 
 <main>
     <h1>Choisissez votre activité et votre situation</h1>
-    <form method="post" action="index.php?action=achat&step=option">
+    <form method="post" action="c_Redirection.php?action=codeAchat&step=option">
         <div id="choixActivite">
             <fieldset>
                 <legend>Choisir une activité :</legend>

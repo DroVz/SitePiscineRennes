@@ -1,5 +1,4 @@
 <?php
-
 require_once('pdo/database.php');
 require_once('model/booking.php');
 

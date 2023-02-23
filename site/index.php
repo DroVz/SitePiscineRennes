@@ -1,29 +1,29 @@
 <?php
-require_once('controllers/c_HomePage.php');
 require_once('controllers/c_achat.php');
-require_once('controllers/c_verif.php');
 require_once('controllers/c_admin.php');
+ require_once('controllers/c_Redirection.php');
+ require_once('controllers/c_CodeInformation.php');
+
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 if(empty($action)) {
 	$action = 'accueil';
 }
-// controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
+// Navigation Barre Actions 
 switch($action) {
 	case 'accueil' :
-		require('view/v_accueil.php');
+		require('view/v_HomePage.php');
 		break;
 	case 'achat' :
 		achat();
 		break;
 	case 'verif' :
-		verif() ;
+		require('view/v_CodeVerification.php') ;
 		break;
 	case 'admin' ;
 		gestion() ;
 		break;
-
 	default:
-	require('view/v_accueil.php');
+	require('view/v_HomePage.php');
 
 }

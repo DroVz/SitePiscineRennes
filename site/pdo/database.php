@@ -2,17 +2,21 @@
 
 class DBConnection
 {
-	private ?PDO $database = null;
+	private static ?PDO $database = null;
 
-	public function getConnection(): PDO
+	public static function getInstance(): PDO
 	{
-		if ($this->database === null) {
+		if (DBConnection::$database === null) {
 			try {
-				$this->database = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
+				DBConnection::$database = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
 			} catch (Exception $e) {
 				die('Erreur : ' . $e->getMessage());
 			}
 		}
-		return $this->database;
+		return DBConnection::$database;
+	}
+	private function __construct()
+	{
+		
 	}
 }

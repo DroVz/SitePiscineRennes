@@ -7,13 +7,12 @@ require_once('model/offer.php');
 
 class OfferPDO
 {
-    public DBConnection $connection;
     private array $data = array();
 
     // Return 1 offer from database
     public function read(int $id_offer): Offer
     {
-        $stmt = $this->connection->getConnection()->prepare('SELECT * FROM offer WHERE id_offer = ?;');
+        $stmt = DBConnection::getInstance()->prepare('SELECT * FROM offer WHERE id_offer = ?;');
         $stmt->execute([$id_offer]);
         $offer = null;
         if (array_key_exists($id_offer, $this->data)) {
@@ -30,7 +29,7 @@ class OfferPDO
 
         $MySQLQuery = 'SELECT * FROM offer 
         WHERE id_activity = ? AND id_situation = ? AND active = 1;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$activity->getIdActivity(), $situation->getIdSituation()]);
         return $this->returnOffers($stmt->fetchAll());
     }
@@ -57,14 +56,11 @@ class OfferPDO
         foreach ($rows as $row) {
             $id_offer = $row['id_offer'];
             $activityPDO = new ActivityPDO();
-            $activityPDO->connection = new DBConnection();
             $activity = $activityPDO->read($row["id_activity"]);
             $situationPDO = new SituationPDO();
-            $situationPDO->connection = new DBConnection();
             $situation = $situationPDO->getSituation($row["id_situation"]);
             $nb_entries = $row['nb_entries'];
             $nb_people = $row['nb_people'];
-
             $validity = $row['validity'];
             $price = $row['price'];
             $active = $row['active'];

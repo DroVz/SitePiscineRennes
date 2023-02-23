@@ -6,7 +6,6 @@ require_once('model/code.php');
 
 class CodePDO
 {
-    public DBConnection $connection;
     private array $data = array();
 
     // Return 1 code from database
@@ -14,7 +13,7 @@ class CodePDO
     {
         $MySQLQuery = 'SELECT id_code, id_offer, generation_date, code_string, remaining_entries
                         FROM code WHERE id_code = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$id_code]);
         $code = null;
         if (array_key_exists($id_code, $this->data)) {
@@ -28,7 +27,7 @@ class CodePDO
     // Return all codes from database
     public function readAll(): array
     {
-        $stmt = $this->connection->getConnection()->prepare('SELECT * FROM code;');
+        $stmt = DBConnection::getInstance()->prepare('SELECT * FROM code;');
         $stmt->execute();
         return $this->returnCodes($stmt->fetchAll());
     }
@@ -38,7 +37,7 @@ class CodePDO
     {
         $MySQLQuery = 'INSERT INTO code (id_offer, generation_date, code_string, remaining_entries)
         VALUES (?, ?, ?, ?)';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([
             $code->getOffer()->getIdOffer(), $code->getGenerationDate(),
             $code->getCodeString(), $code->getRemainingEntries()
@@ -62,7 +61,7 @@ class CodePDO
     // Return code ID if given code string already exists in database
     public function getId(string $strCode): int
     {
-        $stmt = $this->connection->getConnection()->prepare('SELECT * FROM code WHERE code_string = ?');
+        $stmt = DBConnection::getInstance()->prepare('SELECT * FROM code WHERE code_string = ?');
         $stmt->execute([$strCode]);
         $code = $stmt->fetch();
         // if code exists, return its id_code, else return 0
@@ -76,7 +75,6 @@ class CodePDO
         foreach ($rows as $row) {
             $id_code = $row['id_code'];
             $optionPDO = new OfferPDO();
-            $optionPDO->connection = new DBConnection();
             $offer = $optionPDO->read($row["id_offer"]);
             $generation_date = $row['generation_date'];
             $codeString = $row['code_string'];

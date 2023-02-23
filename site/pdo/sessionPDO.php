@@ -5,14 +5,14 @@ require_once('model/session.php');
 
 class SessionPDO
 {
-    public DBConnection $connection;
+    //public DBConnection $connection;
     private array $data = array();
 
     // Return 1 session from database
     public function read(int $id_session): Session
     {
         $MySQLQuery = 'SELECT * FROM session WHERE id_session = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$id_session]);
         $session = null;
         if (array_key_exists($id_session, $this->data)) {
@@ -32,7 +32,7 @@ class SessionPDO
         WHERE s.id_activity = ? AND s.active = 1
         GROUP BY s.id_session
         ORDER BY s.id_pool';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$activity->getIdActivity()]);
         return $this->returnSessions($stmt->fetchAll());
     }
@@ -59,7 +59,7 @@ class SessionPDO
         $MySQLQuery = 'SELECT COUNT(*) as bookingNb
         FROM session_code sc
         WHERE sc.id_session = ?';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$session->getId_session()]);
         while ($row = $stmt->fetch()) {
             $occupation = $row['bookingNb'];
@@ -71,7 +71,7 @@ class SessionPDO
     public function alreadyBooked(Code $code, Session $session): bool
     {
         $MySQLQuery = 'SELECT * FROM session_code sc WHERE sc.id_code = ? AND sc.id_session = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code(), $session->getId_session()]);
         if ($row = $stmt->fetch()) {
             return true;
@@ -87,10 +87,8 @@ class SessionPDO
         foreach ($rows as $row) {
             $id_session = $row['id_session'];
             $poolPDO = new PoolPDO();
-            $poolPDO->connection = new DBConnection();
             $pool = $poolPDO->read($row["id_pool"]);
             $activityPDO = new ActivityPDO();
-            $activityPDO->connection = new DBConnection();
             $activity = $activityPDO->read($row["id_activity"]);
             $datetime = $row['date_time'];
             $coach = $row['coach'];

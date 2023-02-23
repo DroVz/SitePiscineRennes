@@ -12,7 +12,7 @@ class BookingPDO
     {
         $MySQLQuery = 'SELECT id_session, id_code, booking_date
         FROM session_code WHERE id_code = ?';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code()]);
         return $this->returnBookings($stmt->fetchAll());
     }
@@ -38,10 +38,8 @@ class BookingPDO
         $bookings = [];
         foreach ($rows as $row) {
             $sessionPDO = new SessionPDO();
-            $sessionPDO->connection = new DBConnection();
             $session = $sessionPDO->read($row['id_session']);
             $codePDO = new CodePDO();
-            $codePDO->connection = new DBConnection();
             $code = $codePDO->read($row['id_code']);
             $booking_date = $row['booking_date'];
             $booking = new Booking($session, $code, $booking_date);

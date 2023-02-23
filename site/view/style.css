@@ -1,202 +1,210 @@
 body {
-    margin: 0%;
-    padding: 0%;
-    background-color: #EDEDED;
+  margin: 0%;
+  padding: 0%;
+  background-color: #ededed;
 }
 
-/* Taille Police */
-h1 {
-    font-size: 28pt;
+/* Links */
+a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  margin-right: 20px;
 
+  font-family: "Istok Web";
+  font-size: 16pt;
+  text-decoration: none;
+  color: #000000;
+}
+.blueLink {
+  color: #ffffff;
+  background-color: #479cff;
+  border: solid 1px #479cff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+a:hover {
+  color: #ffffff;
+  background-color: #479cff;
+  transition: 500ms;
+}
+.blueLink:hover {
+  color: #479cff;
+  background-color: #ffffff;
+  transition: 500ms;
+}
+/* Text */
+h1 {
+  font-size: 28pt;
 }
 h2 {
-    font-family:'Istok Web';
-    font-size: 24pt;
-
+  font-family: "Istok Web";
+  font-size: 24pt;
 }
 p {
-    font-size: 14pt;
+  font-size: 14pt;
 }
+
+/* Objets */
 .line {
-    margin: 50px 0px 50px 0px;
-    width: 80%;
-    border-bottom: solid 1px #BBBBBB;
-    
+  margin: 50px 0px 50px 0px;
+  width: 80%;
+  border-bottom: solid 1px #bbbbbb;
 }
+.banner {
+  width: 100vw;
+  height: 90vh;
+  opacity: 80%;
+}
+.groupBox {
+  margin: 20px 0px 10vh 10vh;
+  padding-bottom: 20px;
+
+  width: 80vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 /* Navigation */
 nav {
-    position: fixed;
-    z-index: 1;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    background-color: #FFFFFF;
-    width: 100%;
-    height: 10vh;
+  background-color: #ffffff;
+  width: 100vw;
+  height: 10vh;
 }
 nav img {
-    margin-left: 20px;
-    width: 20%;
+  margin-left: 20px;
+  width: 20vw;
 }
 nav ul {
-    margin:0%;
-    padding: 0%;
-    display: flex;
+  margin: 0%;
+  padding: 0%;
+  display: flex;
 
-    list-style-type: none;
+  list-style-type: none;
 }
-a{
-    display: block;
-    text-align: center;
-    padding: 16px;
-    margin-right: 20px;
 
-    font-family:'Istok Web';
-    font-size: 16pt;
-    text-decoration: none;
-    color: #000000;
-}
-.StyleButton{
-    color: #FFFFFF;
-    background-color: #479CFF;
-    border: solid 1px #479CFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-a:hover{
-    color: #FFFFFF;
-    background-color: #479CFF;
-    transition: 500ms;
-}
-.StyleButton:hover {
-    color: #479CFF;
-    background-color: #FFFFFF;
-    transition: 500ms;
-}
-/* Banner */
-.banner {
-    width: 100%;
-    height: 90vh;
-    opacity: 80%;
-}
 /* SelectSwimmingPool */
 .SelectSwimmingPool {
-    margin: 0%;
-    padding: 0%;
+  margin: 0%;
+  padding: 0%;
 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.SelectSwimmingPool .card {
-    width: 30%;
-    margin: 40px;
+.SelectSwimmingPool .SwimmingPool--Pool {
+  width: 30vw;
+  margin: 40px;
 }
 .SelectSwimmingPool .SwimmingPool--Img {
-    width: 100%;
-    height: 80%;
-    opacity: 100%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 80%;
+  opacity: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.SelectSwimmingPool .poolName {
-    font-family:'Istok Web';
-    font-size: 24pt;
+.SelectSwimmingPool .SwimmingPool--Name {
+  font-family: "Istok Web";
+  font-size: 24pt;
 
-    visibility: hidden;
-    text-align: center;
+  visibility: hidden;
+  text-align: center;
 }
-.SwimmingPool--Img:hover + .poolName{
-    visibility: visible;
-    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
-    transition: 500ms;
+.SwimmingPool--Img:hover + .SwimmingPool--Name {
+  visibility: visible;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+  transition: 500ms;
 }
 .SwimmingPool--Img:hover {
-    box-shadow: none;
+  box-shadow: none;
 }
+
 /* FocusSwimmingPool */
-.FocusSwimmingPool {
-    background-color: #ffffff;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
+.groupBox h1 {
+  width: 100%;
+  border-bottom: solid 1px #bbbbbb;
+  text-align: center;
+}
+.groupBox div {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.groupBox .info {
+  width: 60%;
+  margin: 0px 10px 0px 20px;
+}
+.groupBox img {
+  padding: 10px 20px 10px 20px;
 
-    width: 80%;
-
-    margin-top: 20px;
-    margin-left: 10%;
-    margin-bottom: 10%;
-    padding-bottom: 20px;
-
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 40%;
+  border-left: solid 1px #bbbbbb;
+}
+.groupBox a {
+  margin: 40px 0px 20px 0px;
 }
 
-.FocusSwimmingPool h1{
-    width: 100%;
-    border-bottom: solid 1px #BBBBBB;
-    text-align: center;
-}
-
-.FocusSwimmingPool div {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-.FocusSwimmingPool .info {
-    width: 60%;
-    margin: 0px 10px 0px 20px;
-}
-.FocusSwimmingPool img {
-    padding: 10px 20px 10px 20px;
-
-    width: 40%;
-    border-left: solid 1px #BBBBBB;
-}
-.FocusSwimmingPool a{
-    margin: 40px 0px 20px 0px;
-}
 /*CheckCodeSwimmingPool */
 .CheckCodeSwimmingPool {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
 
-    background-color: #ffffff;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
+  margin-top: 14vh;
+  margin-left: 10%;
+  padding-bottom: 20px;
 
-    margin-top: 20px;
-    margin-left: 10%;
-    margin-bottom: 10%;
-    padding-bottom: 20px;
-
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .CheckCodeSwimmingPool h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .CheckCodeSwimmingPool input {
-    width: 600px;
-    height: 50px;
+  width: 600px;
+  height: 50px;
 
-    text-align: center;
-    font-size: 16pt;
+  text-align: center;
+  font-size: 16pt;
 }
 
 .CheckCodeSwimmingPool button {
-    margin-top: 20px;
-    width: 20%;
-    height: 60px;
+  margin-top: 20px;
+  width: 20%;
+  height: 60px;
 
-    color: #ffffff;
-    background-color: #479CFF;
-    border: solid 1px #479CFF;
+  color: #ffffff;
+  background-color: #479cff;
+  border: solid 1px #479cff;
 
-    font-family:'Istok Web';
-    font-size: 16pt;
+  font-family: "Istok Web";
+  font-size: 16pt;
 }
 .CheckCodeSwimmingPool button:hover {
-    color: #479CFF;
-    background-color: #FFFFFF;
+  color: #479cff;
+  background-color: #ffffff;
+}
+/* CodeInformation */
+.CodeInformation {
+  margin: 0vh 0vh 0vh 10vw;
+
+  width: 80%;
+  height: 30vh;
+  border-top: solid 1px #bbbbbb;
+  background-color: #ffffff;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

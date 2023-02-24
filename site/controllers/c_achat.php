@@ -12,7 +12,7 @@ function achat()
     require_once('model/code.php');
     require_once('pdo/codePDO.php');
 
-    $step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
+    $step = htmlspecialchars($_GET['step']);
     if (empty($step)) {
         $step = 'initial';
     }

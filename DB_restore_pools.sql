@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 27 jan. 2023 à 16:14
+-- Généré le : sam. 11 fév. 2023 à 12:23
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `code` (
   `code_string` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `remaining_entries` int(11) NOT NULL,
   PRIMARY KEY (`id_code`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `code`
@@ -75,116 +75,33 @@ INSERT INTO `code` (`id_code`, `id_offer`, `generation_date`, `code_string`, `re
 (14, 6, '2022-12-27 15:22:38', 'KLV4-W6N3', 10),
 (13, 6, '2022-12-27 15:21:16', 'QZ4U-U2DJ', 10),
 (12, 8, '2022-12-27 15:09:10', '7RUT-6CNR', 10),
-(11, 1, '2022-12-27 15:06:23', 'S4UG-G8J2', 10);
+(11, 1, '2022-12-27 15:06:23', 'S4UG-G8J2', 10),
+(40, 26, '2023-02-09 10:28:22', 'GD2Y-GNVT', 5);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `offer`
+-- Structure de la table `lesson`
 --
 
-DROP TABLE IF EXISTS `offer`;
-CREATE TABLE IF NOT EXISTS `offer` (
-  `id_offer` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_activity` int(11) NOT NULL,
-  `id_situation` int(11) NOT NULL,
-  `nb_entries` int(11) NOT NULL,
-  `nb_people` int(11) NOT NULL,
-  `validity` int(11) NOT NULL,
-  `price` float NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_offer`),
-  UNIQUE KEY `id_formule` (`id_offer`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `lesson`;
+CREATE TABLE IF NOT EXISTS `lesson` (
+  `id_lesson` int(11) NOT NULL AUTO_INCREMENT,
 
---
--- Déchargement des données de la table `offer`
---
-
-INSERT INTO `offer` (`id_offer`, `id_activity`, `id_situation`, `nb_entries`, `nb_people`, `validity`, `price`, `active`) VALUES
-(1, 1, 1, 10, 1, 12, 49.95, 1),
-(2, 1, 2, 10, 1, 12, 19.95, 1),
-(3, 1, 3, 10, 1, 12, 15.95, 1),
-(4, 1, 1, 10, 2, 12, 94.35, 1),
-(5, 1, 2, 10, 2, 12, 37.55, 1),
-(6, 1, 3, 10, 2, 12, 29.95, 1),
-(7, 2, 1, 10, 1, 12, 105.45, 1),
-(8, 2, 2, 10, 1, 12, 85.15, 1),
-(9, 2, 3, 10, 1, 12, 74.25, 1),
-(10, 2, 1, 20, 1, 18, 203, 1),
-(11, 2, 2, 20, 1, 18, 165, 1),
-(12, 2, 3, 20, 1, 18, 143, 1),
-(13, 3, 1, 10, 1, 12, 105.45, 1),
-(14, 3, 2, 10, 1, 12, 85.15, 1),
-(15, 3, 3, 10, 1, 12, 74.25, 1),
-(16, 3, 1, 20, 1, 18, 203, 1),
-(17, 3, 2, 20, 1, 18, 165, 1),
-(18, 3, 3, 20, 1, 18, 143, 1),
-(19, 4, 1, 10, 1, 12, 110, 1),
-(20, 4, 3, 10, 1, 12, 95, 1),
-(21, 5, 1, 1, 1, 6, 15.35, 1),
-(22, 5, 3, 1, 1, 6, 9.85, 1),
-(23, 5, 1, 5, 1, 12, 76.5, 1),
-(24, 5, 3, 5, 1, 12, 49.15, 1),
-(25, 6, 1, 5, 1, 12, 212, 1),
-(26, 6, 2, 5, 1, 12, 84, 1),
-(27, 6, 3, 5, 1, 12, 68, 1),
-(31, 5, 2, 1, 1, 6, 11.5, 1),
-(30, 4, 2, 10, 1, 12, 98, 1),
-(32, 5, 2, 5, 1, 12, 62.2, 1);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `pool`
---
-
-DROP TABLE IF EXISTS `pool`;
-CREATE TABLE IF NOT EXISTS `pool` (
-  `id_pool` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  `picture` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `map` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_pool`),
-  UNIQUE KEY `id_piscine` (`id_pool`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `pool`
---
-
-INSERT INTO `pool` (`id_pool`, `name`, `address`, `active`, `picture`, `map`, `description`) VALUES
-(1, 'Piscine Crébigny', '47 bis, rue des Maillots', 1, 'view/img/Brequigny.webp', 'view/img/MapBrequigny.png', '  La piscine de Bréquigny vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
-(2, 'Piscine des Glaïeuls', '3, avenue Matthew Webb', 1, 'view/img/Gayeulles.webp', 'view/img/MapGayeulles.png', '  La piscine des Gayeulles vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
-(3, 'Piscine Saint-Doux', '36, rue du Papillon', 1, 'view/img/SaintGeorge.jpg', 'view/img/MapSaintGeorge.png', '  La piscine de Saint George vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
-(4, 'Piscine Villepierre', '1, rue Folle-bouée', 1, 'view/img/VilleJean.webp', 'view/img/MapVilleJean.png', '  La piscine de Ville Jean vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `session`
---
-
-DROP TABLE IF EXISTS `session`;
-CREATE TABLE IF NOT EXISTS `session` (
-  `id_session` int(11) NOT NULL AUTO_INCREMENT,
   `id_pool` int(11) NOT NULL,
   `id_activity` int(11) NOT NULL,
   `date_time` datetime NOT NULL,
   `coach` text COLLATE utf8_unicode_ci NOT NULL,
   `capacity` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_session`)
+  PRIMARY KEY (`id_lesson`)
 ) ENGINE=MyISAM AUTO_INCREMENT=911 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `session`
+-- Déchargement des données de la table `lesson`
 --
 
-INSERT INTO `session` (`id_session`, `id_pool`, `id_activity`, `date_time`, `coach`, `capacity`, `active`) VALUES
+INSERT INTO `lesson` (`id_lesson`, `id_pool`, `id_activity`, `date_time`, `coach`, `capacity`, `active`) VALUES
 (1, 1, 2, '2023-03-13 08:30:00', 'Bernard PAPILLON', 10, 1),
 (2, 1, 2, '2023-03-15 16:00:00', 'Bernard PAPILLON', 10, 1),
 (3, 1, 2, '2023-03-18 09:30:00', 'Bernard PAPILLON', 10, 1),
@@ -1078,7 +995,7 @@ INSERT INTO `session` (`id_session`, `id_pool`, `id_activity`, `date_time`, `coa
 (891, 4, 3, '2023-06-29 13:30:00', 'Stacy REINE', 10, 1),
 (892, 4, 3, '2023-06-29 17:30:00', 'Stacy REINE', 10, 1),
 (893, 4, 6, '2023-06-26 09:30:00', 'Iris DOE', 1, 1);
-INSERT INTO `session` (`id_session`, `id_pool`, `id_activity`, `date_time`, `coach`, `capacity`, `active`) VALUES
+INSERT INTO `lesson` (`id_lesson`, `id_pool`, `id_activity`, `date_time`, `coach`, `capacity`, `active`) VALUES
 (894, 4, 6, '2023-06-26 10:30:00', 'Iris DOE', 1, 1),
 (895, 4, 6, '2023-06-26 11:30:00', 'Iris DOE', 1, 1),
 (896, 4, 6, '2023-06-27 09:30:00', 'Iris DOE', 1, 1),
@@ -1100,24 +1017,109 @@ INSERT INTO `session` (`id_session`, `id_pool`, `id_activity`, `date_time`, `coa
 -- --------------------------------------------------------
 
 --
--- Structure de la table `session_code`
+-- Structure de la table `lesson_code`
 --
 
-DROP TABLE IF EXISTS `session_code`;
-CREATE TABLE IF NOT EXISTS `session_code` (
-  `id_session` int(11) NOT NULL,
+DROP TABLE IF EXISTS `lesson_code`;
+CREATE TABLE IF NOT EXISTS `lesson_code` (
+  `id_lesson` int(11) NOT NULL,
   `id_code` int(11) NOT NULL,
   `booking_date` datetime NOT NULL,
-  PRIMARY KEY (`id_session`,`id_code`)
+  PRIMARY KEY (`id_lesson`,`id_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Déchargement des données de la table `session_code`
+-- Déchargement des données de la table `lesson_code`
 --
 
-INSERT INTO `session_code` (`id_session`, `id_code`, `booking_date`) VALUES
+INSERT INTO `lesson_code` (`id_lesson`, `id_code`, `booking_date`) VALUES
 (1, 1, '2022-12-01 08:38:02'),
 (4, 21, '2022-12-01 08:38:02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `offer`
+--
+
+DROP TABLE IF EXISTS `offer`;
+CREATE TABLE IF NOT EXISTS `offer` (
+  `id_offer` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_activity` int(11) NOT NULL,
+  `id_situation` int(11) NOT NULL,
+  `nb_entries` int(11) NOT NULL,
+  `nb_people` int(11) NOT NULL,
+  `validity` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_offer`),
+  UNIQUE KEY `id_formule` (`id_offer`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `offer`
+--
+
+INSERT INTO `offer` (`id_offer`, `id_activity`, `id_situation`, `nb_entries`, `nb_people`, `validity`, `price`, `active`) VALUES
+(1, 1, 1, 10, 1, 12, 49.95, 1),
+(2, 1, 2, 10, 1, 12, 19.95, 1),
+(3, 1, 3, 10, 1, 12, 15.95, 1),
+(4, 1, 1, 10, 2, 12, 94.35, 1),
+(5, 1, 2, 10, 2, 12, 37.55, 1),
+(6, 1, 3, 10, 2, 12, 29.95, 1),
+(7, 2, 1, 10, 1, 12, 105.45, 1),
+(8, 2, 2, 10, 1, 12, 85.15, 1),
+(9, 2, 3, 10, 1, 12, 74.25, 1),
+(10, 2, 1, 20, 1, 18, 203, 1),
+(11, 2, 2, 20, 1, 18, 165, 1),
+(12, 2, 3, 20, 1, 18, 143, 1),
+(13, 3, 1, 10, 1, 12, 105.45, 1),
+(14, 3, 2, 10, 1, 12, 85.15, 1),
+(15, 3, 3, 10, 1, 12, 74.25, 1),
+(16, 3, 1, 20, 1, 18, 203, 1),
+(17, 3, 2, 20, 1, 18, 165, 1),
+(18, 3, 3, 20, 1, 18, 143, 1),
+(19, 4, 1, 10, 1, 12, 110, 1),
+(20, 4, 3, 10, 1, 12, 95, 1),
+(21, 5, 1, 1, 1, 6, 15.35, 1),
+(22, 5, 3, 1, 1, 6, 9.85, 1),
+(23, 5, 1, 5, 1, 12, 76.5, 1),
+(24, 5, 3, 5, 1, 12, 49.15, 1),
+(25, 6, 1, 5, 1, 12, 212, 1),
+(26, 6, 2, 5, 1, 12, 84, 1),
+(27, 6, 3, 5, 1, 12, 68, 1),
+(31, 5, 2, 1, 1, 6, 11.5, 1),
+(30, 4, 2, 10, 1, 12, 98, 1),
+(32, 5, 2, 5, 1, 12, 62.2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pool`
+--
+
+DROP TABLE IF EXISTS `pool`;
+CREATE TABLE IF NOT EXISTS `pool` (
+  `id_pool` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `picture` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `map` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_pool`),
+  UNIQUE KEY `id_piscine` (`id_pool`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `pool`
+--
+
+INSERT INTO `pool` (`id_pool`, `name`, `address`, `active`, `picture`, `map`, `description`) VALUES
+(1, 'Piscine Crébigny', '47 bis, rue des Maillots', 1, 'view/img/Brequigny.webp', 'view/img/MapBrequigny.png', '  La piscine de Bréquigny vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
+(2, 'Piscine des Glaïeuls', '3, avenue Matthew Webb', 1, 'view/img/Gayeulles.webp', 'view/img/MapGayeulles.png', '  La piscine des Gayeulles vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
+(3, 'Piscine Saint-Doux', '36, rue du Papillon', 1, 'view/img/SaintGeorge.jpg', 'view/img/MapSaintGeorge.png', '  La piscine de Saint George vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
+(4, 'Piscine Villepierre', '1, rue Folle-bouée', 1, 'view/img/VilleJean.webp', 'view/img/MapVilleJean.png', '  La piscine de Ville Jean vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.');
 
 -- --------------------------------------------------------
 

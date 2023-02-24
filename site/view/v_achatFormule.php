@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <main>
-    <form method="POST" action="index.php?action=achat&step=final">
+    <form method="POST" action="index.php?action=panier&step=add">
         <div id="choixFormule">
             <fieldset>
                 <legend>Choisissez votre formule :</legend>
@@ -19,7 +19,7 @@
                     ?>
                 </p>
             </fieldset>
-            <input type="submit" value="Obtenir mon code">
+            <input type="submit" value="Ajouter au panier">
         </div>
     </form>
 </main>

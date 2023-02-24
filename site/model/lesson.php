@@ -2,9 +2,9 @@
 
 // require_once('pdo/sessionPDO.php');
 
-class Session
+class Lesson
 {
-    public int $id_session;
+    public int $id_lesson;
     public Pool $pool;
     public Activity $activity;
     public string $date_time;
@@ -19,9 +19,9 @@ class Session
         string $coach,
         int $capacity,
         int $active,
-        int $id_session = -1
+        int $id_lesson = -1
     ) {
-        $this->id_session = $id_session;
+        $this->id_lesson = $id_lesson;
         $this->pool = $pool;
         $this->activity = $activity;
         $this->date_time = $date_time;
@@ -30,9 +30,9 @@ class Session
         $this->active = $active;
     }
 
-    public function getId_session(): int
+    public function getId_lesson(): int
     {
-        return $this->id_session;
+        return $this->id_lesson;
     }
 
     public function getPool(): Pool
@@ -67,14 +67,14 @@ class Session
 
     public function getBookingNb(): int
     {
-        $seancePDO = new SessionPDO();
+        $seancePDO = new LessonPDO();
         $seancePDO->connection = new DBConnection();
         return $seancePDO->getBookingNb($this);
     }
 
     public function alreadyBooked(Code $code): bool
     {
-        $seancePDO = new SessionPDO();
+        $seancePDO = new LessonPDO();
         $seancePDO->connection = new DBConnection();
         return $seancePDO->alreadyBooked($code, $this);
     }

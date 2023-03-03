@@ -1,36 +1,43 @@
 <?php
-require_once('controllers/c_accueil.php');
-require_once('controllers/c_achat.php');
-require_once('controllers/c_verif.php');
-require_once('controllers/c_admin.php');
-require_once('controllers/c_panier.php');
+// /!\ Les requires partent tous d'index (attention aux paths)/!\ \\
+require_once('controllers/c_Redirection.php');
+$ControllerRedirection = Redirection::getInstance();
 
-session_start();
+// Récupère les infos du form 
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+$step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
 
-if (isset($_GET['action'])) {
-	$action = htmlspecialchars($_GET['action']);
-} else {
+if(empty($action)) {
 	$action = 'accueil';
 }
-
-// controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
-// controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
-switch ($action) {
-	case 'accueil':
-		accueil();
+// Redirection action barre de nav 
+switch($action) {
+	case 'accueil' :
+		require('view/v_HomePage.php');
 		break;
-	case 'achat':
+
+	case 'achat' :
 		achat();
 		break;
-	case 'verif':
-		verif();
+
+	case 'verif' :
+		require('view/v_CodeVerification.php') ;
 		break;
-	case 'admin';
-		gestion();
+
+	case 'admin' ;
+		gestion() ;
 		break;
-	case 'panier';
-		panier();
+
+// Redirection envoie de formulaire 
+	case 'codeRedirection';
+		$ControllerRedirection->codeRedirection();
 		break;
+	
+	case 'codeAchat';
+		$ControllerRedirection->achatRedirection();
+		break;
+
 	default:
-		accueil();
+	require('view/v_HomePage.php');
+
 }

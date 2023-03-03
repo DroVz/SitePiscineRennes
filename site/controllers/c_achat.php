@@ -20,36 +20,29 @@ function achat()
     switch ($step) {
         case 'initial':
             $activityPDO = new ActivityPDO();
-            $activityPDO->connection = new DBConnection();
             $activities = $activityPDO->readAll();
             $situationPDO = new SituationPDO();
-            $situationPDO->connection = new DBConnection();
             $situations = $situationPDO->getSituations();
             require('view/v_achatInitial.php');
             break;
         case 'option':
 
             $activityPDO = new ActivityPDO();
-            $activityPDO->connection = new DBConnection();
             $activity = $activityPDO->read($_POST["activity"]);
             $situationPDO = new SituationPDO();
-            $situationPDO->connection = new DBConnection();
             $situation = $situationPDO->getSituation($_POST["situation"]);
 
             // Recherche en base des formules existantes pour ce couple "activite + situation"
             $optionPDO = new OfferPDO();
-            $optionPDO->connection = new DBConnection();
             $options = $optionPDO->readAll($activity, $situation);
 
             require('view/v_achatFormule.php');
             break;
         case 'final':
             $optionPDO = new OfferPDO();
-            $optionPDO->connection = new DBConnection();
             $option = $optionPDO->read($_POST["formule"]);
             // génération d'un nouveau code
             $codePDO = new CodePDO();
-            $codePDO->connection = new DBConnection();
             $newCode = $codePDO->newCode($option);
             $codePDO->create($newCode);
             // récupération du nouveau code

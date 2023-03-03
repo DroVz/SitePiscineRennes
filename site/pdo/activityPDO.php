@@ -1,18 +1,16 @@
 <?php
-
 require_once('pdo/database.php');
 require_once('model/activity.php');
 
 class ActivityPDO
 {
-    public DBConnection $connection;
     private array $data = array();
 
     // Return 1 activity from database
     public function read(int $id_activity): Activity
     {
         $MySQLQuery = 'SELECT * FROM activity WHERE id_activity = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$id_activity]);
         $activite = null;
         if (array_key_exists($id_activity, $this->data)) {
@@ -27,7 +25,7 @@ class ActivityPDO
     public function readAll(): array
     {
         $MySQLQuery = 'SELECT * FROM activity WHERE active = 1';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute();
         return $this->returnActivities($stmt->fetchAll());
     }

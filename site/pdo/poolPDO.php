@@ -1,18 +1,15 @@
 <?php
-
 require_once('pdo/database.php');
-require_once('model/pool.php');
 
 class PoolPDO
 {
-    public DBConnection $connection;
     private array $data = array();
 
     // Return 1 pool from database
     public function read(int $id_pool): Pool
     {
         $MySQLQuery = 'SELECT * FROM pool WHERE id_pool = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$id_pool]);
         $pool = null;
         if (array_key_exists($id_pool, $this->data)) {
@@ -27,7 +24,7 @@ class PoolPDO
     public function readAll(): array
     {
         $MySQLQuery = 'SELECT * FROM pool';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute();
         return $this->returnPools($stmt->fetchAll());
     }

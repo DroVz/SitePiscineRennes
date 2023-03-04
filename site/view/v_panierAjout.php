@@ -1,12 +1,14 @@
+<?php require_once('controllers/c_PanierAjout.php') ?>
 <?php $title = "Ajout au panier"; ?>
+<?php $controllerRedirection = Redirection::getInstance(); ?>
+
 <?php ob_start(); ?>
+
+<?php $controllerPanierAjout = new PanierAjout() ?>
 
 <main>
     <div>
-        <?php
-        echo '<p>Le produit a bien été ajouté au panier</br><a href="index.php?action=panier&step=view">Voir mon panier</a>
-        </br><a href="index.php?action=achat&step=initial">Retour aux formules</a></p>';
-        ?>
+        <?php $controllerPanierAjout->addToCart(); ?>
     </div>
 </main>
 

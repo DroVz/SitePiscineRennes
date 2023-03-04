@@ -1,43 +1,59 @@
 <?php
 // /!\ Les requires partent tous d'index (attention aux paths)/!\ \\
+session_start();
 require_once('controllers/c_Redirection.php');
 $ControllerRedirection = Redirection::getInstance();
 
-// Récupère les infos du form 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-$step = filter_input(INPUT_GET, 'step', FILTER_SANITIZE_STRING);
+// Récupère les infos du form
+$action = null;
+$step = null;
+if (isset($_GET['action'])) {
+	$action = htmlspecialchars($_GET['action']);
+}
+if (isset($_GET['step'])) {
+	$step = htmlspecialchars($_GET['step']);
+}
 
-if(empty($action)) {
+if (empty($action)) {
 	$action = 'accueil';
 }
-// Redirection action barre de nav 
-switch($action) {
-	case 'accueil' :
+
+switch ($action) {
+
+		// Redirections action barre de nav
+	case 'accueil':
 		require('view/v_HomePage.php');
 		break;
 
-	case 'achat' :
-		achat();
+	case 'achat':
+		require('view/v_ChoixActivite.php');
 		break;
 
-	case 'verif' :
-		require('view/v_CodeVerification.php') ;
+	case 'verif':
+		require('view/v_CodeVerification.php');
 		break;
 
-	case 'admin' ;
-		gestion() ;
+	case 'admin';
+		gestion();
 		break;
 
-// Redirection envoie de formulaire 
+	case 'panier':
+		require('view/v_panierVue.php');
+		break;
+
+		// Redirections envoi de formulaire
 	case 'codeRedirection';
 		$ControllerRedirection->codeRedirection();
 		break;
-	
-	case 'codeAchat';
+
+	case 'achatRedirection';
 		$ControllerRedirection->achatRedirection();
 		break;
 
-	default:
-	require('view/v_HomePage.php');
+	case 'panierRedirection';
+		$ControllerRedirection->panierRedirection();
+		break;
 
+	default:
+		require('view/v_HomePage.php');
 }

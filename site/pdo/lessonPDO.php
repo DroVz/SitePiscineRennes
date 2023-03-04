@@ -11,7 +11,7 @@ class LessonPDO
     public function read(int $id_lesson): Lesson
     {
         $MySQLQuery = 'SELECT * FROM lesson WHERE id_lesson = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$id_lesson]);
         $lesson = null;
         if (array_key_exists($id_lesson, $this->data)) {
@@ -31,7 +31,7 @@ class LessonPDO
         WHERE l.id_activity = ? AND l.active = 1
         GROUP BY l.id_lesson
         ORDER BY l.id_pool';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$activity->getIdActivity()]);
         return $this->returnLessons($stmt->fetchAll());
     }
@@ -58,7 +58,7 @@ class LessonPDO
         $MySQLQuery = 'SELECT COUNT(*) as bookingNb
         FROM lesson_code lc
         WHERE lc.id_lesson = ?';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$lesson->getId_lesson()]);
         while ($row = $stmt->fetch()) {
             $occupation = $row['bookingNb'];
@@ -70,7 +70,7 @@ class LessonPDO
     public function alreadyBooked(Code $code, Lesson $lesson): bool
     {
         $MySQLQuery = 'SELECT * FROM lesson_code lc WHERE sc.id_code = ? AND sc.id_lesson = ?;';
-        $stmt = $this->connection->getConnection()->prepare($MySQLQuery);
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code(), $lesson->getId_lesson()]);
         if ($row = $stmt->fetch()) {
             return true;

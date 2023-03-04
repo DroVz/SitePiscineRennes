@@ -5,7 +5,6 @@ require_once('model/lesson.php');
 
 class LessonPDO
 {
-    public DBConnection $connection;
     private array $data = array();
 
     // Return 1 lesson from database
@@ -87,10 +86,8 @@ class LessonPDO
         foreach ($rows as $row) {
             $id_lesson = $row['id_lesson'];
             $poolPDO = new PoolPDO();
-            $poolPDO->connection = new DBConnection();
             $pool = $poolPDO->read($row["id_pool"]);
             $activityPDO = new ActivityPDO();
-            $activityPDO->connection = new DBConnection();
             $activity = $activityPDO->read($row["id_activity"]);
             $datetime = $row['date_time'];
             $coach = $row['coach'];

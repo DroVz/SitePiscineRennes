@@ -110,13 +110,13 @@ class Redirection
 
         switch ($step) {
             case 'view':
-                require('view/v_panierVue.php');
+                require('view/v_PanierVue.php');
                 break;
             case 'add':
-                require('view/v_panierAjout.php');
+                require('view/v_PanierAjout.php');
                 break;
             case 'remove':
-                require('view/v_panierSuppression.php');
+                require('view/v_PanierSuppression.php');
                 break;
             case 'payment':
                 // TODO

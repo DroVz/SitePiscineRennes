@@ -38,7 +38,7 @@ switch ($action) {
 		break;
 
 	case 'panier':
-		require('view/v_panierVue.php');
+		require('view/v_PanierVue.php');
 		break;
 
 		// Redirections envoi de formulaire

@@ -12,7 +12,7 @@
     <!-- Je remets le header ici pour l'instant mais à revoir -->
     <header>
         <nav>
-            <img src="view/img/logo.jpeg" alt="">
+            <a class=a-nostyle href="/index.php?action=accueil"><img src="view/img/logo.jpeg" alt=""></a>
             <ul>
                 <li><a href="/index.php?action=accueil">Accueil</a></li>
                 <li><a href="/index.php?action=achat">Formules</a></li>

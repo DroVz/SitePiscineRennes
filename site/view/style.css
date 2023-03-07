@@ -219,6 +219,28 @@ nav ul {
   background-color: #ffffff;
 }
 
+
+
+
+
+/*   TESTS CLAIRE   */
+
 main {
-  margin-top: 10vh;
+  margin-top: 15vh;
+}
+
+#CB--div {
+  display: none;
+}
+
+#PayPal--div {
+  display: none;
+}
+
+.a-nostyle {
+  text-decoration: none;
+}
+
+.a-nostyle:hover {
+  background: none;
 }

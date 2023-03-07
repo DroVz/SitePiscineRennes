@@ -120,19 +120,11 @@ class Redirection
                 require('view/v_PanierSuppression.php');
                 break;
             case 'payment':
-                // TODO
-                // VIEILLES LIGNES POUR CREATION DE CODE, A REUTILISER AU MOMENT DU PAIEMENT
-                /*
-                    $optionPDO = new OfferPDO();
-                    $option = $optionPDO->read($_POST["formule"]);
-                    // génération d'un nouveau code
-                    $codePDO = new CodePDO();
-                    $newCode = $codePDO->newCode($option);
-                    $codePDO->create($newCode);
-                    // récupération du nouveau code
-                    require('view/v_achatFinal.php');
-                    break;
-                */
+                require('view/v_Paiement.php');
+                break;
+            case 'paymentDone':
+                require('view/v_CodeObtention.php');
+                break;
         }
     }
 }

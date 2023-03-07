@@ -1,30 +1,59 @@
 <?php
-require_once('controllers/c_accueil.php');
-require_once('controllers/c_achat.php');
-require_once('controllers/c_verif.php');
-require_once('controllers/c_admin.php');
+// /!\ Les requires partent tous d'index (attention aux paths)/!\ \\
+session_start();
+require_once('controllers/c_Redirection.php');
+$ControllerRedirection = Redirection::getInstance();
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-if(empty($action)) {
+// Récupère les infos du form
+$action = null;
+$step = null;
+if (isset($_GET['action'])) {
+	$action = htmlspecialchars($_GET['action']);
+}
+if (isset($_GET['step'])) {
+	$step = htmlspecialchars($_GET['step']);
+}
+
+if (empty($action)) {
 	$action = 'accueil';
 }
-// controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
-// controllerFocus permet d'instancier la vue et le controller correspondant pour pouvoir acceder aux différentes fct 
-switch($action) {
-	case 'accueil' :
-		accueil();
+
+switch ($action) {
+
+		// Redirections action barre de nav
+	case 'accueil':
+		require('view/v_HomePage.php');
 		break;
-	case 'achat' :
-		achat();
+
+	case 'achat':
+		require('view/v_ChoixActivite.php');
 		break;
-	case 'verif' :
-		verif() ;
+
+	case 'verif':
+		require('view/v_CodeVerification.php');
 		break;
-	case 'admin' ;
-		gestion() ;
+
+	case 'admin';
+		gestion();
+		break;
+
+	case 'panier':
+		require('view/v_PanierVue.php');
+		break;
+
+		// Redirections envoi de formulaire
+	case 'codeRedirection';
+		$ControllerRedirection->codeRedirection();
+		break;
+
+	case 'achatRedirection';
+		$ControllerRedirection->achatRedirection();
+		break;
+
+	case 'panierRedirection';
+		$ControllerRedirection->panierRedirection();
 		break;
 
 	default:
-	accueil();
-
+		require('view/v_HomePage.php');
 }

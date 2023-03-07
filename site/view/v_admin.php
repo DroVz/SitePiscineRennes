@@ -74,7 +74,7 @@
             <button type="submit">Ajouter une situation</button>
         </form>
     </div>
-
+    
 </main>
 
 <?php $content = ob_get_clean(); ?>

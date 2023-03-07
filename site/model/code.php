@@ -3,23 +3,23 @@
 class Code
 {
     private int $id_code;
-    private Formule $formule;
-    private string $date_generation;
+    private Offer $offer;
+    private string $generation_date;
     private string $codeString;
-    private int $entrees_restantes;
+    private int $remaining_entries;
 
     public function __construct(
-        Formule $formule,
-        string $date_generation,
-        string $code,
-        int $entrees_restantes,
+        Offer $offer,
+        string $generation_date,
+        string $code_string,
+        int $remaining_entries,
         int $id_code = -1
     ) {
         $this->id_code = $id_code;
-        $this->formule = $formule;
-        $this->date_generation = $date_generation;
-        $this->codeString = $code;
-        $this->entrees_restantes = $entrees_restantes;
+        $this->offer = $offer;
+        $this->generation_date = $generation_date;
+        $this->codeString = $code_string;
+        $this->remaining_entries = $remaining_entries;
     }
 
     public function getId_code(): int
@@ -27,14 +27,14 @@ class Code
         return $this->id_code;
     }
 
-    public function getFormule(): Formule
+    public function getOffer(): Offer
     {
-        return $this->formule;
+        return $this->offer;
     }
 
-    public function getDate_generation(): string
+    public function getGenerationDate(): string
     {
-        return $this->date_generation;
+        return $this->generation_date;
     }
 
     public function getCodeString(): string
@@ -42,8 +42,8 @@ class Code
         return $this->codeString;
     }
 
-    public function getEntrees_restantes(): int
+    public function getRemainingEntries(): int
     {
-        return $this->entrees_restantes;
+        return $this->remaining_entries;
     }
 }

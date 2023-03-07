@@ -1,8 +1,9 @@
 <?php
-require_once ('pdo/codePDO.php');
-class CodeController {
-
-    public function tryToGetCode(){
+require_once('pdo/codePDO.php');
+class CodeController
+{
+    public function tryToGetCode()
+    {
 
         $userInput = $_POST["code"];
 
@@ -11,6 +12,4 @@ class CodeController {
 
         return $idCode;
     }
-
-    
 }

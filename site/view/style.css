@@ -16,30 +16,36 @@ a {
   text-decoration: none;
   color: #000000;
 }
+
 .blueLink {
   color: #ffffff;
   background-color: #479cff;
   border: solid 1px #479cff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 a:hover {
   color: #ffffff;
   background-color: #479cff;
   transition: 500ms;
 }
+
 .blueLink:hover {
   color: #479cff;
   background-color: #ffffff;
   transition: 500ms;
 }
+
 /* Text */
 h1 {
   font-size: 28pt;
 }
+
 h2 {
   font-family: "Istok Web";
   font-size: 24pt;
 }
+
 p {
   font-size: 14pt;
 }
@@ -50,11 +56,13 @@ p {
   width: 80%;
   border-bottom: solid 1px #bbbbbb;
 }
+
 .banner {
   width: 100vw;
   height: 90vh;
   opacity: 80%;
 }
+
 .groupBox {
   margin: 20px 0px 10vh 10vh;
   padding-bottom: 20px;
@@ -83,10 +91,12 @@ nav {
   width: 100vw;
   height: 10vh;
 }
+
 nav img {
   margin-left: 20px;
   width: 20vw;
 }
+
 nav ul {
   margin: 0%;
   padding: 0%;
@@ -104,16 +114,19 @@ nav ul {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .SelectSwimmingPool .SwimmingPool--Pool {
   width: 30vw;
   margin: 40px;
 }
+
 .SelectSwimmingPool .SwimmingPool--Img {
   width: 100%;
   height: 80%;
   opacity: 100%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .SelectSwimmingPool .SwimmingPool--Name {
   font-family: "Istok Web";
   font-size: 24pt;
@@ -121,11 +134,13 @@ nav ul {
   visibility: hidden;
   text-align: center;
 }
-.SwimmingPool--Img:hover + .SwimmingPool--Name {
+
+.SwimmingPool--Img:hover+.SwimmingPool--Name {
   visibility: visible;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
   transition: 500ms;
 }
+
 .SwimmingPool--Img:hover {
   box-shadow: none;
 }
@@ -136,21 +151,25 @@ nav ul {
   border-bottom: solid 1px #bbbbbb;
   text-align: center;
 }
+
 .groupBox div {
   display: flex;
   width: 100%;
   height: 100%;
 }
+
 .groupBox .info {
   width: 60%;
   margin: 0px 10px 0px 20px;
 }
+
 .groupBox img {
   padding: 10px 20px 10px 20px;
 
   width: 40%;
   border-left: solid 1px #bbbbbb;
 }
+
 .groupBox a {
   margin: 40px 0px 20px 0px;
 }
@@ -169,6 +188,7 @@ nav ul {
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .CheckCodeSwimmingPool h2 {
   text-align: center;
 }
@@ -193,7 +213,34 @@ nav ul {
   font-family: "Istok Web";
   font-size: 16pt;
 }
+
 .CheckCodeSwimmingPool button:hover {
   color: #479cff;
   background-color: #ffffff;
+}
+
+
+
+
+
+/*   TESTS CLAIRE   */
+
+main {
+  margin-top: 15vh;
+}
+
+#CB--div {
+  display: none;
+}
+
+#PayPal--div {
+  display: none;
+}
+
+.a-nostyle {
+  text-decoration: none;
+}
+
+.a-nostyle:hover {
+  background: none;
 }

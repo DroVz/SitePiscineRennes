@@ -68,14 +68,12 @@ class Lesson
     public function getBookingNb(): int
     {
         $seancePDO = new LessonPDO();
-        $seancePDO->connection = new DBConnection();
         return $seancePDO->getBookingNb($this);
     }
 
     public function alreadyBooked(Code $code): bool
     {
         $seancePDO = new LessonPDO();
-        $seancePDO->connection = new DBConnection();
         return $seancePDO->alreadyBooked($code, $this);
     }
 }

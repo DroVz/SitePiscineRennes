@@ -87,7 +87,6 @@ INSERT INTO `code` (`id_code`, `id_offer`, `generation_date`, `code_string`, `re
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE IF NOT EXISTS `lesson` (
   `id_lesson` int(11) NOT NULL AUTO_INCREMENT,
->>>>>>>>> Temporary merge branch 2
   `id_pool` int(11) NOT NULL,
   `id_activity` int(11) NOT NULL,
   `date_time` datetime NOT NULL,

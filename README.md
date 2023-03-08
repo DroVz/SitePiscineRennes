@@ -2,7 +2,6 @@
 Site Web pour les piscines de Rennes afin de gérer les abonnements des utilisateurs (Projet BTS)
 
 
-===================================
 Mise en place de la base de données
 ===================================
 

@@ -39,7 +39,6 @@ class Redirection
         if (isset($_GET['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
-        echo '<script>console.log("ok") </script>';
         switch ($step) {
             case 'initial':
                 // TODO hmm, mais ce fichier vue n'existe plus ?

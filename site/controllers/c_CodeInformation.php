@@ -37,11 +37,11 @@ class CodeInformation {
     }
     function printBookingInformations(){
         if ($this->code->getOffer()->getActivity()->getBooking()) {
-            echo '<form method="POST" action="index.php?action=codeRedirection&step=booking">
+            echo '<form  method="POST" action="index.php?action=codeRedirection&step=booking">
                   <input type="hidden" id="id_code" name="id_code" value=' . $this->code->getId_code() . ' /input>
                   <input type="hidden" id="id_activity" name="id_activity" value=' . $this->code->getOffer()->getActivity()->getIdActivity() . ' /input>
                   <input type="hidden" id="nb_entries" name="nb_entries" value=' . $this->code->getOffer()->getNbEntries() . ' /input>
-                  <input type=submit value="Gérer les réservations"/>
+                  <input class="blueLink" type=submit value="Gérer les réservations"/>
                   </form>';
         }
     }

@@ -54,7 +54,8 @@ switch ($action) {
 	case 'panierRedirection';
 		$ControllerRedirection->panierRedirection();
 		break;
-
+	case 'bookingNewLesson';
+		
 	default:
 		require('view/v_HomePage.php');
 }

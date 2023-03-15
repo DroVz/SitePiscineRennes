@@ -2,6 +2,7 @@
 require_once('c_admin.php');
 require_once('c_CodeInformation.php');
 require_once('controllers/c_CodeController.php');
+require_once('controllers/c_BookingController.php');
 
 // a cause de booking dans codeRedirection 
 require_once('./pdo/activityPDO.php');
@@ -100,6 +101,22 @@ class Redirection
             case 'paymentDone':
                 require('view/v_CodeObtention.php');
                 break;
+        }
+    }
+    public function bookingRedirection(){
+
+        $bookingController = new BookingController;
+
+        $step = 'view';
+        if (isset($_GET['step'])) {
+            $step = htmlspecialchars($_GET['step']);
+        }
+
+        switch ($step) {
+            case 'addBooking':
+                $bookingController->addBooking($_GET['lesson_id'],$_GET['id_code']);
+                require('view/v_CodeObtention.php');
+        break;
         }
     }
 }

@@ -51,7 +51,7 @@ class Reservation {
         }
     }
     public function printRemainingBooking(){
-        echo 'Il vous reste ' . $this->remainingBookings . ' séances à réserver';
+        echo '<p> Il vous reste ' . $this->remainingBookings . ' séances à réserver </p>';
     }
     public function printNbEntries(){
         echo 'Votre code est valable pour ' . $this->nbEntries . ' entrées.' ;
@@ -66,9 +66,9 @@ class Reservation {
             $capacity = $lesson->getCapacity();
             $alreadyBooked = $lesson->alreadyBooked($this->code);
 
-            echo '<li>Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). 
+            echo '<li id ="'.$lesson->getId_lesson.'li" ><button class="blueLink" onclick="setBookingEvent('.$lesson->getId_lesson.')"> Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). 
              - Occupation : ' . $bookingNb . '/' . $capacity .
-                ($alreadyBooked ? ' - Vous avez déjà réservé pour cette séance' : '') . '</li>';
+                ($alreadyBooked ? ' - Vous avez déjà réservé pour cette séance' : '') . '</button></li>';
         }
     }
 

@@ -3,9 +3,7 @@
 <?php ob_start(); ?>
 <?php $ControllerCodeInformation = new CodeInformation()?>
 
-<main>
-   
-
+<main class="CodeInformation">
 <?php $ControllerCodeInformation->printCode(); ?>
 
     <div>

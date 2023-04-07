@@ -1,18 +1,19 @@
 <?php
+$title = "Piscines municipales de Rennes - Page Administrative - Ajout Activité";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $libelle = $_POST["libelle"];
+    $libelle = $_POST["activityname"];
     $description = $_POST["description"];
-    $reservation = isset($_POST["reservation"]) ? 1 : 0;
-    $actif = isset($_POST["actif"]) ? 1 : 0;
+    $reservation = isset($_POST["booking"]) ? 1 : 0;
+    $actif = isset($_POST["active"]) ? 1 : 0;
 
     if(!empty($libelle) || !empty($description)) {
     
-    $bd = new PDO('mysql:host=localhost;dbname=piscines;charset=utf8', "root", "");
+    $bd = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
 
 
-    $stmt = $bd->prepare("INSERT INTO activite (libelle, description, reservation, actif) VALUES (:libelle, :description, :reservation, :actif)");
+    $stmt = $bd->prepare("INSERT INTO activity (name, description, booking, active) VALUES (:libelle, :description, :reservation, :actif)");
     $stmt->bindParam(':libelle', $libelle);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':reservation', $reservation);
@@ -24,15 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 } else {
     
-    echo "Les champs libellé et description sont obligatoires";
-    sleep(2);
 
+    header("Location: http://localhost/index.php?action=admin");
+    
 }
-
-
-
-
-
 }
 
 ?>

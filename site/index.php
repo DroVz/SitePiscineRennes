@@ -17,6 +17,7 @@ if (isset($_GET['step'])) {
 if (empty($action)) {
 	$action = 'accueil';
 }
+echo '<script>console.log("'. $action .'") </script>';
 
 switch ($action) {
 
@@ -53,7 +54,8 @@ switch ($action) {
 	case 'panierRedirection';
 		$ControllerRedirection->panierRedirection();
 		break;
-
+	case 'bookingNewLesson';
+		
 	default:
 		require('view/v_HomePage.php');
 }

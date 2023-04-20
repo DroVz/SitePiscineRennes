@@ -3,11 +3,11 @@ $title = "Piscines municipales de Rennes - Page Administrative - Supression Elem
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $Type = $_POST["SupressionType"];
-    $ID = $_POST["SupressionID"];
+    $Type = $_POST["SuppressionType"];
+    $ID = $_POST["SuppressionID"];
     $TypeComprehension="";
 
-    if(!empty($Type) || !empty($ID)) {
+    if(!empty($ID)) {
     
         $bd = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
 
@@ -27,12 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':ID', $ID);
         $stmt->execute();
 
-        header("Location: http://localhost/index.php?action=admin");
+        header("Location: /index.php?action=admin");
         exit(); 
-
     } else {
-        header("Location: http://localhost/index.php?action=admin");
-
+        header("Location: /index.php?action=admin");
     }
 }
 

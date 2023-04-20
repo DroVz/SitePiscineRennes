@@ -47,5 +47,5 @@
 </main>
 
 <?php $content = ob_get_clean(); ?>
-<?php require('C:\wamp64\www\view\layout.php') ?>
+<?php require('\view\layout.php') ?>
 

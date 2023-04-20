@@ -20,13 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':actif', $actif);
     $stmt->execute();
 
-    header("Location: http://localhost/index.php?action=admin");
+    header("Location: /index.php?action=admin");
     exit(); 
 
 } else {
     
 
-    header("Location: http://localhost/index.php?action=admin");
+    header("Location: /index.php?action=admin");
     
 }
 }

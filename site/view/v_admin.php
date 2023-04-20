@@ -1,5 +1,19 @@
 <?php $title = "Piscines municipales de Rennes - Page Administrative"; ?>
 
+<?php 
+
+$bd = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
+
+$query = $bd->query('SELECT * FROM activity');
+$activity = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$query = $bd->query('SELECT * FROM situation');
+$situation = $query->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
+
 <?php ob_start(); ?>
 
 <main>
@@ -101,7 +115,7 @@
 
     <h3> Suppression </h3>
 
-<form method="post" action="view/v_admin_suppression.php">
+<form method="post" action="view\v_admin_supression.php">
 
     <label for="SuppressionType">Type d'élément à supprimer:</label>
     <select name="SuppressionType" id="SuppressionType" required>
@@ -121,4 +135,4 @@
 </form>
 </main>
 <?php $content = ob_get_clean(); ?>
-<?php require('C:\wamp64\www\view\layout.php') ?>
+<?php require('view\layout.php') ?>

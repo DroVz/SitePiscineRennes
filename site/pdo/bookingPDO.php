@@ -21,6 +21,7 @@ class BookingPDO
     {
         $MySQLQuery = 'INSERT INTO lesson_code (id_lesson, id_code, booking_date)
         VALUES ('. $id_lesson .', '. $id_code .', NOW())';
+        echo $MySQLQuery ;
         $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute();
     }
@@ -41,7 +42,6 @@ class BookingPDO
         $bookings = [];
         foreach ($rows as $row) {
             $lessonPDO = new LessonPDO();
-            $lessonPDO->connection = new DBConnection();
             $lesson = $lessonPDO->read($row['id_lesson']);
             $codePDO = new CodePDO();
             $code = $codePDO->read($row['id_code']);

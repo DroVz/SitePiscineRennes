@@ -37,8 +37,8 @@ class Redirection
         $codeController = new CodeController;
 
         $step = 'initial';
-        if (isset($_GET['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+        if (isset($_POST['step'])) {
+            $step = htmlspecialchars($_POST['step']);
         }
         switch ($step) {
             case 'initial':
@@ -64,7 +64,7 @@ class Redirection
     public function achatRedirection()
     {
         $step = 'initial';
-        if (isset($_GET['step'])) {
+        if (isset($_POST['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
 
@@ -81,7 +81,7 @@ class Redirection
     public function panierRedirection()
     {
         $step = 'view';
-        if (isset($_GET['step'])) {
+        if (isset($_POST['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
 
@@ -108,15 +108,22 @@ class Redirection
         $bookingController = new BookingController;
 
         $step = 'view';
-        if (isset($_GET['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+        if (isset($_POST['step'])) {
+            $step = htmlspecialchars($_POST['step']);
         }
 
         switch ($step) {
             case 'addBooking':
-                $bookingController->addBooking($_GET['lesson_id'],$_GET['id_code']);
-                require('view/v_CodeObtention.php');
-        break;
+                $bookingController->addBooking($_POST['lesson_id'],$_POST['id_code']);
+                require('view/v_verifReservation.php');
+                break;
+            case 'dellBooking':
+                $bookingController->dellBooking($_POST['lesson_id'],$_POST['id_code']);
+                require('view/v_verifReservation.php');
+                break;
+            case 'view':
+                require('view/v_HomePage.php');
+                break;
         }
     }
 }

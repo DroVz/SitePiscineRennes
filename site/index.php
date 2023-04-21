@@ -35,7 +35,7 @@ switch ($action) {
 		break;
 
 	case 'admin';
-		gestion();
+		require('view/v_admin.php');
 		break;
 
 	case 'panier':

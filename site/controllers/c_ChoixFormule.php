@@ -33,7 +33,7 @@ class ChoixFormule
                 $offer->getIdOffer() . '" required/> <label for="' . $offer->getIdOffer() .
                 '">' . $offer->getNbEntries() . ' entrées, ' . $offer->getNbPeople() .
                 ' personne(s), code valable ' . $offer->getValidity() . ' mois à partir de l\'achat - ' .
-                $offer->getPrice() . ' €</label><br />';
+                number_format($offer->getPrice(), 2, ",", " ") . ' €</label><br />';
         }
     }
 }

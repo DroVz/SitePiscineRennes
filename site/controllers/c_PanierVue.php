@@ -2,15 +2,18 @@
 
 class PanierVue
 {
-    private $choices;
+    private array $choices;
+    private float $totalPrice;
 
     function __construct()
     {
-        $ids = array_keys($_SESSION['cart']);
-        $optionPDO = new OfferPDO();
-        $this->choices = [];
-        foreach ($ids as $id) {
-            $this->choices[] = $optionPDO->read($id);
+        if (isset($_SESSION['cart'])) {
+            $ids = array_keys($_SESSION['cart']);
+            $offerPDO = new OfferPDO();
+            $this->choices = [];
+            foreach ($ids as $id) {
+                $this->choices[] = $offerPDO->read($id);
+            }
         }
     }
 
@@ -31,9 +34,9 @@ class PanierVue
                 <li>Situation : ' . $choice->getSituation()->getName() . '</li>
                 <li>Réservation nécessaire : ' . ($choice->getActivity()->getBooking() ? 'oui' : 'non') . '</li>        
                 <li>Code valable ' . $choice->getValidity() . ' mois </li>
-                <li>Prix unitaire : ' . $choice->getPrice() . ' €</li>
+                <li>Prix unitaire : ' . number_format($choice->getPrice(), 2, ",", " ") . ' €</li>
                 <li>Nombre : ' . $_SESSION['cart'][$choice->getIdOffer()] . '</li>
-                <li>Prix total : ' . $choice->getPrice() * $_SESSION['cart'][$choice->getIdOffer()] . ' €</li>                
+                <li>Prix total : ' . number_format($choice->getPrice() * $_SESSION['cart'][$choice->getIdOffer()], 2, ",", " ") . ' €</li>                
                 </ul>
                 <form method=POST action="index.php?action=panierRedirection&step=remove">
                 <input type="hidden" name="formule" value=' . $choice->getIdOffer() . '>
@@ -41,6 +44,23 @@ class PanierVue
                 </form>
                 </div>';
             }
+            echo '<div>
+            <h2>Votre commande</h2>
+            <p>Nombre d\'articles : ' . sizeof($this->choices) . '</p>
+            <p>Total TTC : ' . number_format($this->findTotalPrice(), 2, ",", " ") . ' €</p>
+            <form method=POST action="index.php?action=panierRedirection&step=payment">
+            <input type=submit value="Procéder au paiement"/>
+            </form>
+            </div>';
         }
+    }
+
+    function findTotalPrice()
+    {
+        $this->totalPrice = 0;
+        foreach ($this->choices as $choice) {
+            $this->totalPrice += $choice->getPrice();
+        }
+        return $this->totalPrice;
     }
 }

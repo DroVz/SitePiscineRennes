@@ -17,8 +17,12 @@ class BookingPDO
     }
 
     // TODO Add new reservation to database
-    public function create(): void
+    public function create($id_lesson,$id_code): void
     {
+        $MySQLQuery = 'INSERT INTO lesson_code (id_lesson, id_code, booking_date)
+        VALUES ('. $id_lesson .', '. $id_code .', NOW())';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
+        $stmt->execute();
     }
 
     // TODO Update existing reservation

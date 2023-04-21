@@ -1,75 +1,138 @@
 <?php $title = "Piscines municipales de Rennes - Page Administrative"; ?>
 
+<?php 
+
+$bd = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
+
+$query = $bd->query('SELECT * FROM activity');
+$activity = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$query = $bd->query('SELECT * FROM situation');
+$situation = $query->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
+
 <?php ob_start(); ?>
 
 <main>
-    <form method="post" action=>
-        <h1> Gestion Des Options </h1>
-        <div>
-            <ul>
+    <h1>Gestion Des Options</h1>
 
+    <div>
+        <h2>Activités</h2>
 
-                <table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Libellé</th>
+                    <th>Description</th>
+                    <th>Réservation</th>
+                    <th>En Activité</th>
+                    <th>ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($activity as $activity) {
+                        $estactif="";
+                        $areservation="";
 
+                        if ($activity['booking'] == 1) 
+                            $areservation="possible"; 
+                        else 
+                            $areservation="n/a";
 
-                    <p>-Libelle&emsp;&emsp;Description&emsp;&emsp;réservation&emsp;&emsp;En Activité</p>
+                        if ($activity['active'] == 1) 
+                            $estactif="actif"; 
+                        else 
+                            $estactif="innactif";
 
-                    <fieldset>
-                        <?php
-                        foreach ($activity as $activity) {
-                            echo '<li>' . $activity['libelle'] . "&emsp;" . "&emsp;" . $activity['description'] . "&emsp;" . "&emsp;" . $activity['reservation'] . "&emsp;" . "&emsp;" . $activity['actif'] .  '</li>' . '<input type="radio" name="activite" value="' . $activity['id_activite'] . '" >';
-                        }
+                            echo '<tr> <td>' . $activity['name'] . '</td><td>' . $activity['description'] . '</td> <td class="' . $areservation . '">' . $areservation . '</td><td class="' . $estactif . '">' . $estactif . '</td> <td>' . $activity['id_activity'] . '</td> <td><a href="view/v_admin_modifieractivité.php?id=' . $activity['id_activity'] . '">ModifierActivité</a></td> </tr>';
+                    }                   
+                ?>
+            </tbody>
+        </table>
 
-                        ?>
-                    </fieldset>
-                    <br><br> <input type="submit" value="Modifier Une Activité"> &emsp; <input type="" value="Supprimer Une Activité">
+        <br><br>
 
-                </table>
+        <form method="post" action="view/v_admin_ajoutactivite.php">
+            <input type="text" name="activityname" placeholder="Libellé de l'activité">
+            <input type="text" name="description" placeholder="Description de l'activité">
+            <label><input type="checkbox" name="booking" value="1"> Réservation disponible</label>
+            <label><input type="checkbox" name="active" value="1" checked> Activité disponible</label>
+            <br> 
+            <button type="submit">Ajouter une activité</button>
+        </form>
 
-                <br><br><br>
+    </div>
 
-                <table>
+    <br><br><br>
 
+    <div>
+        <h2>Situations</h2>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Libellé</th>
+                    <th>En Activité</th>
+                    <th>ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($situation as $situation) {  
+                        
+                        if ($activity['active'] == 1) 
+                        $estactif="actif"; 
+                    else 
+                       $estactif="innactif";
+                
+                        echo '<tr>
+                         <td>' . $situation['name'] . '</td>
+                         <td class="' . $estactif . '">' . $estactif . '</td>
+                         <td>' . $situation['id_situation'] . '</td>
+                         <td><a href="view/v_admin_modifiersituation.php?id=' . $situation['id_situation'] . '">ModifierSituation</a></td>
+                        </tr>';
+                    }                    
+                ?>
+            </tbody>
+        </table>
 
-                    <p>-Libelle&emsp;&emsp;En Activité</p>
+        <br><br>
 
-                    <fieldset>
-                        <?php
+        <form method="post" action="view/v_admin_ajoutsituation.php">
+            <input type="text" name="situationname" placeholder="Libellé de la situation">
+            <label><input type="checkbox" name="active" value="1" checked> Activité disponible</label>
+            <br> 
+            <button type="submit">Ajouter une situation</button>
+        </form>
 
-                        foreach ($situation as $situation) {
-                            echo '<li>' . $situation['libelle'] . "&emsp;" . "&emsp;" . $situation['actif'] .  '</li>' . '<input type="radio" name="situation" value="' . $situation['id_situation'] . '">';
-                        }
+    </div>
+    
+    <br><br>
 
-                        ?>
-                    </fieldset>
-                    <br><br> <input type="submit" value="Modifier Une Situation"> &emsp; <input type="" value="Supprimer Une Situation">
+    <h3> Suppression </h3>
 
-                </table>
+<form method="post" action="view\v_admin_supression.php">
 
-                <br><br><br>
+    <label for="SuppressionType">Type d'élément à supprimer:</label>
+    <select name="SuppressionType" id="SuppressionType" required>
+        <option value="activity">Activité</option>
+        <option value="situation">Situation</option>
+    </select>
 
-                <table>
+    <br><br>
 
-                    <p>-Nombre d'entrées &emsp;&emsp; Nombre de Personnes&emsp;&emsp;Durée De Validité&emsp;&emsp;Prix&emsp;&emsp;En Activité</p>
+    <label for="SuppressionID">ID de l'élément à supprimer:</label>
+    <input type="text" name="SuppressionID" id="SuppressionID" required>
 
-                    <fieldset>
-                        <?php
+    <br><br>
 
-                        foreach ($option as $option) {
-                            echo '<li>' . $option['nb_entrees'] . "&emsp;" . "&emsp;" . $option['nb_personnes'] . "&emsp;" . "&emsp;" . $option['duree_validite'] . "&emsp;" . "&emsp;" . $option['prix'] . "&emsp;" . "&emsp;" . $option['actif'] . '</li>' . '<input type="radio" name="Formule" value="' . $option['id_formule'] . '">';
-                        }
+    <button type="submit">Supprimer un élément</button>
 
-
-                        ?>
-                    </fieldset>
-                    <br><br> <input type="submit" value="Modifier Une Formule"> &emsp; <input type="" value="Supprimer Une Formule">
-                </table>
-            </ul>
-        </div>
-    </form>
+</form>
 </main>
-
 <?php $content = ob_get_clean(); ?>
-
-<?php require('view/layout.php') ?>
+<?php require('view\layout.php') ?>

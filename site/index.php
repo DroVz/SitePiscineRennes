@@ -17,7 +17,6 @@ if (isset($_GET['step'])) {
 if (empty($action)) {
 	$action = 'accueil';
 }
-echo '<script>console.log("'. $action .'") </script>';
 
 switch ($action) {
 

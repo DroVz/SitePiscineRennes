@@ -41,3 +41,19 @@ function PaymentClickEvent(button) {
     choiceDiv.style.display = "block";
     otherChoiceDiv.style.display = "none";
 }
+function setBookingEvent(id){
+    const clickedLi = document.getElementById(id);
+
+    // Ajouter l'élément li à la liste de réservations
+    const bookingList = document.getElementById("bookingReserve");
+    bookingList.appendChild(clickedLi);
+
+// Pemet de demander ou d'envoyer des données sans actualiser la page. 
+    $.ajax({
+        url: '"index.php?action=bookingNewLesson&step=addBooking"',
+        type: 'POST',
+        data: {
+          lesson_id: id,
+        }
+      });
+}

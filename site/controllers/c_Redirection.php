@@ -2,8 +2,14 @@
 require_once('c_admin.php');
 require_once('c_CodeInformation.php');
 require_once('controllers/c_CodeController.php');
+require_once('controllers/c_BookingController.php');
 
+// a cause de booking dans codeRedirection 
+require_once('./pdo/activityPDO.php');
+require_once('./pdo/bookingPDO.php');
+require_once('./pdo/poolPDO.php');
 require_once('./pdo/codePDO.php');
+require_once('./pdo/lessonPDO.php');
 
 class Redirection
 {
@@ -34,7 +40,7 @@ class Redirection
         if (isset($_GET['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
-
+        echo '<script>console.log("ok") </script>';
         switch ($step) {
             case 'initial':
                 // TODO hmm, mais ce fichier vue n'existe plus ?
@@ -51,36 +57,7 @@ class Redirection
                 break;
 
             case 'booking':
-                // TODO : Faire un singleton de la connexion à la bd 
-                // Récupération du numéro du code dans la base depuis le formulaire précédent
-                // Récupération du code de l'activité
-                $id_code = $_POST['id_code'];
-
-                $id_activity = $_POST['id_activity'];
-                $nbEntries = $_POST['nb_entries'];
-
-                // On récupère les infos du code
-                $codePDO = new CodePDO();
-                $code = $codePDO->read($id_code);
-
-                // On récupère les infos de l'activité
-                $activityPDO = new ActivityPDO();
-                $activity = $activityPDO->read($id_activity);
-
-                // On récupère les réservations existantes pour le code
-                $bookingPDO = new BookingPDO();
-                $bookings = $bookingPDO->readAll($code);
-                $remainingBookings = $nbEntries - count($bookings);
-
-                // On a besoin des infos des piscines
-                $poolPDO = new PoolPDO();
-                $pools = $poolPDO->readAll();
-
-                // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
-                $lessonPDO = new LessonPDO();
-                $availableSessions = $lessonPDO->readAll($activity);
-
-                require('view/v_verifReservation.php');
+                require('view/v_VerifReservation.php');
                 break;
         }
     }
@@ -108,7 +85,6 @@ class Redirection
         if (isset($_GET['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
-
         switch ($step) {
             case 'view':
                 require('view/v_PanierVue.php');
@@ -123,6 +99,55 @@ class Redirection
                 require('view/v_Paiement.php');
                 break;
             case 'paymentDone':
+                require('view/v_CodeObtention.php');
+                break;
+        }
+    }
+
+    public function adminRedirection()
+    {
+        $step = 'view';
+        if (isset($_GET['step'])) {
+            $step = htmlspecialchars($_GET['step']);
+        }
+        switch ($step) {
+            case 'view':
+                require('view/v_Admin.php');
+                break;
+            case 'addActivity':
+                require('view/v_AdminAddActivity.php');
+                break;
+            case 'addSituation':
+                require('view/v_AdminAddSituation.php');
+                break;
+            case 'updateActivity':
+                require('view/v_AdminUpdateActivity.php');
+                break;
+            case 'updateSituation':
+                require('view/v_AdminUpdateSituation.php');
+                break;
+            case 'updateActivityAction':
+                require('view/v_AdminUpdateActivityAction.php');
+                break;
+            case 'updateSituationAction':
+                require('view/v_AdminUpdateSituationAction.php');
+                break;
+        }
+    }
+
+    public function bookingRedirection()
+    {
+
+        $bookingController = new BookingController;
+
+        $step = 'view';
+        if (isset($_GET['step'])) {
+            $step = htmlspecialchars($_GET['step']);
+        }
+
+        switch ($step) {
+            case 'addBooking':
+                $bookingController->addBooking($_GET['lesson_id'], $_GET['id_code']);
                 require('view/v_CodeObtention.php');
                 break;
         }

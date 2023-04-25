@@ -3,10 +3,9 @@
 <?php ob_start(); ?>
 <?php $ControllerCodeInformation = new CodeInformation()?>
 
-<main>
-   
-
-<?php $ControllerCodeInformation->printCode(); ?>
+<main class="CodeInformation">
+    <div class="groupBox">
+    <?php $ControllerCodeInformation->printCode(); ?>
 
     <div>
         <h2>Formule</h2>
@@ -22,6 +21,7 @@
     </div>
     <!-- Si le code correspond à une formule nécessitant une réservation -->
     <?php $ControllerCodeInformation->printBookingInformations() ?>
+    </div>
 </main>
 
 <?php $content = ob_get_clean(); ?>

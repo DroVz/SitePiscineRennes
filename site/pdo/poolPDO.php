@@ -1,5 +1,6 @@
 <?php
 require_once('pdo/database.php');
+require_once('model/pool.php');
 
 class PoolPDO
 {

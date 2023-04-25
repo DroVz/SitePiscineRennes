@@ -58,13 +58,13 @@ p {
 }
 
 .banner {
-  width: 100vw;
+  width: 99vw;
   height: 90vh;
   opacity: 80%;
 }
 
 .groupBox {
-  margin: 20px 0px 10vh 10vh;
+  margin: 20px 0px 10vh 10vw;
   padding-bottom: 20px;
 
   width: 80vw;
@@ -219,14 +219,55 @@ nav ul {
   background-color: #ffffff;
 }
 
+/* CodeInformation  */
+.CodeInformation {
+  margin: 12vh 0px 0px 0px;
+}
 
+.CodeInformation .groupBox {
+  margin: 20px 0px 0px 10vw;
+}
 
+.CodeInformation .groupBox div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5vw;
+}
 
+.CodeInformation .groupBox li {
+  list-style: none;
+}
+
+.CodeInformation .blueLink {
+  padding: 20px 20px 20px 20px;
+}
+
+/* BookingPage */
+
+.BookingPage {
+  margin: 12vh 0px 0px 0px;
+}
+
+.BookingPage .groupBox div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5vw;
+}
+
+.BookingPage .groupBox li {
+  list-style: none;
+  width: 40vw;
+  margin-bottom: 10px;
+}
+
+.BookingPage .groupBox div li button {
+  padding: 20px 20px 20px 20px;
+}
 
 /*   TESTS CLAIRE   */
 
 main {
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 
 #CB--div {
@@ -243,4 +284,12 @@ main {
 
 .a-nostyle:hover {
   background: none;
+}
+
+footer {
+  background-color: #000000;
+}
+
+.white-font {
+  color: #ffffff;
 }

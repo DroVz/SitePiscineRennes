@@ -57,7 +57,7 @@ class Redirection
                 break;
 
             case 'booking':
-                require('view/v_verifReservation.php');
+                require('view/v_VerifReservation.php');
                 break;
         }
     }
@@ -85,7 +85,6 @@ class Redirection
         if (isset($_GET['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
-
         switch ($step) {
             case 'view':
                 require('view/v_PanierVue.php');
@@ -104,7 +103,40 @@ class Redirection
                 break;
         }
     }
-    public function bookingRedirection(){
+
+    public function adminRedirection()
+    {
+        $step = 'view';
+        if (isset($_GET['step'])) {
+            $step = htmlspecialchars($_GET['step']);
+        }
+        switch ($step) {
+            case 'view':
+                require('view/v_Admin.php');
+                break;
+            case 'addActivity':
+                require('view/v_AdminAddActivity.php');
+                break;
+            case 'addSituation':
+                require('view/v_AdminAddSituation.php');
+                break;
+            case 'updateActivity':
+                require('view/v_AdminUpdateActivity.php');
+                break;
+            case 'updateSituation':
+                require('view/v_AdminUpdateSituation.php');
+                break;
+            case 'updateActivityAction':
+                require('view/v_AdminUpdateActivityAction.php');
+                break;
+            case 'updateSituationAction':
+                require('view/v_AdminUpdateSituationAction.php');
+                break;
+        }
+    }
+
+    public function bookingRedirection()
+    {
 
         $bookingController = new BookingController;
 
@@ -115,9 +147,9 @@ class Redirection
 
         switch ($step) {
             case 'addBooking':
-                $bookingController->addBooking($_GET['lesson_id'],$_GET['id_code']);
+                $bookingController->addBooking($_GET['lesson_id'], $_GET['id_code']);
                 require('view/v_CodeObtention.php');
-        break;
+                break;
         }
     }
 }

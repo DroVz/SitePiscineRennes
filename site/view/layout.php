@@ -16,7 +16,6 @@
             <ul>
                 <li><a href="/index.php?action=accueil">Accueil</a></li>
                 <li><a href="/index.php?action=achat">Formules</a></li>
-                <li><a href="/index.php?action=admin">Gestion</a></li>
                 <li><a href="/index.php?action=panier">Panier</a></li>
                 <li><a class="blueLink" href="/index.php?action=verif">Mon Code</a></li>
             </ul>
@@ -24,6 +23,10 @@
     </header>
 
     <?= $content ?>
+
+    <footer>
+        <a class="a-nostyle white-font" href="/index.php?action=admin">Espace administrateur</a>
+    </footer>
 </body>
 
 </html>

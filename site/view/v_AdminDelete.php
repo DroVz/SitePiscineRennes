@@ -1,24 +1,24 @@
 <?php
-$title = "Piscines municipales de Rennes - Page Administrative - Supression Element";
+$title = "Piscines municipales de Rennes - Page administrateur - Suppression d'un élement";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $Type = $_POST["SuppressionType"];
     $ID = $_POST["SuppressionID"];
-    $TypeComprehension="";
+    $TypeComprehension = "";
 
-    if(!empty($ID)) {
-    
+    if (!empty($ID)) {
+
         $bd = new PDO('mysql:host=localhost;dbname=pools;charset=utf8', "root", "");
 
-        switch($Type){
+        switch ($Type) {
 
-            case'activity':
-                $TypeComprehension="id_activity";
+            case 'activity':
+                $TypeComprehension = "id_activity";
                 break;
 
-            case'situation':
-                $TypeComprehension="id_situation";
+            case 'situation':
+                $TypeComprehension = "id_situation";
                 break;
         }
 
@@ -28,10 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         header("Location: /index.php?action=admin");
-        exit(); 
+        exit();
     } else {
         header("Location: /index.php?action=admin");
     }
 }
-
-?>

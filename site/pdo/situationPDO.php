@@ -19,25 +19,52 @@ class SituationPDO
         return $situation;
     }
 
-    // Return all situations from database
-    public function getSituations(): array
+    // Return all active situations from database
+    public function getActiveSituations(): array
     {
         $stmt = DBConnection::getInstance()->prepare('SELECT * FROM situation WHERE active = 1;');
         $stmt->execute();
         return $this->returnSituations($stmt->fetchAll());
     }
 
-    // TODO Add new situation to database
-    public function create(): void
+    // Return all situations from database
+    public function getSituations(): array
     {
+        $stmt = DBConnection::getInstance()->prepare('SELECT * FROM situation;');
+        $stmt->execute();
+        return $this->returnSituations($stmt->fetchAll());
     }
 
-    // TODO Update existing situation
-    public function update(): void
+    // Add new situation to database
+    public function create(Situation $situation): int
     {
+        $MySQLQuery = 'INSERT INTO situation (name, active)
+        VALUES (?, ?)';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
+        $stmt->execute([
+            $situation->getName(),
+            $situation->getActive()
+        ]);
+        return DBConnection::getInstance()->lastInsertId();
     }
 
-    // TODO Delete situation from database
+    // Update existing situation
+    public function update(Situation $situation): bool
+    {
+        $res = false;
+        $MySQLQuery = 'UPDATE situation SET name=?, active=? WHERE id_situation=?';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
+        if ($stmt->execute([
+            $situation->getName(),
+            $situation->getActive(),
+            $situation->getIdSituation()
+        ])) {
+            $res = true;
+        }
+        return $res;
+    }
+
+    // Not used
     public function delete(): void
     {
     }

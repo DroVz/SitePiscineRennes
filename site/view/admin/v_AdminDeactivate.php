@@ -1,5 +1,5 @@
 <?php require_once('controllers/admin/c_AdminDeactivate.php') ?>
-<?php $title = "Piscines municipales de Rennes - Page administrateur - Désactivation d'un élement"; ?>
+<?php $title = "Piscines municipales de Rennes - Page administrateur - Désactivation d'une activité"; ?>
 
 <?php ob_start(); ?>
 

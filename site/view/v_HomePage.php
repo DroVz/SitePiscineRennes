@@ -5,8 +5,8 @@ ob_start();
 $ControllerHomePage = new HomePage;
 ?>
 
-<main>
-    <img class="banner" src="view\img\bannerRennes.webp" alt="">
+<main id="mainHome">
+    <img class="banner" src="view\img\bannerPool.jpg" alt="">
 
     <div class="SelectSwimmingPool">
         <div class="line"></div>

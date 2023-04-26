@@ -1,7 +1,7 @@
 body {
   margin: 0%;
   padding: 0%;
-  background-color: #ededed;
+  background-color: #e0ecf2;
 }
 
 /* Links */
@@ -59,7 +59,7 @@ p {
 
 .banner {
   width: 99vw;
-  height: 90vh;
+  height: 60vh;
   opacity: 80%;
 }
 
@@ -267,8 +267,17 @@ nav ul {
 /*   TESTS CLAIRE   */
 
 main {
-  margin-top: 10vh;
   min-height: 80vh;
+  width: 70vw;
+  margin: auto;
+  margin-top: 10vh;
+  background-color: #ffffff;
+  padding: 15px;
+}
+
+#mainHome {
+  width: 100%;
+  padding: 0px;
 }
 
 #CB--div {
@@ -293,4 +302,21 @@ footer {
 
 .white-font {
   color: #ffffff;
+}
+
+.adminIcon {
+  width: 20px;
+  height: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
 }

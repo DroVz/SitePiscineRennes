@@ -147,6 +147,9 @@ class Redirection
             case 'deactivate':
                 require('view/admin/v_AdminDeactivate.php');
                 break;
+            case 'deactivateSituation':
+                require('view/admin/v_AdminDeactivateSituation.php');
+                break;
             case 'disconnect':
                 unset($_SESSION['login']);
                 require('view/admin/v_AdminLogin.php');

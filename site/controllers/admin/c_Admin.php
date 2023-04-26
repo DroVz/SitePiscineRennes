@@ -38,11 +38,20 @@ class Admin
                 $estactif = "actif";
             else
                 $estactif = "inactif";
-            echo '<tr><td>' . $activity->getName() . '</td><td>' . $activity->getDescription() .
-                '</td> <td class="' . $areservation . '">' . $areservation . '</td><td class="' .
-                $estactif . '">' . $estactif . '</td> <td>' . $activity->getIdActivity() .
-                '</td><td><a href="index.php?action=adminRedirection&step=updateActivity&id=' .
-                $activity->getIdActivity() . '">ModifierActivité</a></td> </tr>';
+            echo '<tr>
+                <td>' . $activity->getName() . '</td>
+                <td>' . $activity->getDescription() . '</td>
+                <td class="' . $areservation . '">' . $areservation . '</td>
+                <td class="' . $estactif . '">' . $estactif . '</td>
+                <td>' . $activity->getIdActivity() . '</td>
+                <td><a class="a-nostyle" href="index.php?action=adminRedirection&step=updateActivity&id=' .
+                $activity->getIdActivity() . '"><img class="adminIcon" src="view/img/edit.ico" /></a></td>';
+            if ($activity->getActive() == 1) {
+                echo '<td><a class="a-nostyle" href="index.php?action=adminRedirection&step=deactivate&type=activity&id=' .
+                    $activity->getIdActivity() . '"><img class="adminIcon" src="view/img/delete.ico" /></a></td></tr>';
+            } else {
+                echo '</tr>';
+            }
         }
     }
 
@@ -58,8 +67,14 @@ class Admin
                     <td>' . $situation->getName() . '</td>
                     <td class="' . $estactif . '">' . $estactif . '</td>
                     <td>' . $situation->getIdSituation() . '</td>
-                    <td><a href="index.php?action=adminRedirection&step=updateSituation&id=' .
-                $situation->getIdSituation() . '">ModifierSituation</a></td></tr>';
+                    <td><a class="a-nostyle" href="index.php?action=adminRedirection&step=updateSituation&id=' .
+                $situation->getIdSituation() . '"><img class="adminIcon" src="view/img/edit.ico" /></a></td>';
+            if ($situation->getActive() == 1) {
+                echo '<td><a class="a-nostyle" href="index.php?action=adminRedirection&step=deactivate&type=situation&id=' .
+                    $situation->getIdSituation() . '"><img class="adminIcon" src="view/img/delete.ico" /></a></td></tr>';
+            } else {
+                echo '</tr>';
+            }
         }
     }
 }

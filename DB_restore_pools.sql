@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 26 avr. 2023 à 09:31
+-- Généré le : mer. 26 avr. 2023 à 19:22
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -48,7 +48,7 @@ INSERT INTO `activity` (`id_activity`, `name`, `description`, `booking`, `active
 (4, 'Aquagym', 'Découverte de l\'aquagym avec un professeur', 1, 1),
 (5, 'Bébés nageurs', 'Découverte du milieu aquatique pour un tout-petit (moins de 2 ans) accompagné d\'un adulte', 1, 1),
 (6, 'Cours particulier', 'Apprentissage de la natation pour une personne avec un professeur', 1, 1),
-(16, 'TEST', 'test', 0, 1);
+(16, 'TEST', 'test', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1121,10 +1121,10 @@ CREATE TABLE IF NOT EXISTS `pool` (
 --
 
 INSERT INTO `pool` (`id_pool`, `name`, `address`, `active`, `picture`, `map`, `description`) VALUES
-(1, 'Piscine Crébigny', '47 bis, rue des Maillots', 1, 'view/img/Brequigny.webp', 'view/img/MapBrequigny.png', '  La piscine de Bréquigny vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
-(2, 'Piscine des Glaïeuls', '3, avenue Matthew Webb', 1, 'view/img/Gayeulles.webp', 'view/img/MapGayeulles.png', '  La piscine des Gayeulles vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
-(3, 'Piscine Saint-Doux', '36, rue du Papillon', 1, 'view/img/SaintGeorge.jpg', 'view/img/MapSaintGeorge.png', '  La piscine de Saint George vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.'),
-(4, 'Piscine Villepierre', '1, rue Folle-bouée', 1, 'view/img/VilleJean.webp', 'view/img/MapVilleJean.png', '  La piscine de Ville Jean vous proposes un cadre idéale pour la decouverte de la nage libre. <br>                         Notament grâce à son grand bassin de 50m de long. <br>                         Des plongeoirs y sont aussi installé pour les courageux d\'entre vous.');
+(1, 'Piscine de Bréquigny', '12 Bd Albert 1er\r\n35000 Rennes', 1, 'view/img/Brequigny.webp', 'view/img/MapBrequigny.png', 'Piscine municipale olympique. Dispose de 2 bassins intérieurs et un bassin nordique.'),
+(2, 'Piscine des Gayeulles', '16 avenue des Gayeulles - CS 63126 - 35031 Rennes Cedex', 1, 'view/img/Gayeulles.webp', 'view/img/MapGayeulles.png', 'Bassin de natation de 25 mètres, espace ludique : bassin à vagues, lagune pour les tout-petits, bassin de détente et fosse de plongée.'),
+(3, 'Piscine Saint-Georges', '4 rue Gambetta - CS 63126 - 35031 Rennes Cedex', 1, 'view/img/SaintGeorge.jpg', 'view/img/MapSaintGeorge.png', 'Bassin (33,33 x 14 m), profondeur du bassin (1,10 à 3 m), bain-douche (accès rue Gambetta). Piscine décorée par le mosaïste Odorico.'),
+(4, 'Piscine Villejean', '1 square d\'Alsace - CS 63126 - 35031 Rennes Cedex', 1, 'view/img/VilleJean.webp', 'view/img/MapVilleJean.png', '2 bassins (25x12,50 m et 12,5x10 m).');
 
 -- --------------------------------------------------------
 

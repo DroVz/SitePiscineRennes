@@ -1,4 +1,4 @@
-<?php require_once('controllers/c_Admin.php') ?>
+<?php require_once('controllers/admin/c_Admin.php') ?>
 <?php $title = "Piscines municipales de Rennes - Page administrateur"; ?>
 
 <?php ob_start(); ?>
@@ -51,18 +51,18 @@
         <button type="submit">Ajouter une situation</button>
     </form>
 
-    <h3> Suppression </h3>
-    <form method="post" action="index.php?action=adminRedirection&step=delete">
-        <label for="SuppressionType">Type d'élément à supprimer:</label>
-        <select name="SuppressionType" id="SuppressionType" required>
+    <h2>Désactivation</h2>
+    <form method="post" action="index.php?action=adminRedirection&step=deactivate">
+        <label for="elementType">Type d'élément à désactiver:</label>
+        <select name="elementType" id="elementType" required>
             <option value="activity">Activité</option>
             <option value="situation">Situation</option>
         </select>
         <br><br>
-        <label for="SuppressionID">ID de l'élément à supprimer:</label>
-        <input type="text" name="SuppressionID" id="SuppressionID" required>
+        <label for="elementID">ID de l'élément à désactiver:</label>
+        <input type="text" name="elementID" id="elementID" required>
         <br><br>
-        <button type="submit">Supprimer un élément</button>
+        <button type="submit">Désactiver cet élément</button>
     </form>
 </main>
 

@@ -20,7 +20,6 @@ if (empty($action)) {
 echo '<script>console.log("' . $action . '") </script>';
 
 switch ($action) {
-
 		// Redirections action barre de nav
 	case 'accueil':
 		require('view/v_HomePage.php');
@@ -35,7 +34,7 @@ switch ($action) {
 		break;
 
 	case 'admin';
-		require('view/v_Admin.php');
+		require('view/admin/v_AdminLogin.php');
 		break;
 
 	case 'panier':

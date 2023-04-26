@@ -73,6 +73,18 @@ class ActivityPDO
         return $res;
     }
 
+    // Deactivate existing activity
+    public function deactivate(Activity $activity): bool
+    {
+        $res = false;
+        $MySQLQuery = 'UPDATE activity SET active=0 WHERE id_activity=?';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
+        if ($stmt->execute([$activity->getIdActivity()])) {
+            $res = true;
+        }
+        return $res;
+    }
+
     // Not used
     public function delete(): void
     {

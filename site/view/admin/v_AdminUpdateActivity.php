@@ -1,4 +1,4 @@
-<?php require_once('controllers/c_AdminUpdateActivity.php') ?>
+<?php require_once('controllers/admin/c_AdminUpdateActivity.php') ?>
 <?php $title = "Piscines municipales de Rennes - Page Administrative - Modification Activité"; ?>
 
 <?php ob_start(); ?>
@@ -11,4 +11,4 @@
 </main>
 
 <?php $content = ob_get_clean(); ?>
-<?php require('layout.php') ?>
+<?php require('view/layout.php') ?>

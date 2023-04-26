@@ -17,9 +17,9 @@ class AdminAddActivity
     {
         $activityPDO = new ActivityPDO();
         if ($activityPDO->create($this->newActivity)) {
-            echo '<h1>Activité ajoutée</h1>';
+            echo "<p>L'activité a été ajoutée</p>";
         } else {
-            echo '<p>Echec de l\enregistrement</p>';
+            echo "<p>Echec de l'enregistrement</p>";
         }
     }
 }

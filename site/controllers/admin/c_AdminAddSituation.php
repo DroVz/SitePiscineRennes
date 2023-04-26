@@ -15,9 +15,9 @@ class AdminAddSituation
     {
         $situationPDO = new SituationPDO();
         if ($situationPDO->create($this->newSituation)) {
-            echo '<h1>Situation ajoutée</h1>';
+            echo "<h1>Situation ajoutée</h1>";
         } else {
-            echo '<p>Echec de l\'enregistrement</p>';
+            echo "<p>Echec de l'enregistrement</p>";
         }
     }
 }

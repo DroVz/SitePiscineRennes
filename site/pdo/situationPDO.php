@@ -64,6 +64,18 @@ class SituationPDO
         return $res;
     }
 
+    // Deactivate existing situation
+    public function deactivate(Situation $situation): bool
+    {
+        $res = false;
+        $MySQLQuery = 'UPDATE situation SET active=0 WHERE id_situation=?';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
+        if ($stmt->execute([$situation->getIdSituation()])) {
+            $res = true;
+        }
+        return $res;
+    }
+
     // Not used
     public function delete(): void
     {

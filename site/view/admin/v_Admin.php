@@ -6,6 +6,7 @@
 <?php $ControllerAdmin = new Admin ?>
 
 <main>
+    <?php $ControllerAdmin->printInfoConnexion(); ?>
     <h1>Gestion des options</h1>
     <h2>Activités</h2>
     <table>

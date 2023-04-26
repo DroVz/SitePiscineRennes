@@ -1,4 +1,5 @@
 <?php
+
 require_once('admin/c_admin.php');
 require_once('c_CodeInformation.php');
 require_once('controllers/c_CodeController.php');
@@ -106,11 +107,20 @@ class Redirection
         }
         switch ($step) {
             case 'view':
-                require('view/admin/v_AdminLogin.php');
+                if (isset($_SESSION['login'])) {
+                    require('view/admin/v_Admin.php');
+                } else {
+                    require('view/admin/v_AdminLogin.php');
+                }
                 break;
             case 'login':
-                // Regarde si l'utilisateur existe et oriente la redirection en fonction 
-                if ($adminController->tryToGetAdmin() != null) {
+                $user_id = $adminController->tryToGetAdmin();
+                if ($user_id != null) {
+                    // On définit des variables de session
+                    $pooluserPDO = new PooluserPDO();
+                    $user = $pooluserPDO->read($user_id);
+                    echo '<script>console.log("' . $user_id . '")</script>';
+                    $_SESSION['login'] = $user->getLogin();
                     require('view/admin/v_Admin.php');
                 } else {
                     require('view/admin/v_AdminLogin.php');
@@ -136,6 +146,10 @@ class Redirection
                 break;
             case 'deactivate':
                 require('view/admin/v_AdminDeactivate.php');
+                break;
+            case 'disconnect':
+                unset($_SESSION['login']);
+                require('view/admin/v_AdminLogin.php');
                 break;
         }
     }

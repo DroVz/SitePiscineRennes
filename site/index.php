@@ -33,10 +33,6 @@ switch ($action) {
 		require('view/v_CodeVerification.php');
 		break;
 
-	case 'admin';
-		require('view/admin/v_AdminLogin.php');
-		break;
-
 	case 'panier':
 		require('view/v_PanierVue.php');
 		break;

@@ -25,7 +25,7 @@
     <?= $content ?>
 
     <footer>
-        <a class="a-nostyle white-font" href="/index.php?action=admin">Espace administrateur</a>
+        <a class="a-nostyle white-font" href="/index.php?action=adminRedirection">Espace administrateur</a>
     </footer>
 </body>
 

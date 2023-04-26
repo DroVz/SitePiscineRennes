@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 21 avr. 2023 à 07:21
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Généré le : mer. 26 avr. 2023 à 09:31
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,14 +29,13 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `activity`;
 CREATE TABLE IF NOT EXISTS `activity` (
-  `id_activity` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `id_activity` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
   `booking` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_activity`),
-  UNIQUE KEY `id_activite` (`id_activity`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  PRIMARY KEY (`id_activity`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `activity`
@@ -48,7 +47,8 @@ INSERT INTO `activity` (`id_activity`, `name`, `description`, `booking`, `active
 (3, 'Cours de natation avancé', 'Approfondissement des techniques de natation sous la supervision d\'un professeur', 1, 1),
 (4, 'Aquagym', 'Découverte de l\'aquagym avec un professeur', 1, 1),
 (5, 'Bébés nageurs', 'Découverte du milieu aquatique pour un tout-petit (moins de 2 ans) accompagné d\'un adulte', 1, 1),
-(6, 'Cours particulier', 'Apprentissage de la natation pour une personne avec un professeur', 1, 1);
+(6, 'Cours particulier', 'Apprentissage de la natation pour une personne avec un professeur', 1, 1),
+(16, 'TEST', 'test', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -58,26 +58,28 @@ INSERT INTO `activity` (`id_activity`, `name`, `description`, `booking`, `active
 
 DROP TABLE IF EXISTS `code`;
 CREATE TABLE IF NOT EXISTS `code` (
-  `id_code` int NOT NULL AUTO_INCREMENT,
-  `id_offer` int NOT NULL,
+  `id_code` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_offer` int(11) UNSIGNED NOT NULL,
   `generation_date` datetime NOT NULL,
-  `code_string` char(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `remaining_entries` int NOT NULL,
-  PRIMARY KEY (`id_code`)
-) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `code_string` char(10) COLLATE utf8_unicode_ci NOT NULL,
+  `remaining_entries` int(11) NOT NULL,
+  PRIMARY KEY (`id_code`),
+  KEY `fk_code_offer` (`id_offer`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `code`
 --
 
 INSERT INTO `code` (`id_code`, `id_offer`, `generation_date`, `code_string`, `remaining_entries`) VALUES
-(15, 6, '2022-12-27 15:22:55', 'AKJH-E6MR', 10),
-(14, 6, '2022-12-27 15:22:38', 'KLV4-W6N3', 10),
-(13, 6, '2022-12-27 15:21:16', 'QZ4U-U2DJ', 10),
+(1, 1, '2022-12-27 15:06:23', 'S4UG-G8J2', 10),
 (12, 8, '2022-12-27 15:09:10', '7RUT-6CNR', 10),
-(11, 1, '2022-12-27 15:06:23', 'S4UG-G8J2', 10),
-(40, 26, '2023-02-09 10:28:22', 'GD2Y-GNVT', 5),
-(41, 1, '2023-03-16 06:59:11', '9EKH-S5CW', 10);
+(13, 6, '2022-12-27 15:21:16', 'QZ4U-U2DJ', 10),
+(14, 6, '2022-12-27 15:22:38', 'KLV4-W6N3', 10),
+(15, 6, '2022-12-27 15:22:55', 'AKJH-E6MR', 10),
+(21, 26, '2023-02-09 10:28:22', 'GD2Y-GNVT', 5),
+(41, 1, '2023-03-16 06:59:11', '9EKH-S5CW', 10),
+(42, 7, '2023-04-25 13:19:33', 'RDKF-3JBH', 10);
 
 -- --------------------------------------------------------
 
@@ -87,15 +89,17 @@ INSERT INTO `code` (`id_code`, `id_offer`, `generation_date`, `code_string`, `re
 
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE IF NOT EXISTS `lesson` (
-  `id_lesson` int NOT NULL AUTO_INCREMENT,
-  `id_pool` int NOT NULL,
-  `id_activity` int NOT NULL,
+  `id_lesson` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_pool` int(11) UNSIGNED NOT NULL,
+  `id_activity` int(11) UNSIGNED NOT NULL,
   `date_time` datetime NOT NULL,
-  `coach` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `capacity` int NOT NULL,
+  `coach` text COLLATE utf8_unicode_ci NOT NULL,
+  `capacity` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_lesson`)
-) ENGINE=MyISAM AUTO_INCREMENT=911 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  PRIMARY KEY (`id_lesson`),
+  KEY `fk_lesson_pool` (`id_pool`),
+  KEY `fk_lesson_activity` (`id_activity`)
+) ENGINE=InnoDB AUTO_INCREMENT=911 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `lesson`
@@ -1022,19 +1026,20 @@ INSERT INTO `lesson` (`id_lesson`, `id_pool`, `id_activity`, `date_time`, `coach
 
 DROP TABLE IF EXISTS `lesson_code`;
 CREATE TABLE IF NOT EXISTS `lesson_code` (
-  `id_lesson` int NOT NULL,
-  `id_code` int NOT NULL,
+  `id_lesson` int(11) UNSIGNED NOT NULL,
+  `id_code` int(11) UNSIGNED NOT NULL,
   `booking_date` datetime NOT NULL,
-  PRIMARY KEY (`id_lesson`,`id_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  PRIMARY KEY (`id_lesson`,`id_code`),
+  UNIQUE KEY `id_lesson` (`id_lesson`),
+  KEY `id_code` (`id_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `lesson_code`
 --
 
 INSERT INTO `lesson_code` (`id_lesson`, `id_code`, `booking_date`) VALUES
-(1, 1, '2022-12-01 08:38:02'),
-(4, 21, '2022-12-01 08:38:02');
+(1, 1, '2022-12-01 08:38:02');
 
 -- --------------------------------------------------------
 
@@ -1044,17 +1049,18 @@ INSERT INTO `lesson_code` (`id_lesson`, `id_code`, `booking_date`) VALUES
 
 DROP TABLE IF EXISTS `offer`;
 CREATE TABLE IF NOT EXISTS `offer` (
-  `id_offer` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_activity` int NOT NULL,
-  `id_situation` int NOT NULL,
-  `nb_entries` int NOT NULL,
-  `nb_people` int NOT NULL,
-  `validity` int NOT NULL,
+  `id_offer` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_activity` int(11) UNSIGNED NOT NULL,
+  `id_situation` int(11) UNSIGNED NOT NULL,
+  `nb_entries` int(11) NOT NULL,
+  `nb_people` int(11) NOT NULL,
+  `validity` int(11) NOT NULL,
   `price` float NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_offer`),
-  UNIQUE KEY `id_formule` (`id_offer`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  KEY `fk_activity_offer` (`id_activity`),
+  KEY `fk_activity_situation` (`id_situation`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `offer`
@@ -1088,8 +1094,8 @@ INSERT INTO `offer` (`id_offer`, `id_activity`, `id_situation`, `nb_entries`, `n
 (25, 6, 1, 5, 1, 12, 212, 1),
 (26, 6, 2, 5, 1, 12, 84, 1),
 (27, 6, 3, 5, 1, 12, 68, 1),
-(31, 5, 2, 1, 1, 6, 11.5, 1),
 (30, 4, 2, 10, 1, 12, 98, 1),
+(31, 5, 2, 1, 1, 6, 11.5, 1),
 (32, 5, 2, 5, 1, 12, 62.2, 1);
 
 -- --------------------------------------------------------
@@ -1100,16 +1106,15 @@ INSERT INTO `offer` (`id_offer`, `id_activity`, `id_situation`, `nb_entries`, `n
 
 DROP TABLE IF EXISTS `pool`;
 CREATE TABLE IF NOT EXISTS `pool` (
-  `id_pool` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `address` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `id_pool` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `picture` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `map` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `description` varchar(1000) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_pool`),
-  UNIQUE KEY `id_piscine` (`id_pool`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `picture` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `map` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_pool`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `pool`
@@ -1124,16 +1129,39 @@ INSERT INTO `pool` (`id_pool`, `name`, `address`, `active`, `picture`, `map`, `d
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `pool_user`
+--
+
+DROP TABLE IF EXISTS `pool_user`;
+CREATE TABLE IF NOT EXISTS `pool_user` (
+  `id_user` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `login` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `pool_user`
+--
+
+INSERT INTO `pool_user` (`id_user`, `login`, `password`, `name`, `admin`) VALUES
+(1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin-piscines', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `situation`
 --
 
 DROP TABLE IF EXISTS `situation`;
 CREATE TABLE IF NOT EXISTS `situation` (
-  `id_situation` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `id_situation` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_situation`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `situation`
@@ -1142,23 +1170,39 @@ CREATE TABLE IF NOT EXISTS `situation` (
 INSERT INTO `situation` (`id_situation`, `name`, `active`) VALUES
 (1, 'Adulte', 1),
 (2, 'Moins de 18 ans', 1),
-(3, 'Demandeur d\'emploi', 1);
-
--- --------------------------------------------------------
+(3, 'Demandeur d\'emploi', 1),
+(21, 'TESTsituation', 0);
 
 --
--- Structure de la table `user`
+-- Contraintes pour les tables déchargées
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `password` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `admin` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+--
+-- Contraintes pour la table `code`
+--
+ALTER TABLE `code`
+  ADD CONSTRAINT `code_ibfk_1` FOREIGN KEY (`id_offer`) REFERENCES `offer` (`id_offer`);
+
+--
+-- Contraintes pour la table `lesson`
+--
+ALTER TABLE `lesson`
+  ADD CONSTRAINT `lesson_ibfk_1` FOREIGN KEY (`id_pool`) REFERENCES `pool` (`id_pool`),
+  ADD CONSTRAINT `lesson_ibfk_2` FOREIGN KEY (`id_activity`) REFERENCES `activity` (`id_activity`);
+
+--
+-- Contraintes pour la table `lesson_code`
+--
+ALTER TABLE `lesson_code`
+  ADD CONSTRAINT `lesson_code_ibfk_1` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id_lesson`),
+  ADD CONSTRAINT `lesson_code_ibfk_2` FOREIGN KEY (`id_code`) REFERENCES `code` (`id_code`);
+
+--
+-- Contraintes pour la table `offer`
+--
+ALTER TABLE `offer`
+  ADD CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`id_activity`) REFERENCES `activity` (`id_activity`),
+  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`id_situation`) REFERENCES `situation` (`id_situation`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

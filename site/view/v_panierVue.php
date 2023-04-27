@@ -5,8 +5,14 @@
 <?php $controllerPanierVue = new PanierVue() ?>
 
 <main>
-    <div>
-        <?php $controllerPanierVue->displayChoices(); ?>
+    <h1>Mon panier</h1>
+    <div id="divCart">
+        <div>
+            <?php $controllerPanierVue->displayChoices(); ?>
+        </div>
+        <aside>
+            <?php $controllerPanierVue->displayOptions(); ?>
+        </aside>
     </div>
 </main>
 

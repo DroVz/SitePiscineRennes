@@ -5,8 +5,8 @@
 <main>
     <h1>Espace admin</h1>
     <form method="post" action="index.php?action=adminRedirection&step=login">
-        <label for="login">Login</label><input id="login" type="text" name="login" required>
-        <label for="pwd">Mot de passe</label><input id="pwd" type="password" name="pwd" required>
+        <label for="login">Login</label><input id="login" type="text" name="login" required></br>
+        <label for="pwd">Mot de passe</label><input id="pwd" type="password" name="pwd" required></br>
         <input type="submit" value="Connexion">
     </form>
 </main>

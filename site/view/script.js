@@ -30,30 +30,31 @@ function PaymentClickEvent(button) {
 
     switch (choix) {
         case "cb":
-            choiceDiv = document.getElementById("CB--div");
-            otherChoiceDiv = document.getElementById("PayPal--div");
+            choiceDiv = document.getElementById("divCB");
+            otherChoiceDiv = document.getElementById("divPP");
             break;
         case "pp":
-            choiceDiv = document.getElementById("PayPal--div");
-            otherChoiceDiv = document.getElementById("CB--div");
+            choiceDiv = document.getElementById("divPP");
+            otherChoiceDiv = document.getElementById("divCB");
             break;
     }
     choiceDiv.style.display = "block";
     otherChoiceDiv.style.display = "none";
 }
-function setBookingEvent(id){
+
+function setBookingEvent(id) {
     const clickedLi = document.getElementById(id);
 
     // Ajouter l'élément li à la liste de réservations
     const bookingList = document.getElementById("bookingReserve");
     bookingList.appendChild(clickedLi);
 
-// Pemet de demander ou d'envoyer des données sans actualiser la page. 
+    // Pemet de demander ou d'envoyer des données sans actualiser la page. 
     $.ajax({
         url: '"index.php?action=bookingNewLesson&step=addBooking"',
         type: 'POST',
         data: {
-          lesson_id: id,
+            lesson_id: id,
         }
-      });
+    });
 }

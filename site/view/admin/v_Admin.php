@@ -6,8 +6,8 @@
 <?php $ControllerAdmin = new Admin ?>
 
 <main>
-    <?php $ControllerAdmin->printInfoConnexion(); ?>
     <h1>Gestion des options</h1>
+    <?php $ControllerAdmin->printInfoConnexion(); ?>
     <h2>Activités</h2>
     <table>
         <thead>

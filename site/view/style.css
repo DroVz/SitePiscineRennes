@@ -280,7 +280,7 @@ main {
   padding: 0px;
 }
 
-#PaymentChoice--div form {
+#divPaymentSelect form {
   display: flex;
   justify-content: center;
 }
@@ -293,12 +293,12 @@ main {
   font-size: 1.5em;
 }
 
-#divCB {
+.divInvisible {
   display: none;
 }
 
-#divPP {
-  display: none;
+.divVisible {
+  display: block;
 }
 
 .a-nostyle {
@@ -367,4 +367,44 @@ td {
 h1 {
   text-align: center;
   margin-bottom: 40px;
+}
+
+.alignRight {
+  display: flex;
+  justify-content: right;
+}
+
+.dispColumn {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+#adminAction {
+  background-color: #bbbbbb;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+
+.btnSmall {
+  border-width: 0px;
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+  font-size: 1.1em;
+}
+
+.btnClicked {
+  background-color: #e9f0f4;
+}
+
+.btnNotClicked {
+  background-color: #ffffff;
+}
+
+.btnSmall:hover {
+  background-color: #e9f0f4;
 }

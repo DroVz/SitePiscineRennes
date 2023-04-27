@@ -43,12 +43,7 @@ class OfferPDO
     {
     }
 
-    // TODO Delete offer from database
-    public function delete(): void
-    {
-    }
-
-    // Return all options in $rows and update $data
+    // Return all offers in $rows and update $data
     private function returnOffers(array $rows): array
     {
         $offers = [];

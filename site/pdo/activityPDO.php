@@ -54,6 +54,7 @@ class ActivityPDO
         return DBConnection::getInstance()->lastInsertId();
     }
 
+    // TODO PROBABLEMENT NOT USED
     // Update existing activity
     public function update(Activity $activity): bool
     {
@@ -83,11 +84,6 @@ class ActivityPDO
             $res = true;
         }
         return $res;
-    }
-
-    // Not used
-    public function delete(): void
-    {
     }
 
     // Return all activities in $rows and update $data

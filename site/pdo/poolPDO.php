@@ -30,21 +30,6 @@ class PoolPDO
         return $this->returnPools($stmt->fetchAll());
     }
 
-    // TODO Add new pool to database
-    public function create(): void
-    {
-    }
-
-    // TODO Update existing pool
-    public function update(): void
-    {
-    }
-
-    // TODO Delete pool from database
-    public function delete(): void
-    {
-    }
-
     // Return all pools in $rows and update $data
     private function returnPools(array $rows): array
     {

@@ -23,37 +23,69 @@ function PiscineClickEvent(picture) {
     SwimmingPoolMap.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
 
-function PaymentClickEvent(button) {
+function setNotClicked(element) {
+    element.classList.add("btnNotClicked");
+    element.classList.remove("btnClicked");
+}
+
+function setInvisible(element) {
+    element.classList.add("divInvisible");
+    element.classList.remove("divVisible");
+}
+
+function paymentClickEvent(button) {
     let choix = button.getAttribute("name");
     let choiceDiv = null;
-    let otherChoiceDiv = null;
+    let allChoiceDiv = null;
 
-    switch (choix) {
-        case "cb":
-            choiceDiv = document.getElementById("CB--div");
-            otherChoiceDiv = document.getElementById("PayPal--div");
-            break;
-        case "pp":
-            choiceDiv = document.getElementById("PayPal--div");
-            otherChoiceDiv = document.getElementById("CB--div");
-            break;
+    allChoiceDiv = document.getElementsByClassName("divPaymentOption");
+    choiceDiv = document.getElementById(choix);
+    console.log(choiceDiv);
+    console.log(allChoiceDiv);
+
+    for (let item of allChoiceDiv) {
+        setInvisible(item);
     }
-    choiceDiv.style.display = "block";
-    otherChoiceDiv.style.display = "none";
+    choiceDiv.classList.remove("divInvisible");
+    choiceDiv.classList.add("divVisible");
 }
-function setBookingEvent(id){
+
+function adminClickEvent(button) {
+    let choix = button.getAttribute("name");
+    let allChoiceBtn = null;
+    let choiceDiv = null;
+    let allChoiceDiv = null;
+    allChoiceBtn = document.getElementsByClassName("btnAdminOption");
+    choiceDiv = document.getElementById(choix);
+    allChoiceDiv = document.getElementsByClassName("divAdminOption");
+
+
+    for (let item of allChoiceDiv) {
+        setInvisible(item);
+    }
+    choiceDiv.classList.remove("divInvisible");
+    choiceDiv.classList.add("divVisible");
+
+    for (let item of allChoiceBtn) {
+        setNotClicked(item);
+    }
+    button.classList.remove("btnNotClicked");
+    button.classList.add("btnClicked");
+}
+
+function setBookingEvent(id) {
     const clickedLi = document.getElementById(id);
 
     // Ajouter l'élément li à la liste de réservations
     const bookingList = document.getElementById("bookingReserve");
     bookingList.appendChild(clickedLi);
 
-// Pemet de demander ou d'envoyer des données sans actualiser la page. 
+    // Pemet de demander ou d'envoyer des données sans actualiser la page. 
     $.ajax({
         url: '"index.php?action=bookingNewLesson&step=addBooking"',
         type: 'POST',
         data: {
-          lesson_id: id,
+            lesson_id: id,
         }
-      });
+    });
 }

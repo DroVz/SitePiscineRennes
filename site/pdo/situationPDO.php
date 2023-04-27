@@ -76,11 +76,6 @@ class SituationPDO
         return $res;
     }
 
-    // Not used
-    public function delete(): void
-    {
-    }
-
     // Return all situations in $rows and update $data
     private function returnSituations(array $rows): array
     {

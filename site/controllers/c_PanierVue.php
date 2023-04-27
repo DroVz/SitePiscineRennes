@@ -19,13 +19,14 @@ class PanierVue
 
     function displayChoices()
     {
-        echo '<h1>Mon panier</h1>';
         if (empty($this->choices)) {
             echo '<p>Votre panier est vide.</p>';
         } else {
-            foreach ($this->choices as $choice) {
-                echo '<div>
-                <h2>Formule choisie</h2>
+            for ($i = 0; $i < sizeof($this->choices); $i++) {
+                $choice = $this->choices[$i];
+                // foreach ($this->choices as $choice) {
+                echo '<div class="divCartProduct">
+                <h2>Formule n° ' . intval($i + 1) . '</h2>
                 <ul>
                 <li>Activité : ' . $choice->getActivity()->getName() . '</li>
                 <li>Description de l\'activité : ' . $choice->getActivity()->getDescription() . '</li>
@@ -44,15 +45,20 @@ class PanierVue
                 </form>
                 </div>';
             }
-            echo '<div>
-            <h2>Votre commande</h2>
-            <p>Nombre d\'articles : ' . sizeof($this->choices) . '</p>
-            <p>Total TTC : ' . number_format($this->findTotalPrice(), 2, ",", " ") . ' €</p>
-            <form method=POST action="index.php?action=panierRedirection&step=payment">
-            <input type=submit value="Procéder au paiement"/>
-            </form>
-            </div>';
         }
+    }
+
+    function displayOptions()
+    {
+        echo '<div id="divCartAside">
+        <h2>Ma commande</h2>
+        <p>Nombre d\'articles : ' . sizeof($this->choices) . '</p>
+        <p>Total TTC : ' . number_format($this->findTotalPrice(), 2, ",", " ") . ' €</p>
+        <form method=POST action="index.php?action=panierRedirection&step=payment">';
+        if (sizeof($this->choices) > 0) {
+            echo '<input type=submit value="Payer"/>';
+        }
+        echo '</form></div>';
     }
 
     function findTotalPrice()

@@ -15,14 +15,9 @@ class Admin
         $this->login = $_SESSION['login'];
     }
 
-    function printInfoConnexion()
+    function printInfoConnection()
     {
-        echo '<div class="infoUser">
-            <p>Connecté en tant que ' . $this->login . '</p>
-            <form method="post" action="index.php?action=adminRedirection&step=disconnect">
-                <input type="submit" value="Déconnexion">            
-            </form>
-        </div>';
+        echo '<p>Connecté en tant que ' . $this->login . '</p>';
     }
 
     function printActivityLines()

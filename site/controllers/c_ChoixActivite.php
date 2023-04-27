@@ -8,9 +8,9 @@ class ChoixActivite
     function __construct()
     {
         $activityPDO = new ActivityPDO();
-        $this->activities = $activityPDO->readAll();
+        $this->activities = $activityPDO->readAllActive();
         $situationPDO = new SituationPDO();
-        $this->situations = $situationPDO->getSituations();
+        $this->situations = $situationPDO->getActiveSituations();
     }
 
     function printActivites()

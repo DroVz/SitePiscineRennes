@@ -70,4 +70,74 @@ class Offer
     {
         return $this->active;
     }
+
+    /**
+     * @param Activity $activity 
+     * @return self
+     */
+    public function setActivity(Activity $activity): self
+    {
+        $this->activity = $activity;
+        return $this;
+    }
+
+    /**
+     * @param Situation $situation 
+     * @return self
+     */
+    public function setSituation(Situation $situation): self
+    {
+        $this->situation = $situation;
+        return $this;
+    }
+
+    /**
+     * @param int $nb_people 
+     * @return self
+     */
+    public function setNb_people(int $nb_people): self
+    {
+        $this->nb_people = $nb_people;
+        return $this;
+    }
+
+    /**
+     * @param int $validity 
+     * @return self
+     */
+    public function setValidity(int $validity): self
+    {
+        $this->validity = $validity;
+        return $this;
+    }
+
+    /**
+     * @param float $price 
+     * @return self
+     */
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @param int $active 
+     * @return self
+     */
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+     * @param int $id_offer 
+     * @return self
+     */
+    public function setId_offer(int $id_offer): self
+    {
+        $this->id_offer = $id_offer;
+        return $this;
+    }
 }

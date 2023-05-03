@@ -42,7 +42,8 @@ class PooluserPDO
             $id_user = $row['id_user'];
             $login = $row['login'];
             $pwd = $row['password'];
-            $user = new Pooluser($login, $pwd, $id_user);
+            $name = $row['name'];
+            $user = new Pooluser($login, $pwd, $name, $id_user);
             $users[] = $user;
             $this->data[$id_user] = $user;
         }

@@ -8,26 +8,44 @@
     <div id="divPaymentSelect">
         <form>
             <input type=button class="btnPayment" name="divCB" value="Carte bancaire" onclick="paymentClickEvent(this)" />
-            <input type=button class="btnPayment" name="divPP" value="Paypal" onclick="paymentClickEvent(this)" />
+            <input type=button class="btnPayment" name="divPP" value="PayPal" onclick="paymentClickEvent(this)" />
         </form>
     </div>
     <div id="divPayment">
         <div class="divInvisible divPaymentOption" id="divCB">
-            <p>Informations de carte bancaire</p>
+            <h2>Informations de carte bancaire</h2>
             <form method="POST" action="index.php?action=panierRedirection&step=paymentDone">
-                <label for="cbNum">Numéro</label><input type="text" id="cbNum" value="1111-2222-3333-4444" readonly></br>
-                <label for="cbDate">Date d'expiration</label><input type="text" id="cbDate" value="11/28" readonly></br>
-                <label for="cbCvv">CVC / CVV</label><input type="text" id="cbCvv" value="123" readonly></br>
-                <label for="cbNom">Nom sur la carte</label><input type="text" id="cbNom" value="Mme Katrinne Dupont" readonly></br>
-                <input type=submit value="Valider le paiement par carte bancaire">
+                <div class="colDiv">
+                    <div class="vDiv divAlignRight">
+                        <label for="cbNum">* Numéro</label>
+                        <label for="cbDate">* Date d'expiration</label>
+                        <label for="cbCvv">* CVC / CVV</label>
+                        <label for="cbNom">* Nom sur la carte</label>
+                    </div>
+                    <div class="vDiv divAlignLeft">
+                        <input type="text" id="cbNum" value="1111-2222-3333-4444" readonly>
+                        <input type="text" id="cbDate" value="11/28" readonly>
+                        <input type="text" id="cbCvv" value="123" readonly>
+                        <input type="text" id="cbNom" value="Mme Katrinne Dupont" readonly>
+                        <input type=submit value="Valider le paiement par carte bancaire">
+                    </div>
+                </div>
             </form>
         </div>
         <div class="divInvisible divPaymentOption" id="divPP">
-            <p>Informations de compte PayPal</p>
+            <h2>Informations de compte PayPal</h2>
             <form method="POST" action="index.php?action=panierRedirection&step=paymentDone">
-                <label for="ppMail">E-mail du compte PayPal</label><input type="text" id="ppMail" value="katrinne.dupont@mail.fr" readonly></br>
-                <label for="ppMdp">Date d'expiration</label><input type="password" id="ppMdp" value="password" readonly></br>
-                <input type=submit value="Valider le paiement avec PayPal">
+                <div class="colDiv">
+                    <div class="vDiv divAlignRight">
+                        <label for="ppMail">* E-mail du compte PayPal</label>
+                        <label for="ppMdp">* Mot de passe</label>
+                    </div>
+                    <div class="vDiv divAlignLeft">
+                        <input type="text" id="ppMail" value="katrinne.dupont@mail.fr" readonly>
+                        <input type="password" id="ppMdp" value="password" readonly>
+                        <input type=submit value="Valider le paiement avec PayPal">
+                    </div>
+                </div>
             </form>
         </div>
     </div>

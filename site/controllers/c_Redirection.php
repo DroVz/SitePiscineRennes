@@ -93,7 +93,11 @@ class Redirection
                 require('view/v_Paiement.php');
                 break;
             case 'paymentDone':
-                require('view/v_CodeObtention.php');
+                if (isset($_SESSION['cart'])) {
+                    require('view/v_CodeObtention.php');
+                } else {
+                    require('view/v_PanierVue.php');
+                }
                 break;
         }
     }
@@ -120,7 +124,7 @@ class Redirection
                     $pooluserPDO = new PooluserPDO();
                     $user = $pooluserPDO->read($user_id);
                     echo '<script>console.log("' . $user_id . '")</script>';
-                    $_SESSION['login'] = $user->getLogin();
+                    $_SESSION['login'] = $user->getName();
                     require('view/admin/v_Admin.php');
                 } else {
                     require('view/admin/v_AdminLogin.php');

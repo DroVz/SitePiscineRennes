@@ -19,10 +19,12 @@ class SituationPDO
         return $situation;
     }
 
-    // Return all active situations from database
+    // Return all active situations which have offers
     public function getActiveSituations(): array
     {
-        $stmt = DBConnection::getInstance()->prepare('SELECT * FROM situation WHERE active = 1;');
+        $MySQLQuery = 'SELECT * FROM situation s
+        WHERE s.id_situation in (SELECT DISTINCT id_situation FROM offer) AND s.active = 1;';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute();
         return $this->returnSituations($stmt->fetchAll());
     }
@@ -59,18 +61,6 @@ class SituationPDO
             $situation->getActive(),
             $situation->getIdSituation()
         ])) {
-            $res = true;
-        }
-        return $res;
-    }
-
-    // Deactivate existing situation
-    public function deactivate(Situation $situation): bool
-    {
-        $res = false;
-        $MySQLQuery = 'UPDATE situation SET active=0 WHERE id_situation=?';
-        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
-        if ($stmt->execute([$situation->getIdSituation()])) {
             $res = true;
         }
         return $res;

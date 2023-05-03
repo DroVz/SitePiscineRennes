@@ -2,7 +2,7 @@
 
 class PanierVue
 {
-    private array $choices;
+    private array $choices = [];
     private float $totalPrice;
 
     function __construct()
@@ -24,7 +24,6 @@ class PanierVue
         } else {
             for ($i = 0; $i < sizeof($this->choices); $i++) {
                 $choice = $this->choices[$i];
-                // foreach ($this->choices as $choice) {
                 echo '<div class="divCartProduct">
                 <h2>Formule n° ' . intval($i + 1) . '</h2>
                 <ul>

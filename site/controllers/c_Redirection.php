@@ -51,7 +51,9 @@ class Redirection
                 }
                 break;
             case 'booking':
-                require('view/v_VerifReservation.php');
+                // TODO à réactiver quand la page sera fonctionnelle
+                // require('view/v_VerifReservation.php');
+                require('view/v_HomePage.php');
                 break;
         }
     }

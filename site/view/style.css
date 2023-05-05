@@ -221,6 +221,8 @@ nav ul {
 }
 
 /* CodeInformation  */
+/*
+
 .CodeInformation {
   margin: 12vh 0px 0px 0px;
 }
@@ -242,6 +244,7 @@ nav ul {
 .CodeInformation .blueLink {
   padding: 20px 20px 20px 20px;
 }
+*/
 
 /* BookingPage */
 
@@ -464,7 +467,7 @@ input {
 
 input[type=text],
 input[type=password] {
-  height: 30px;
+  line-height: 30px;
   font-size: 1.2em;
   color: #041a26;
   justify-items: right;

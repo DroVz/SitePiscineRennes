@@ -6,7 +6,7 @@
 <?php $ControllerAdmin = new Admin ?>
 
 <main>
-    <h1>Gestion des options</h1>
+    <h1>Gestion des formules</h1>
     <div class="alignRight">
         <div class="dispColumn">
             <?php $ControllerAdmin->printInfoConnection(); ?>
@@ -25,26 +25,34 @@
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Libellé</th>
                     <th>Description</th>
                     <th>Réservation</th>
                     <th>Actif</th>
-                    <th>ID</th>
                     <th>Modifier</th>
-                    <th>Désactiver</th>
+                    <th>Activer/</br>Désactiver</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $ControllerAdmin->printActivityLines(); ?>
             </tbody>
         </table>
+        <h2>Ajouter une activité</h2>
         <form method="post" action="index.php?action=adminRedirection&step=addActivity">
-            <input type="text" name="activityname" placeholder="Libellé de l'activité" required>
-            <input type="text" name="description" placeholder="Description de l'activité" required>
-            <label><input type="checkbox" name="booking" value="1">Réservation disponible</label>
-            <label><input type="checkbox" name="active" value="1" checked>Activité disponible</label>
-            <br>
-            <button type="submit">Ajouter une activité</button>
+            <div class="colDiv">
+                <div class="vDiv divAlignRight">
+                    <label for="activityname">* Nom de l'activité</label>
+                    <label for="description">* Description</label>
+                </div>
+                <div class="vDiv divAlignLeft">
+                    <input type="text" name="activityname" required>
+                    <input class="txtDescription" type="text" name="description" required>
+                    <label class="lblChkbox"><input type="checkbox" name="booking" value="1">Réservation nécessaire</label>
+                    <label class="lblChkbox"><input type="checkbox" name="active" value="1" checked>Activité disponible</label>
+                    <input type="submit" value="Ajouter l'activité"></input>
+                </div>
+            </div>
         </form>
     </div>
 
@@ -57,18 +65,25 @@
                     <th>Actif</th>
                     <th>ID</th>
                     <th>Modifier</th>
-                    <th>Désactiver</th>
+                    <th>Activer/</br>Désactiver</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $ControllerAdmin->printSituationLines(); ?>
             </tbody>
         </table>
+        <h2>Ajouter une situation</h2>
         <form method="post" action="index.php?action=adminRedirection&step=addSituation">
-            <input type="text" name="situationname" placeholder="Libellé de la situation" required>
-            <label><input type="checkbox" name="active" value="1" checked>Activité disponible</label>
-            <br>
-            <button type="submit">Ajouter une situation</button>
+            <div class="colDiv">
+                <div class="vDiv divAlignRight">
+                    <label for="situationname">* Nom de la situation</label>
+                </div>
+                <div class="vDiv divAlignLeft">
+                    <input type="text" name="situationname" required>
+                    <label class="lblChkbox"><input type="checkbox" name="active" value="1" checked>Situation disponible</label>
+                    <input type="submit" value="Ajouter la situation"></input>
+                </div>
+            </div>
         </form>
     </div>
 

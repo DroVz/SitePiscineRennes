@@ -27,4 +27,34 @@ class Situation
     {
         return $this->active;
     }
+
+    /**
+     * @param string $name 
+     * @return self
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @param int $active 
+     * @return self
+     */
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+     * @param int $id_situation 
+     * @return self
+     */
+    public function setId_situation(int $id_situation): self
+    {
+        $this->id_situation = $id_situation;
+        return $this;
+    }
 }

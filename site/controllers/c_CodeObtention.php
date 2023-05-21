@@ -7,23 +7,19 @@ class CodeObtention
 
     function __construct()
     {
-        // TODO réduire le gaspillage, j'ai un constructeur identique dans c_PanierVue...
+        // TODO réduire le gaspillage, il y a un constructeur identique dans c_PanierVue
         $ids = array_keys($_SESSION['cart']);
         $offerPDO = new OfferPDO();
         $this->choices = [];
         foreach ($ids as $id) {
             $this->choices[] = $offerPDO->read($id);
         }
-        // TODO corriger problème si rafraîchissement : sur la page où sont affichés les codes,
-        // si l'utilisateur fait F5, tout plein d'erreurs : normal, impossible de générer des codes
-        // puisque le panier a été vidé !
-        // Piste : dans c_Redirection, vérifier si le panier est vide, et orienter en fonction
         $this->generateAllCodes();
     }
 
     public function displayPurchasedCodes()
     {
-        // TODO réduire le gaspillage, CodeInformation fait déjà la même chose !
+        // TODO réduire le gaspillage, CodeInformation fait déjà la même chose
         foreach ($this->purchasedCodes as $purchasedCode) {
             $strMois = " +" . $purchasedCode->getOffer()->getValidity() . " month";
             $dateValidite = $purchasedCode->getGenerationDate();

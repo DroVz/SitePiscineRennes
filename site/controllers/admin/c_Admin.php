@@ -15,14 +15,9 @@ class Admin
         $this->login = $_SESSION['login'];
     }
 
-    function printInfoConnexion()
+    function printInfoConnection()
     {
-        echo '<div class="infoUser">
-            <p>Connecté en tant que ' . $this->login . '</p>
-            <form method="post" action="index.php?action=adminRedirection&step=disconnect">
-                <input type="submit" value="Déconnexion">            
-            </form>
-        </div>';
+        echo '<p>Connecté en tant que ' . $this->login . '</p>';
     }
 
     function printActivityLines()
@@ -31,26 +26,29 @@ class Admin
             $estactif = "";
             $areservation = "";
             if ($activity->getBooking() == 1)
-                $areservation = "possible";
+                $areservation = "oui";
             else
-                $areservation = "n/a";
+                $areservation = "non";
             if ($activity->getActive() == 1)
                 $estactif = "actif";
             else
                 $estactif = "inactif";
             echo '<tr>
+                <td>' . $activity->getIdActivity() . '</td>
                 <td>' . $activity->getName() . '</td>
                 <td>' . $activity->getDescription() . '</td>
+           
+
                 <td class="' . $areservation . '">' . $areservation . '</td>
                 <td class="' . $estactif . '">' . $estactif . '</td>
-                <td>' . $activity->getIdActivity() . '</td>
+                
                 <td><a class="a-nostyle" href="index.php?action=adminRedirection&step=updateActivity&id=' .
                 $activity->getIdActivity() . '"><img class="adminIcon" src="view/img/edit.ico" /></a></td>';
             if ($activity->getActive() == 1) {
                 echo '<td><a class="a-nostyle" href="index.php?action=adminRedirection&step=deactivate&type=activity&id=' .
                     $activity->getIdActivity() . '"><img class="adminIcon" src="view/img/delete.ico" /></a></td></tr>';
             } else {
-                echo '</tr>';
+                echo '<td></td></tr>';
             }
         }
     }
@@ -73,7 +71,7 @@ class Admin
                 echo '<td><a class="a-nostyle" href="index.php?action=adminRedirection&step=deactivate&type=situation&id=' .
                     $situation->getIdSituation() . '"><img class="adminIcon" src="view/img/delete.ico" /></a></td></tr>';
             } else {
-                echo '</tr>';
+                echo '<td></td></tr>';
             }
         }
     }

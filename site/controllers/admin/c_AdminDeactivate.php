@@ -24,12 +24,14 @@ class AdminDeactivate
     function printDeactivateResult()
     {
         if ($this->activity != null) {
+            $this->activity->setActive(0);
             $activityPDO = new ActivityPDO();
-            $activityPDO->deactivate($this->activity);
+            $activityPDO->update($this->activity);
             echo "L'activité a été désactivée";
         } else if ($this->situation != null) {
+            $this->situation->setActive(0);
             $situationPDO = new SituationPDO();
-            $situationPDO->deactivate($this->situation);
+            $situationPDO->update($this->situation);
             echo "La situation a été désactivée";
         }
     }

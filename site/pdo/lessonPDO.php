@@ -36,23 +36,7 @@ class LessonPDO
         return $this->returnLessons($stmt->fetchAll());
     }
 
-    // TODO Add new lesson to database
-    public function create(): void
-    {
-    }
-
-    // TODO Update existing lesson
-    public function update(): void
-    {
-    }
-
-    // TODO Delete lesson from database
-    public function delete(): void
-    {
-    }
-
-
-    // TODO devrait vraiment être public ?
+    // Return booking number for a given lesson
     public function getBookingNb(Lesson $lesson): int
     {
         $MySQLQuery = 'SELECT COUNT(*) as bookingNb
@@ -66,7 +50,7 @@ class LessonPDO
         return $occupation;
     }
 
-    // TODO devrait vraiment être public ?
+    // return true if given code has already a booking for given lesson
     public function alreadyBooked(Code $code, Lesson $lesson): bool
     {
         $MySQLQuery = 'SELECT * FROM lesson_code lc WHERE sc.id_code = ? AND sc.id_lesson = ?;';

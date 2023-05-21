@@ -5,9 +5,17 @@
 <main>
     <h1>Espace admin</h1>
     <form method="post" action="index.php?action=adminRedirection&step=login">
-        <label for="login">Login</label><input id="login" type="text" name="login" required>
-        <label for="pwd">Mot de passe</label><input id="pwd" type="password" name="pwd" required>
-        <input type="submit" value="Connexion">
+        <div class="colDiv">
+            <div class="vDiv divAlignRight">
+                <label for="login">* Login</label>
+                <label for="pwd">* Mot de passe</label>
+            </div>
+            <div class="vDiv divAlignLeft">
+                <input id="login" type="text" name="login" required>
+                <input id="pwd" type="password" name="pwd" required>
+                <input class="btnSubmit" type="submit" value="Connexion">
+            </div>
+        </div>
     </form>
 </main>
 

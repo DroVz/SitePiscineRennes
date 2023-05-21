@@ -7,6 +7,7 @@
 <?php $controllerChoixFormule = new ChoixFormule() ?>
 
 <main>
+    <h1>Choix de la formule</h1>
     <form method="POST" action="index.php?action=panierRedirection&step=add">
         <div id="choixFormule">
             <fieldset>

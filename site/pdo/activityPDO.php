@@ -21,10 +21,11 @@ class ActivityPDO
         return $activite;
     }
 
-    // Return all active activities from database
+    // Return all active activities which have offers
     public function readAllActive(): array
     {
-        $MySQLQuery = 'SELECT * FROM activity WHERE active = 1';
+        $MySQLQuery = 'SELECT * FROM activity a
+        WHERE a.id_activity in (SELECT DISTINCT id_activity FROM offer) AND a.active = 1;';
         $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute();
         return $this->returnActivities($stmt->fetchAll());
@@ -71,23 +72,6 @@ class ActivityPDO
             $res = true;
         }
         return $res;
-    }
-
-    // Deactivate existing activity
-    public function deactivate(Activity $activity): bool
-    {
-        $res = false;
-        $MySQLQuery = 'UPDATE activity SET active=0 WHERE id_activity=?';
-        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
-        if ($stmt->execute([$activity->getIdActivity()])) {
-            $res = true;
-        }
-        return $res;
-    }
-
-    // Not used
-    public function delete(): void
-    {
     }
 
     // Return all activities in $rows and update $data

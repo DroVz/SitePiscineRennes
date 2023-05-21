@@ -41,4 +41,44 @@ class Activity
     {
         return $this->active;
     }
+
+    /**
+     * @param string $name 
+     * @return self
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @param int $booking 
+     * @return self
+     */
+    public function setBooking(int $booking): self
+    {
+        $this->booking = $booking;
+        return $this;
+    }
+
+    /**
+     * @param int $active 
+     * @return self
+     */
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+     * @param int $id_activity 
+     * @return self
+     */
+    public function setId_activity(int $id_activity): self
+    {
+        $this->id_activity = $id_activity;
+        return $this;
+    }
 }

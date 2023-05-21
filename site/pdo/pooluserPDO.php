@@ -34,26 +34,6 @@ class PooluserPDO
         return $pooluser ? $pooluser['id_user'] : 0;
     }
 
-    // Not used
-    public function readAll(): void
-    {
-    }
-
-    // Not used
-    public function create(): void
-    {
-    }
-
-    // Not used
-    public function update(): void
-    {
-    }
-
-    // Not used
-    public function delete(): void
-    {
-    }
-
     // Return all pools in $rows and update $data
     private function returnUsers(array $rows): array
     {
@@ -62,7 +42,8 @@ class PooluserPDO
             $id_user = $row['id_user'];
             $login = $row['login'];
             $pwd = $row['password'];
-            $user = new Pooluser($login, $pwd, $id_user);
+            $name = $row['name'];
+            $user = new Pooluser($login, $pwd, $name, $id_user);
             $users[] = $user;
             $this->data[$id_user] = $user;
         }

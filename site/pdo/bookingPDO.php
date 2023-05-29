@@ -9,8 +9,8 @@ class BookingPDO
     // Return all reservations associated with a given code
     function readAll(Code $code): array
     {
-        $MySQLQuery = 'SELECT id_session, id_code, booking_date
-        FROM session_code WHERE id_code = ?';
+        $MySQLQuery = 'SELECT id_lesson, id_code, booking_date
+        FROM lesson_code WHERE id_code = ?';
         $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code()]);
         return $this->returnBookings($stmt->fetchAll());
@@ -32,8 +32,11 @@ class BookingPDO
     }
 
     // TODO Delete reservation from database
-    public function delete(): void
+    public function delete($id_lesson, $id_code): void
     {
+        $MySQLQuery = 'DELETE FROM lesson_code WHERE id_lesson = '. $id_lesson .' AND id_code = '. $id_code .'';
+        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
+        $stmt->execute();
     }
 
     // Return all reservations in $rows

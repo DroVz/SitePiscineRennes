@@ -13,26 +13,18 @@
         </div>
         <div>
             <h2>Vos réservations actuelles :</h2>
-            <form  method="POST"  action="index.php">
-                <input type="hidden" name="action" value="bookingRedirection">
-                <input type="hidden" name="step" value="dellBooking">
                 <ul id="bookingReserve">
                     <?php $ReservationController->printBooking() ?>
                 </ul>
-            </form>
             <p>
                 <?php $ReservationController->printRemainingBooking()?>
             </p>
         </div>
         <div>
             <h2>Séances disponibles :</h2>
-            <form  method="POST"  action="index.php">
-                <input type="hidden" name="action" value="bookingRedirection">
-                <input type="hidden" name="step" value="addBooking">
                 <ul id="bookingFree">
                     <?php $ReservationController->printAvailableLessons()?>
                 </ul>
-            </form>
         </div>
     </div>
 </main>

@@ -65,10 +65,8 @@ p {
 }
 
 .groupBox {
-  margin: 20px 0px 10vh 10vw;
+  margin: 20px 0px 10vh 1vw;
   padding-bottom: 20px;
-
-  width: 80vw;
 
   display: flex;
   flex-direction: column;
@@ -222,11 +220,12 @@ nav ul {
 
 /* CodeInformation  */
 .CodeInformation {
-  margin: 12vh 0px 0px 0px;
+  margin: 12vh 0px 0px 12vw;
+  width: 80vw;
 }
 
 .CodeInformation .groupBox {
-  margin: 20px 0px 0px 10vw;
+  margin: 20px 0px 0px 0px;
 }
 
 .CodeInformation .groupBox div {
@@ -246,7 +245,8 @@ nav ul {
 /* BookingPage */
 
 .BookingPage {
-  margin: 12vh 0px 0px 0px;
+  margin: 12vh 0px 0px 10vw;
+  width: 80vw;
 }
 
 .BookingPage .groupBox div {

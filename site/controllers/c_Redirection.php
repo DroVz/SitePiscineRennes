@@ -60,9 +60,8 @@ class Redirection
     {
         $step = 'initial';
         if (isset($_POST['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+            $step = htmlspecialchars($_POST['step']);
         }
-
         switch ($step) {
             case 'initial':
                 require('view/v_ChoixActivite.php');
@@ -77,7 +76,7 @@ class Redirection
     {
         $step = 'view';
         if (isset($_POST['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+            $step = htmlspecialchars($_POST['step']);
         }
         switch ($step) {
             case 'view':
@@ -106,7 +105,7 @@ class Redirection
     {
         $adminController = new AdminController;
         $step = 'view';
-        if (isset($_GET['step'])) {
+        if (isset($_POST['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
         switch ($step) {
@@ -173,7 +172,9 @@ class Redirection
 
         switch ($step) {
             case 'addBooking':
-            $bookingController->addBooking($_POST['lesson_id'],$_POST['id_code']);
+                echo '<script> console.log("'. $_POST['lesson_id'] .' + okkkkk ")</script>';
+                echo '<script> console.log("'. $_POST['id_code'] .' + ooooo ")</script>';
+                $bookingController->addBooking($_POST['lesson_id'],$_POST['id_code']);
                 require('view/v_verifReservation.php');
                 break;
             case 'dellBooking':

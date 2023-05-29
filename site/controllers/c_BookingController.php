@@ -10,9 +10,4 @@ class BookingController {
         $bookingPDO->delete($id_lesson,$id_code);
     }
 }
-
-
-
-
-
 ?>

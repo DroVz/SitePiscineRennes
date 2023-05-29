@@ -9,6 +9,8 @@ $action = null;
 
 if (isset($_GET['action'])) {
 	$action = htmlspecialchars($_GET['action']);
+	//Permet d'interpréter les requêtes GET avec le POST 
+	$_POST['action'] = $action;
 } else {
 	if (isset($_POST['action'])) {
 		$action = htmlspecialchars($_POST['action']);

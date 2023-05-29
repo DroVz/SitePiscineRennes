@@ -34,12 +34,22 @@ class Reservation {
 
     public function printBooking(){
         foreach ($this->bookings as $booking) {
-            $pool_name = $booking->getSession()->read()->getName();
+            $pool_name = $booking->getSession()->getPool()->getName();
             $coach = $booking->getSession()->getCoach();
             $day = date('d/m/Y', strtotime($booking->getSession()->getDateTime()));
             $beginTime = date('h:i', strtotime($booking->getSession()->getDateTime()));
-
-            echo '<li>Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . ')</li>';
+           
+            echo '<li id ="'. $booking->getSession()->getId_lesson() .'" >
+            <form  method="POST"  action="index.php">
+                <input type="hidden" name="action" value="bookingRedirection">
+                <input type="hidden" name="step" value="dellBooking">
+                <input type="hidden" name="id_code" value="'.  $this->code->getId_code() .'" />
+                <input type="hidden" name="lesson_id" value="'. $booking->getSession()->getId_lesson() .'" />
+                <button type="submit" class="blueLink"> 
+                    Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . ').
+                </button>
+            </form>
+        </li>';
         }
     }
     public function printRemainingBooking(){
@@ -50,17 +60,28 @@ class Reservation {
     }
     public function printAvailableLessons(){
         foreach ($this->availableLessons as $lesson) {
-            $pool_name = $lesson->getPool()->getName();
-            $coach = $lesson->getCoach();
-            $day = date('d/m/Y', strtotime($lesson->getDateTime()));
-            $beginTime = date('h:i', strtotime($lesson->getDateTime()));
-            $bookingNb = $lesson->getBookingNb();
-            $capacity = $lesson->getCapacity();
-            $alreadyBooked = $lesson->alreadyBooked($this->code);
-
-            echo '<li id ="'. $lesson->getId_lesson() .'" ><button type="submit" class="blueLink"> Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). 
-             - Occupation : ' . $bookingNb . '/' . $capacity .
-                ($alreadyBooked ? ' - Vous avez déjà réservé pour cette séance' : '') . '<input type="hidden" name="id_code" value="'.  $this->code->getId_code() .'" /><input type="hidden" name="lesson_id" value="'. $lesson->getId_lesson() .'" /></button></li>';
+            if ($lesson->alreadyBooked($this->code) == false){
+              
+                $pool_name = $lesson->getPool()->getName();
+                $coach = $lesson->getCoach();
+                $day = date('d/m/Y', strtotime($lesson->getDateTime()));
+                $beginTime = date('h:i', strtotime($lesson->getDateTime()));
+                $bookingNb = $lesson->getBookingNb();
+                $capacity = $lesson->getCapacity();
+                $alreadyBooked = $lesson->alreadyBooked($this->code);
+    
+                echo '<li id ="'. $lesson->getId_lesson() .'" >
+                    <form  method="POST"  action="index.php">
+                        <input type="hidden" name="action" value="bookingRedirection">
+                        <input type="hidden" name="step" value="addBooking">
+                        <input type="hidden" name="id_code" value="'.  $this->code->getId_code() .'" />
+                        <input type="hidden" name="lesson_id" value="'. $lesson->getId_lesson() .'" />
+                        <button type="submit" class="blueLink"> 
+                            Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). - Occupation : ' . $bookingNb . '/' . $capacity .'
+                        </button>
+                    </form>
+                </li>';
+            }
         }
     }
 }

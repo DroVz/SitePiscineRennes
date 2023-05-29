@@ -38,8 +38,8 @@ class Redirection
         // Création des controllers model 
         $codeController = new CodeController;
         $step = 'initial';
-        if (isset($_GET['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+        if (isset($_POST['step'])) {
+            $step = htmlspecialchars($_POST['step']);
         }
         switch ($step) {
             case 'info':
@@ -59,10 +59,9 @@ class Redirection
     public function achatRedirection()
     {
         $step = 'initial';
-        if (isset($_GET['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+        if (isset($_POST['step'])) {
+            $step = htmlspecialchars($_POST['step']);
         }
-
         switch ($step) {
             case 'initial':
                 require('view/v_ChoixActivite.php');
@@ -76,8 +75,8 @@ class Redirection
     public function panierRedirection()
     {
         $step = 'view';
-        if (isset($_GET['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+        if (isset($_POST['step'])) {
+            $step = htmlspecialchars($_POST['step']);
         }
         switch ($step) {
             case 'view':
@@ -106,7 +105,7 @@ class Redirection
     {
         $adminController = new AdminController;
         $step = 'view';
-        if (isset($_GET['step'])) {
+        if (isset($_POST['step'])) {
             $step = htmlspecialchars($_GET['step']);
         }
         switch ($step) {
@@ -167,14 +166,23 @@ class Redirection
         $bookingController = new BookingController;
 
         $step = 'view';
-        if (isset($_GET['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+        if (isset($_POST['step'])) {
+            $step = htmlspecialchars($_POST['step']);
         }
 
         switch ($step) {
             case 'addBooking':
-                $bookingController->addBooking($_GET['lesson_id'], $_GET['id_code']);
-                require('view/v_CodeObtention.php');
+                echo '<script> console.log("'. $_POST['lesson_id'] .' + okkkkk ")</script>';
+                echo '<script> console.log("'. $_POST['id_code'] .' + ooooo ")</script>';
+                $bookingController->addBooking($_POST['lesson_id'],$_POST['id_code']);
+                require('view/v_verifReservation.php');
+                break;
+            case 'dellBooking':
+                $bookingController->dellBooking($_POST['lesson_id'],$_POST['id_code']);
+                require('view/v_verifReservation.php');
+                break;
+            case 'view':
+                require('view/v_HomePage.php');
                 break;
         }
     }

@@ -6,12 +6,15 @@ $ControllerRedirection = Redirection::getInstance();
 
 // Récupère les infos du form
 $action = null;
-$step = null;
+
 if (isset($_GET['action'])) {
 	$action = htmlspecialchars($_GET['action']);
-}
-if (isset($_GET['step'])) {
-	$step = htmlspecialchars($_GET['step']);
+	//Permet d'interpréter les requêtes GET avec le POST 
+	$_POST['action'] = $action;
+} else {
+	if (isset($_POST['action'])) {
+		$action = htmlspecialchars($_POST['action']);
+	}
 }
 
 if (empty($action)) {
@@ -48,13 +51,14 @@ switch ($action) {
 	case 'panierRedirection';
 		$ControllerRedirection->panierRedirection();
 		break;
-
+	case 'bookingRedirection';
+		$ControllerRedirection->bookingRedirection();
+		break;
 	case 'adminRedirection';
 		$ControllerRedirection->adminRedirection();
 		break;
 
 	case 'bookingNewLesson';
-
 	default:
 		require('view/v_HomePage.php');
 }

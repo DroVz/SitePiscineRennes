@@ -2,7 +2,7 @@ body {
   margin: 0%;
   padding: 0%;
   background-color: #e0ecf2;
-  font-family: "Istok Web";
+  font-family: "Istok Web", "sans-serif";
 }
 
 /* Links */
@@ -11,8 +11,6 @@ a {
   text-align: center;
   padding: 16px;
   margin-right: 20px;
-
-  font-family: "Istok Web";
   font-size: 16pt;
   text-decoration: none;
   color: #000000;

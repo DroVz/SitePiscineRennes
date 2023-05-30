@@ -1,6 +1,5 @@
 <?php
 
-require_once('admin/c_admin.php');
 require_once('c_CodeInformation.php');
 require_once('controllers/c_CodeController.php');
 require_once('controllers/admin/c_AdminController.php');
@@ -36,7 +35,7 @@ class Redirection
     public function codeRedirection()
     {
         // Création des controllers model 
-        $codeController = new CodeController;
+        $codeController = new CodeController();
         $step = 'initial';
         if (isset($_GET['step'])) {
             $step = htmlspecialchars($_GET['step']);
@@ -106,7 +105,7 @@ class Redirection
 
     public function adminRedirection()
     {
-        $adminController = new AdminController;
+        $adminController = new AdminController();
         $step = 'view';
         if (isset($_GET['step'])) {
             $step = htmlspecialchars($_GET['step']);
@@ -166,7 +165,7 @@ class Redirection
     public function bookingRedirection()
     {
 
-        $bookingController = new BookingController;
+        $bookingController = new BookingController();
 
         $step = 'view';
         if (isset($_GET['step'])) {

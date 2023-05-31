@@ -1,6 +1,18 @@
-# SitePiscineRennes
-Site Web pour les piscines de Rennes afin de gérer les abonnements des utilisateurs (Projet BTS)
+# Site "Les piscines rennaises" 
+Site Web développé en php, html-css et js. 
+L'objectif à été de mettre en avant les piscines rennaises et ainsi permettre aux utilisateurs l'achat de séance de natation.
 
+# Fonctionalités 
+- Une page d'accueil, qui met en avant différentes piscines 
+- Un espace d'achat pour choisir différentes formules
+- Un pannier pour valider les formules choisies
+- La possibilité de réserver des crénaux en fonction de la formule 
+- Un onglet pour vérifier la validité de son code d'access
+- Une partie administrateur pour pouvoir modifier le contenue des formules 
+
+# Cadre du projet 
+Ce projet à été réalisé dans le cadre de ma deuxième année de BTS SIO. 
+Il a été fait en groupe de 3 personnes.
 
 Mise en place de la base de données
 ===================================

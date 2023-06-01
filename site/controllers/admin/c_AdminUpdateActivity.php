@@ -6,7 +6,7 @@ class AdminUpdateActivity
 
     function __construct()
     {
-        $activityID = intval($_GET["id"]);
+        $activityID = intval($_POST["id"]);
         $activityPDO = new ActivityPDO();
         $this->activityToUpdate = $activityPDO->read($activityID);
     }
@@ -14,7 +14,7 @@ class AdminUpdateActivity
     function printUpdateActivityForm()
     {
         echo '
-        <form method="post" action="index.php?action=adminRedirection&step=updateActivityAction">
+        <form method="post" action="index.php">
         <label for="activityname">Libellé de l\'activité:</label>
         <input type="text" name="activityname" id="activityname" value="' .
             $this->activityToUpdate->getName() . '" required>
@@ -29,6 +29,8 @@ class AdminUpdateActivity
         <label><input type="checkbox" name="active" id="active" value="1" ' .
             ($this->activityToUpdate->getActive() == 1 ? "checked" : "") . '> Activité disponible</label>
         <br><br>
+        <input type="hidden" name="action" value="adminRedirection">
+        <input type="hidden" name="step" value="updateActivityAction">
         <input type="hidden" name="id_activity" value="' . $this->activityToUpdate->getIdActivity() . '">
         <button type="submit">Modifier l\'activité</button>
         </form>';

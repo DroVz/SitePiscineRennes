@@ -10,7 +10,9 @@
     <div class="alignRight">
         <div class="dispColumn">
             <?php $ControllerAdmin->printInfoConnection(); ?>
-            <form method="post" action="index.php?action=adminRedirection&step=disconnect">
+            <form method="post" action="index.php">
+                <input type="hidden" name="action" value="adminRedirection">
+                <input type="hidden" name="step" value="disconnect">
                 <input type="submit" value="Déconnexion">
             </form>
         </div>
@@ -40,6 +42,8 @@
         </table>
         <h2>Ajouter une activité</h2>
         <form method="post" action="index.php?action=adminRedirection&step=addActivity">
+        <input type="hidden" name="action" value="adminRedirection">
+        <input type="hidden" name="step" value="addActivity">
             <div class="colDiv">
                 <div class="vDiv divAlignRight">
                     <label for="activityname">* Nom de l'activité</label>
@@ -73,7 +77,9 @@
             </tbody>
         </table>
         <h2>Ajouter une situation</h2>
-        <form method="post" action="index.php?action=adminRedirection&step=addSituation">
+        <form method="post" action="index.php">
+        <input type="hidden" name="action" value="adminRedirection">
+        <input type="hidden" name="step" value="addSituation">
             <div class="colDiv">
                 <div class="vDiv divAlignRight">
                     <label for="situationname">* Nom de la situation</label>

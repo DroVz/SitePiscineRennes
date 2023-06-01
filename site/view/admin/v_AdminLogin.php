@@ -4,7 +4,7 @@
 
 <main>
     <h1>Espace admin</h1>
-    <form method="post" action="index.php?action=adminRedirection&step=login">
+    <form method="post" action="index.php">
         <div class="colDiv">
             <div class="vDiv divAlignRight">
                 <label for="login">* Login</label>
@@ -13,6 +13,8 @@
             <div class="vDiv divAlignLeft">
                 <input id="login" type="text" name="login" required>
                 <input id="pwd" type="password" name="pwd" required>
+                <input type="hidden" name="action" value="adminRedirection">
+                <input type="hidden" name="step" value="login">
                 <input class="btnSubmit" type="submit" value="Connexion">
             </div>
         </div>

@@ -1,6 +1,5 @@
 <?php
-
-require_once('admin/c_admin.php');
+require_once('admin/c_Admin.php');
 require_once('c_CodeInformation.php');
 require_once('controllers/c_CodeController.php');
 require_once('controllers/admin/c_AdminController.php');
@@ -51,7 +50,7 @@ class Redirection
                 }
                 break;
             case 'booking':
-                require('view/v_VerifReservation.php');
+                require('view/v_verifReservation.php');
                 break;
         }
     }
@@ -80,10 +79,10 @@ class Redirection
         }
         switch ($step) {
             case 'view':
-                require('view/v_PanierVue.php');
+                require('view/v_panierVue.php');
                 break;
             case 'add':
-                require('view/v_PanierAjout.php');
+                require('view/v_panierAjout.php');
                 break;
             case 'remove':
                 require('view/v_PanierSuppression.php');
@@ -95,7 +94,7 @@ class Redirection
                 if (isset($_SESSION['cart'])) {
                     require('view/v_CodeObtention.php');
                 } else {
-                    require('view/v_PanierVue.php');
+                    require('view/v_panierVue.php');
                 }
                 break;
         }
@@ -106,7 +105,7 @@ class Redirection
         $adminController = new AdminController;
         $step = 'view';
         if (isset($_POST['step'])) {
-            $step = htmlspecialchars($_GET['step']);
+            $step = htmlspecialchars($_POST['step']);
         }
         switch ($step) {
             case 'view':

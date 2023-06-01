@@ -9,21 +9,35 @@ class BookingPDO
     // Return all reservations associated with a given code
     function readAll(Code $code): array
     {
-        $MySQLQuery = 'SELECT id_lesson, id_code, booking_date
-        FROM lesson_code WHERE id_code = ?';
-        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
-        $stmt->execute([$code->getId_code()]);
-        return $this->returnBookings($stmt->fetchAll());
+        try {
+            
+            $id_code = $code->getId_code();
+            $req = DBConnection::getInstance()->prepare('SELECT id_lesson, id_code, booking_date
+                                                        FROM lesson_code 
+                                                        WHERE id_code = :id_code') ;
+
+            $req->bindParam(':id_code', $id_code, PDO::PARAM_INT);
+            $req->execute();
+
+        } catch(Exception $ex) {
+            echo '<script> console.log('. $ex .') </script>';
+        }
+
+        return $this->returnBookings($req->fetchAll());
     }
 
-    // TODO Add new reservation to database
     public function create($id_lesson,$id_code): void
     {
-        $MySQLQuery = 'INSERT INTO lesson_code (id_lesson, id_code, booking_date)
-        VALUES ('. $id_lesson .', '. $id_code .', NOW())';
-        echo $MySQLQuery ;
-        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
-        $stmt->execute();
+        try {
+            $req = DBConnection::getInstance()->prepare('INSERT INTO lesson_code (id_lesson, id_code, booking_date)
+                                                         VALUES (:id_lesson, :id_code, NOW())') ;
+
+            $req->bindParam(':id_lesson', $id_lesson, PDO::PARAM_INT);
+            $req->bindParam(':id_code', $id_code, PDO::PARAM_INT);
+            $req->execute();
+        } catch(Exception $ex) {
+            echo '<script> console.log('. $ex .') </script>';
+        }
     }
 
     // TODO Update existing reservation
@@ -31,12 +45,16 @@ class BookingPDO
     {
     }
 
-    // TODO Delete reservation from database
     public function delete($id_lesson, $id_code): void
     {
-        $MySQLQuery = 'DELETE FROM lesson_code WHERE id_lesson = '. $id_lesson .' AND id_code = '. $id_code .'';
-        $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
-        $stmt->execute();
+        try {
+            $req = DBConnection::getInstance()->prepare('DELETE FROM lesson_code WHERE id_lesson = :id_lesson AND id_code = :id_code') ;
+            $req->bindParam(':id_lesson', $id_lesson, PDO::PARAM_INT);
+            $req->bindParam(':id_code', $id_code, PDO::PARAM_INT);
+            $req->execute();
+        } catch(Exception $ex) {
+            echo '<script> console.log('. $ex .') </script>';
+        }
     }
 
     // Return all reservations in $rows

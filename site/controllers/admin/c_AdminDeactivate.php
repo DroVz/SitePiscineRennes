@@ -7,8 +7,8 @@ class AdminDeactivate
 
     function __construct()
     {
-        $type = $_GET["type"];
-        $id = $_GET["id"];
+        $type = $_POST["type"];
+        $id = $_POST["id"];
         switch ($type) {
             case 'activity':
                 $activityPDO = new ActivityPDO();

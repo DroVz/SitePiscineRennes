@@ -41,12 +41,29 @@ class Admin
 
                 <td class="' . $areservation . '">' . $areservation . '</td>
                 <td class="' . $estactif . '">' . $estactif . '</td>
-                
-                <td><a class="a-nostyle" href="index.php?action=adminRedirection&step=updateActivity&id=' .
-                $activity->getIdActivity() . '"><img class="adminIcon" src="view/img/edit.ico" /></a></td>';
+                <form method="post" action="index.php">
+                <input type="hidden" name="action" value="adminRedirection">
+                <input type="hidden" name="step" value="updateActivity">
+                <input type="hidden" name="type" value="activity">
+                <input type="hidden" name="id" value="'. $activity->getIdActivity() .'">
+                <td> <button type="submit">
+                <img class="adminIcon" src="view/img/edit.ico" />
+                </button></td>
+                </form>
+                ';
             if ($activity->getActive() == 1) {
-                echo '<td><a class="a-nostyle" href="index.php?action=adminRedirection&step=deactivate&type=activity&id=' .
-                    $activity->getIdActivity() . '"><img class="adminIcon" src="view/img/delete.ico" /></a></td></tr>';
+                echo '
+                <form method="post" action="index.php">
+                <input type="hidden" name="action" value="adminRedirection">
+                <input type="hidden" name="step" value="deactivate">
+                <input type="hidden" name="type" value="activity">
+                <input type="hidden" name="id" value="'. $activity->getIdActivity() .'">
+                <td> <button type="submit">
+                <img class="adminIcon" src="view/img/delete.ico" />
+                </button></td>
+                </form>
+                </td></tr>
+                ';
             } else {
                 echo '<td></td></tr>';
             }
@@ -61,15 +78,35 @@ class Admin
             else
                 $estactif = "inactif";
             echo '
-                <tr>
+                    <tr>
                     <td>' . $situation->getName() . '</td>
                     <td class="' . $estactif . '">' . $estactif . '</td>
                     <td>' . $situation->getIdSituation() . '</td>
-                    <td><a class="a-nostyle" href="index.php?action=adminRedirection&step=updateSituation&id=' .
-                $situation->getIdSituation() . '"><img class="adminIcon" src="view/img/edit.ico" /></a></td>';
+
+                    <form method="post" action="index.php">
+                    <input type="hidden" name="action" value="adminRedirection">
+                    <input type="hidden" name="step" value="updateSituation">
+                    <input type="hidden" name="id" value="'. $situation->getIdSituation() .'">
+                    <td> <button type="submit">
+                    <img class="adminIcon" src="view/img/edit.ico" />
+                    </button></td>
+                    </form>
+                    </td>
+                    ';
+        
             if ($situation->getActive() == 1) {
-                echo '<td><a class="a-nostyle" href="index.php?action=adminRedirection&step=deactivate&type=situation&id=' .
-                    $situation->getIdSituation() . '"><img class="adminIcon" src="view/img/delete.ico" /></a></td></tr>';
+                echo '
+                    <form method="post" action="index.php">
+                    <input type="hidden" name="action" value="adminRedirection">
+                    <input type="hidden" name="step" value="deactivate">
+                    <input type="hidden" name="type" value="situation">
+                    <input type="hidden" name="id" value="'. $situation->getIdSituation() .'">
+                    <td> <button type="submit">
+                    <img class="adminIcon" src="view/img/delete.ico" />
+                    </button></td>
+                    </form>
+                    </td></tr>
+                    ';
             } else {
                 echo '<td></td></tr>';
             }

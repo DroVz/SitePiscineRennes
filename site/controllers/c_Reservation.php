@@ -37,7 +37,7 @@ class Reservation {
             $pool_name = $booking->getSession()->getPool()->getName();
             $coach = $booking->getSession()->getCoach();
             $day = date('d/m/Y', strtotime($booking->getSession()->getDateTime()));
-            $beginTime = date('h:i', strtotime($booking->getSession()->getDateTime()));
+            $beginTime = date('H:i', strtotime($booking->getSession()->getDateTime()));
            
             echo '<li id ="'. $booking->getSession()->getId_lesson() .'" >
             <form  method="POST"  action="index.php">
@@ -65,7 +65,7 @@ class Reservation {
                 $pool_name = $lesson->getPool()->getName();
                 $coach = $lesson->getCoach();
                 $day = date('d/m/Y', strtotime($lesson->getDateTime()));
-                $beginTime = date('h:i', strtotime($lesson->getDateTime()));
+                $beginTime = date('H:i', strtotime($lesson->getDateTime()));
                 $bookingNb = $lesson->getBookingNb();
                 $capacity = $lesson->getCapacity();
                 $alreadyBooked = $lesson->alreadyBooked($this->code);

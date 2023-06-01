@@ -14,7 +14,7 @@
     <div id="divPayment">
         <div class="divInvisible divPaymentOption" id="divCB">
             <h2>Informations de carte bancaire</h2>
-            <form method="POST" action="index.php?action=panierRedirection&step=paymentDone">
+            <form method="POST" action="index.php">
                 <div class="colDiv">
                     <div class="vDiv divAlignRight">
                         <label for="cbNum">* Numéro</label>
@@ -27,6 +27,8 @@
                         <input type="text" id="cbDate" value="11/28" readonly>
                         <input type="text" id="cbCvv" value="123" readonly>
                         <input type="text" id="cbNom" value="Mme Katrinne Dupont" readonly>
+                        <input type="hidden" name="action" value="panierRedirection">
+                        <input type="hidden" name="step" value="paymentDone">
                         <input type=submit value="Valider le paiement par carte bancaire">
                     </div>
                 </div>
@@ -34,7 +36,7 @@
         </div>
         <div class="divInvisible divPaymentOption" id="divPP">
             <h2>Informations de compte PayPal</h2>
-            <form method="POST" action="index.php?action=panierRedirection&step=paymentDone">
+            <form method="POST" action="index.php">
                 <div class="colDiv">
                     <div class="vDiv divAlignRight">
                         <label for="ppMail">* E-mail du compte PayPal</label>
@@ -43,6 +45,8 @@
                     <div class="vDiv divAlignLeft">
                         <input type="text" id="ppMail" value="katrinne.dupont@mail.fr" readonly>
                         <input type="password" id="ppMdp" value="password" readonly>
+                        <input type="hidden" name="action" value="panierRedirection">
+                        <input type="hidden" name="step" value="paymentDone">
                         <input type=submit value="Valider le paiement avec PayPal">
                     </div>
                 </div>

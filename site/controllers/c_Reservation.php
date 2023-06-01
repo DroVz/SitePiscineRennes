@@ -1,53 +1,55 @@
 <?php 
 
 class Reservation {
-    private $bookings;
-    private $remainingBookings;
-    private $availableLessons; 
-    private $code;
-    private $nbEntries;
+    private Code $code;
+    private Activity $activity;
+    private array $bookings;
+    private array $availableLessons; 
+    private int $remainingBookings;
+    private int $nbEntries;
 
     public function __construct()
     {
-         // TODO : Faire un singleton de la connexion à la bd 
-                // Récupération du numéro du code dans la base depuis le formulaire précédent
-                // Récupération du code de l'activité
-                $id_code = $_POST['id_code'];
+        $bookingPDO = new BookingPDO();
+               
+        // Récupération du code de l'activité
+        $id_code = $_POST['id_code'];
 
-                $id_activity = $_POST['id_activity'];
-                $this->nbEntries = $_POST['nb_entries'];
+        // On récupère les infos du code
+        $codePDO = new CodePDO();
+        $this->code = $codePDO->read(intval($id_code));
 
-                // On récupère les infos du code
-                $codePDO = new CodePDO();
-                $this->code = $codePDO->read($id_code);
+        $this->activity = $this->code->getOffer()->getActivity();
+        $this->nbEntries = $this->code->getOffer()->getNbEntries();
 
-                // On récupère les infos de l'activité
-                $activityPDO = new ActivityPDO();
-                $activity = $activityPDO->read($id_activity);
+        // On récupère les réservations existantes pour le code
+        $this->bookings = $bookingPDO->readAll($this->code);
+        $this->remainingBookings = $this->nbEntries - count($this->bookings);
 
-                // On récupère les réservations existantes pour le code
-                $bookingPDO = new BookingPDO();
-                $this->bookings = $bookingPDO->readAll($this->code);
-                $this->remainingBookings = $this->nbEntries - count($this->bookings);
-
-                // On a besoin des infos des piscines
-                $poolPDO = new PoolPDO();
-                $pools = $poolPDO->readAll();
-
-                // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
-                $lessonPDO = new LessonPDO();
-                $this->availableLessons = $lessonPDO->readAll($activity);
+        // On veut aussi connaître toutes les séances disponibles pour l'activité choisie
+        $lessonPDO = new LessonPDO();
+        $this->availableLessons = $lessonPDO->readAll($this->activity);
 
     }
 
     public function printBooking(){
         foreach ($this->bookings as $booking) {
-            $pool_name = $booking->getSession()->read()->getName();
+            $pool_name = $booking->getSession()->getPool()->getName();
             $coach = $booking->getSession()->getCoach();
             $day = date('d/m/Y', strtotime($booking->getSession()->getDateTime()));
             $beginTime = date('h:i', strtotime($booking->getSession()->getDateTime()));
-
-            echo '<li>Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . ')</li>';
+           
+            echo '<li id ="'. $booking->getSession()->getId_lesson() .'" >
+            <form  method="POST"  action="index.php">
+                <input type="hidden" name="action" value="bookingRedirection">
+                <input type="hidden" name="step" value="dellBooking">
+                <input type="hidden" name="id_code" value="'.  $this->code->getId_code() .'" />
+                <input type="hidden" name="lesson_id" value="'. $booking->getSession()->getId_lesson() .'" />
+                <button type="submit" class="blueLink"> 
+                    Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . ').
+                </button>
+            </form>
+        </li>';
         }
     }
     public function printRemainingBooking(){
@@ -58,18 +60,29 @@ class Reservation {
     }
     public function printAvailableLessons(){
         foreach ($this->availableLessons as $lesson) {
-            $pool_name = $lesson->getPool()->getName();
-            $coach = $lesson->getCoach();
-            $day = date('d/m/Y', strtotime($lesson->getDateTime()));
-            $beginTime = date('h:i', strtotime($lesson->getDateTime()));
-            $bookingNb = $lesson->getBookingNb();
-            $capacity = $lesson->getCapacity();
-            $alreadyBooked = $lesson->alreadyBooked($this->code);
-
-            echo '<li id ="'.$lesson->getId_lesson.'li" ><button class="blueLink" onclick="setBookingEvent('.$lesson->getId_lesson.')"> Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). 
-             - Occupation : ' . $bookingNb . '/' . $capacity .
-                ($alreadyBooked ? ' - Vous avez déjà réservé pour cette séance' : '') . '</button></li>';
+            if ($lesson->alreadyBooked($this->code) == false){
+              
+                $pool_name = $lesson->getPool()->getName();
+                $coach = $lesson->getCoach();
+                $day = date('d/m/Y', strtotime($lesson->getDateTime()));
+                $beginTime = date('h:i', strtotime($lesson->getDateTime()));
+                $bookingNb = $lesson->getBookingNb();
+                $capacity = $lesson->getCapacity();
+                $alreadyBooked = $lesson->alreadyBooked($this->code);
+    
+                echo '<li id ="'. $lesson->getId_lesson() .'" >
+                    <form  method="POST"  action="index.php">
+                        <input type="hidden" name="action" value="bookingRedirection">
+                        <input type="hidden" name="step" value="addBooking">
+                        <input type="hidden" name="id_code" value="'.  $this->code->getId_code() .'" />
+                        <input type="hidden" name="lesson_id" value="'. $lesson->getId_lesson() .'" />
+                        <button type="submit" class="blueLink"> 
+                            Le ' . $day . ' à ' . $beginTime . ' à ' . $pool_name . ' (coach : ' . $coach . '). - Occupation : ' . $bookingNb . '/' . $capacity .'
+                        </button>
+                    </form>
+                </li>';
+            }
         }
     }
-
 }
+// onclick="setBookingEvent(\''.$lesson->getId_lesson().'\')"

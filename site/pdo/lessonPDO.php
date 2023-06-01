@@ -53,7 +53,7 @@ class LessonPDO
     // return true if given code has already a booking for given lesson
     public function alreadyBooked(Code $code, Lesson $lesson): bool
     {
-        $MySQLQuery = 'SELECT * FROM lesson_code lc WHERE sc.id_code = ? AND sc.id_lesson = ?;';
+        $MySQLQuery = 'SELECT * FROM lesson_code lc WHERE lc.id_code = ? AND lc.id_lesson = ?;';
         $stmt = DBConnection::getInstance()->prepare($MySQLQuery);
         $stmt->execute([$code->getId_code(), $lesson->getId_lesson()]);
         if ($row = $stmt->fetch()) {

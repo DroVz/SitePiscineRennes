@@ -38,9 +38,12 @@ class PanierVue
                 <li>Nombre : ' . $_SESSION['cart'][$choice->getIdOffer()] . '</li>
                 <li>Prix total : ' . number_format($choice->getPrice() * $_SESSION['cart'][$choice->getIdOffer()], 2, ",", " ") . ' €</li>                
                 </ul>
-                <form method=POST action="index.php?action=panierRedirection&step=remove">
+                <form method=POST action="index.php">
                 <input type="hidden" name="formule" value=' . $choice->getIdOffer() . '>
+                <input type="hidden" name="action" value="panierRedirection">
+                <input type="hidden" name="step" value="remove">
                 <input type=submit value="Supprimer"/>
+                <script> console.log("coucou") </script>
                 </form>
                 </div>';
             }
@@ -53,10 +56,13 @@ class PanierVue
         <h2>Ma commande</h2>
         <p>Nombre d\'articles : ' . sizeof($this->choices) . '</p>
         <p>Total TTC : ' . number_format($this->findTotalPrice(), 2, ",", " ") . ' €</p>
-        <form method=POST action="index.php?action=panierRedirection&step=payment">';
+        <form method=POST action="index.php">';
         if (sizeof($this->choices) > 0) {
-            echo '<input type=submit value="Payer"/>';
-        }
+             
+            echo '<input type="hidden" name="action" value="panierRedirection">
+                  <input type="hidden" name="step" value="payment">
+                  <input type=submit value="Payer"/>';
+        }       
         echo '</form></div>';
     }
 

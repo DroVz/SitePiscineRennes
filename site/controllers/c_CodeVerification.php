@@ -8,7 +8,7 @@ class CodeVerification
     private function getDefaultValue()
     {
         $returnValue = 'XXXX-XXXX';
-        $action = htmlspecialchars($_GET['action']);
+        $action = htmlspecialchars($_POST['action']);
         if ($action == 'codeRedirection') {
             $returnValue = 'Code incorrect';
         }
